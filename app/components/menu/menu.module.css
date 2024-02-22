@@ -1,0 +1,51 @@
+.menu {
+    position: absolute;
+    width: 100dvw;
+    display: flex;
+    bottom: 2.5dvh;
+    top: auto;
+    justify-content: center;
+    
+}
+
+.nav {
+    background-color: rgba(217, 217, 217, 0.25);
+    display: flex;
+    justify-content: center;
+    gap: 5dvw;
+    padding: 0.5dvh 1dvw;
+    border-radius: 7.5px;
+}
+
+.navLink {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    padding: 0.5dvh 2.5dvw;
+}
+
+.navLinkActive {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    padding: 0.5dvh 2.5dvw;
+    border-radius: 5px;
+    background-color: rgba(217, 217, 217, 0.25);
+}
+
+@media screen and (min-width: 768px){
+    .menu {
+        top: 2.5dvh;
+        bottom: auto;
+    }
+    .nav {
+        gap: 2.5dvw;
+        padding: 0.25dvh 0.5dvw;
+    }
+    .navLink {
+        padding: 0.5dvh 1dvw;
+    }
+    .navLinkActive {
+        padding: 0.5dvh 1dvw;
+    }
+}
