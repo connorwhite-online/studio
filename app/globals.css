@@ -3,5 +3,63 @@ html, body {
   padding: 0;
   min-width: 100dvw;
   min-height: 100dvh;
-  background-color: black;
+}
+
+@font-face {
+  font-family: 'Montreal-Regular';
+  src: url('fonts/PPNeueMontreal-Regular.woff2') format('woff2'); 
+}
+@font-face {
+  font-family: 'Montreal-Light';
+  src: url('fonts/PPNeueMontreal-Light.woff2') format('woff2'); 
+}
+@font-face {
+  font-family: 'Montreal-Bold';
+  src: url('fonts/PPNeueMontreal-Bold.woff2') format('woff2'); 
+}
+@font-face {
+  font-family: 'Mono-Regular';
+  src: url('fonts/PPNeueMontrealMono-Regular.woff2') format('woff2'); 
+}
+@font-face {
+  font-family: 'Mono-Light';
+  src: url('fonts/PPNeueMontrealMono-Light.woff2') format('woff2'); 
+}
+
+:root {
+  --regular: 'Montreal-Regular';
+  --light: 'Montreal-Light';
+  --bold: 'Montreal-Bold';
+  --monoRegular: 'Mono-Regular';
+  --monoLight: 'Mono-Light';
+  --dark: #000000;
+  --light: #ffffff;
+  --copy: 14px;
+}
+
+h1{
+  font-family: var(--regular);
+  font-size: 32px;
+  color: var(--dark);
+  margin: 0;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+li {
+  display: block;
+  padding: 0;
+  margin: 0;
+}
+a {
+  text-decoration: none;
+  color: var(--dark);
+}
+p {
+  font-family: var(--regular);
+  font-size: var(--copy);
+  color: var(--dark);
+  margin: 0;
 }

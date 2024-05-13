@@ -5,41 +5,49 @@
     bottom: 2.5dvh;
     top: auto;
     justify-content: center;
-    
+    z-index: 100;
 }
 
 .nav {
     background-color: rgba(217, 217, 217, 0.25);
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 5dvw;
-    padding: 0.5dvh 1dvw;
+    flex-direction: column;
+    /* width: 120px; */
+    gap: 20px;
+    padding: 10px;
     border-radius: 7.5px;
 }
-
+.mainNav {
+    order: 2;
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    align-items: center;
+}
+.currentPath {
+    font-family: var(--regular);
+    font-size: 16px;
+}
+.subNav {
+    order: 1;
+    display: none;
+    flex-direction: column;
+    gap: 20px;
+    display: none;
+}
 .navLink {
     display: none;
-    font-style: regular;
-    text-decoration: none;
-    color: white;
-    font-size: 20px;
-    padding: 0.5dvh 2.5dvw;
+    font-family: var(--regular);
+    font-size: 16px;
 }
 
 .navLinkActive {
     display: none;
-    font-style: italic;
-    text-decoration: none;
-    color: white;
-    font-size: 20px;
-    padding: 0.5dvh 2.5dvw;
-    border-radius: 5px;
-    background-color: rgba(217, 217, 217, 0.25);
+    font-family: var(--bold);
+    font-size: 16px;
 }
 
 .icon {
-    padding: 0.5dvh 2.5dvw;
     cursor: pointer;
 }
 
@@ -49,16 +57,21 @@
         bottom: auto;
     }
     .nav {
-        gap: 2.5dvw;
-        padding: 0.25dvh 0.5dvw;
+        /* padding: 0.25dvh 0.5dvw; */
+    }
+    .mainNav {
+        order: 1;
+    }
+    .subNav {
+        order: 2;
     }
     .navLink {
-        padding: 0.5dvh 1dvw;
+       
     }
     .navLinkActive {
-        padding: 0.5dvh 1dvw;
+        
     }
     .icon {
-        padding: 0.5dvh 1dvw;
+        /* padding: 0.5dvh 1dvw; */
     }
 }
