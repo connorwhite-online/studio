@@ -13,9 +13,9 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    /* width: 150px; */
-    /* gap: 20px; */
     padding: 10px;
+    height: 20px;
+    width: auto;
     border-radius: 7.5px;
 }
 .mainNav {
@@ -35,17 +35,15 @@
 .subNav {
     order: 1;
     display: none;
-    flex-direction: column;
-    gap: 20px;
 }
 .subNav li {
-    margin-top: 5px;
+    margin-bottom: 10px;
     clip-path: inset(0 0 0 0);
 }
 .navLink {
     /* display: none; */
     visibility: hidden;
-    display: block;
+    display: none;
     font-family: var(--regular);
     font-size: 16px;
     transform: translateY(25px);
@@ -64,22 +62,14 @@
         top: 2.5dvh;
         bottom: auto;
     }
-    .nav {
-        /* padding: 0.25dvh 0.5dvw; */
-    }
     .mainNav {
         order: 1;
     }
     .subNav {
         order: 2;
     }
-    .navLink {
-       
-    }
-    .navLinkActive {
-        
-    }
-    .icon {
-        /* padding: 0.5dvh 1dvw; */
+    .subNav li {
+        margin-bottom: 0;
+        margin-top: 10px;
     }
 }
