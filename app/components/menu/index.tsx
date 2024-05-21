@@ -19,9 +19,9 @@ export default function Menu() {
     useGSAP(() => {
         menuTL.current = gsap.timeline({paused: true})
         .to(iconRef.current, {rotateZ: 135, duration: 1.25, ease: "elastic.out(1,0.75)"})
-        .to(navRef.current, {width: '250px', height: '100px', duration: 0.5, ease: "power4.out"}, "<")
-        .set(`.${styles.subNav}`, {autoAlpha: 1, display: "block"}, 0.1)
-        .to(`.${styles.navLink}`, {autoAlpha: 1, duration: 1, transform: 'translateY(0px)', stagger: 0.1, ease: "power2.out"}, 0.2);
+        .set(`.${styles.subNav}`, {autoAlpha: 1, display: "block"}, "<")
+        .to(navRef.current, {width: '250px', height: '125px', duration: 0.5, ease: "power4.out"}, "<")
+        .to(`.${styles.navLink}`, {autoAlpha: 1, display: "block", duration: 1, transform: 'translateY(0px)', stagger: 0.1, ease: "power2.out"}, 0.2);
     }, { dependencies: [] });
 
     // Menu toggle animation
