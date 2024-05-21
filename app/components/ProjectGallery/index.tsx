@@ -21,7 +21,7 @@ const ProjectGallery: React.FC = () => {
       if (error) {
         console.error('Error fetching projects:', error);
       } else {
-        setProjects(projects);
+        setProjects(projects ?? []);
       }
     };
 
