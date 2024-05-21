@@ -6,8 +6,6 @@ const Projects: React.FC = () => {
     return (
         <div>
             <ProjectGallery />
-            <h1>Projects</h1>
-            <p>Here are some of my past projects.</p>
         </div>
     );
 };
