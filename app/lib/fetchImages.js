@@ -10,11 +10,13 @@ export default async function fetchImages() {
         return { images: [] };
     }
 
-    const images = data.map((image) => {
-        return `${supabase.storageUrl}/media/${image.name}`
-    });
+    console.log(data);
+
+    // const images = data.map((image) => {
+    //     return `${supabase.storageUrl}/media/${image.name}`
+    // });
 
     console.log(images[0]);
 
-    return { images };
+    // return { images };
 }

@@ -1,24 +1,11 @@
 import styles from './projects.module.css';
-import fetchImages  from '../../lib/fetchImages'
-import Gallery from '../../components/gallery';
+import fetchImages  from '../../lib/fetchImages';
+import ProjectGallery from '../../components/ProjectGallery';
 
-interface ProjectsProps {
-    images: string[];
-}
-
-export async function getStaticProps() {
-  const { images } = await fetchImages();
-  return {
-    props: {
-      images,
-    },
-  };
-}
-
-const Projects: React.FC<ProjectsProps> = ({ images }) => {
+const Projects: React.FC = () => {
     return (
         <div>
-            <Gallery images={images} />
+            <ProjectGallery />
         </div>
     );
 };
