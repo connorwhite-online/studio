@@ -1,5 +1,5 @@
 import styles from './projects.module.css';
-import fetchImages  from '../../lib/fetchImages';
+// import fetchImages  from '../../lib/fetchImages';
 import ProjectGallery from '../../components/ProjectGallery';
 
 const Projects: React.FC = () => {
