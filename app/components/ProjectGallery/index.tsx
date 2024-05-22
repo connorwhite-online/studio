@@ -1,38 +1,27 @@
 'use client';
-
-import { useState, useEffect } from 'react';
-import supabase from '../../lib/supabaseClient';
 import ProjectCard from '../ProjectCard';
 
 interface Project {
   id: string;
   name: string;
+  role: string[];
+  summary: string;
+  kpi: string;
+  type: string[];
+  files: string[];
 }
 
-const ProjectGallery: React.FC = () => {
-  const [projects, setProjects] = useState<Project[]>([]);
+interface ProjectGalleryProps {
+  projects: Project[];
+}
 
-  useEffect(() => {
-    const fetchProjects = async () => {
-      let { data: projects, error } = await supabase
-        .from('projects')
-        .select('id, name');
-
-      if (error) {
-        console.error('Error fetching projects:', error);
-      } else {
-        setProjects(projects ?? []);
-      }
-    };
-
-    fetchProjects();
-  }, []);
-
+const ProjectGallery: React.FC<ProjectGalleryProps> = ({ projects }) => {
+console.log('projects:', projects);
   return (
     <div className="project-gallery">
       <div className="gallery">
-        {projects.map((project) => (
-          <ProjectCard key={project.id} project={project} />
+        {projects.map((project, index) => (
+          <ProjectCard key={index} project={project} />
         ))}
       </div>
     </div>

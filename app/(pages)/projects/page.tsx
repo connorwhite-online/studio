@@ -1,11 +1,9 @@
-// import styles from './projects.module.css';
-// import fetchImages  from '../../lib/fetchImages';
-import ProjectGallery from '../../components/ProjectGallery';
+import ProjectGalleryServer from '../../server/ProjectGalleryServer';
 
 const Projects: React.FC = () => {
     return (
         <div>
-            <ProjectGallery />
+            <ProjectGalleryServer />
         </div>
     );
 };

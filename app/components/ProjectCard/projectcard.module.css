@@ -1,0 +1,9 @@
+.projectCard {
+    display: flex;
+    flex-direction: column;
+}
+.mediaGallery {
+    display: flex;
+    gap: 10px;
+    
+}
