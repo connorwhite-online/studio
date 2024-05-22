@@ -1,4 +1,4 @@
-import styles from './projects.module.css';
+// import styles from './projects.module.css';
 // import fetchImages  from '../../lib/fetchImages';
 import ProjectGallery from '../../components/ProjectGallery';
 
