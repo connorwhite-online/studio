@@ -9,7 +9,8 @@
 }
 
 .nav {
-    background-color: rgba(217, 217, 217, 0.25);
+    background-color: rgba(217, 217, 217, 0.75);
+    backdrop-filter: blur(4px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;

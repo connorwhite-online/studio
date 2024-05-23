@@ -33,7 +33,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
 
   return (
     <div className={styles.projectCard}>
-      <h1>{project.name}</h1>
+      {/* <h1>{project.name}</h1> */}
       {project.files && project.files.length > 0 ? (
         <div className={styles.mediaGallery}>
           {project.files.map((file, index) => {
@@ -41,7 +41,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
             return isImage(file) ? (
               <img key={index} src={fileUrl} alt={`${project.name} media ${index + 1}`} height={100} />
             ) : isVideo(file) ? (
-              <video key={index} src={fileUrl} controls width={200} />
+              <video key={index} src={fileUrl} autoPlay muted loop height={100} />
             ) : null;
           })}
         </div>

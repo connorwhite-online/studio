@@ -5,5 +5,5 @@
 .mediaGallery {
     display: flex;
     gap: 10px;
-    
+    overflow-x: scroll;
 }
