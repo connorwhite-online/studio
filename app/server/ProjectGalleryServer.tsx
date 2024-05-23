@@ -7,14 +7,14 @@ interface Project {
   role: string[];
   summary: string;
   kpi: string;
-  type: string[];
+  types: string[];
   files: string[];
 }
 
 const fetchProjects = async (): Promise<Project[]> => {
   const { data: projects, error } = await supabase
     .from('projects')
-    .select('id, name, role, summary, kpi, type, files');
+    .select('id, name, role, summary, kpi, types, files');
 
   if (error) {
     console.error('Error fetching projects:', error);

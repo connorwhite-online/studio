@@ -7,7 +7,7 @@ interface Project {
   role: string[];
   summary: string;
   kpi: string;
-  type: string[];
+  types: string[];
   files: string[];
 }
 
