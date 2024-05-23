@@ -63,3 +63,7 @@ p {
   color: var(--dark);
   margin: 0;
 }
+
+video::-webkit-media-controls {
+  display: none;
+}
