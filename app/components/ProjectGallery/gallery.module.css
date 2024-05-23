@@ -1,5 +1,5 @@
 .projectGallery {
-    margin-top: 10dvh;
+    /* margin-top: 10dvh; */
     display: flex;
     flex-direction: column;
     gap: 1dvh;

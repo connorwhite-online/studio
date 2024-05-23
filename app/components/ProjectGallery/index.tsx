@@ -45,7 +45,9 @@ const ProjectGallery: React.FC<ProjectGalleryProps> = ({ projects }) => {
           return isImage(project.files[0]) ? (
             <img key={index} src={relativeURL + project.files[0]} alt={`${project.name} media ${index + 1}`} height={150} />
           ) : isVideo(project.files[0]) ? (
-            <video key={index} src={relativeURL + project.files[0]} autoPlay muted loop height={150} />
+            <video key={index} autoPlay muted loop height={150}>
+              <source src={relativeURL + project.files[0]} type="video/mp4" />
+            </video>
           ) : null;
         })}
       </div>
