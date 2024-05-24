@@ -89,7 +89,7 @@ const ProjectGallery: React.FC<ProjectGalleryProps> = ({ projects }) => {
           return isImage(project.files[0]) ? (
             <img className={styles.media} key={project.name} src={relativeURL + project.files[0]} alt={`${project.name} media ${index + 1}`} height={150} draggable='false' />
           ) : isVideo(project.files[0]) ? (
-            <video className={styles.media} key={project.name} autoPlay muted loop height={150}>
+            <video className={styles.media} key={project.name} autoPlay muted loop controlsList="nofullscreen" height={150}>
               <source src={relativeURL + project.files[0]} type="video/mp4" />
             </video>
           ) : null;
