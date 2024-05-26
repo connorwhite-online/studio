@@ -14,7 +14,7 @@
     padding: 2.5px;
     font-family: var(--monoLight);
     font-size: --copy;
-    margin-left: 5dvw;
+    margin-left: 2.5dvw;
 }
 .galleryFilter {
     display: flex;
@@ -30,9 +30,6 @@
     font-size: var(--copy);
     cursor: pointer;
 }
-.typeFilter:hover {
-    opacity: 0.5;
-}
 .selected {
     font-family: var(--bold);
 }
@@ -41,7 +38,7 @@
     flex-wrap: nowrap;
     overflow-x: scroll;
     gap: 20px;
-    margin-left: 5dvw;
+    margin-left: 2.5dvw;
     padding-bottom: 10px;
 }
 .slideShow::-webkit-scrollbar {
@@ -56,11 +53,20 @@
 .projectItem:hover, .currentProject:hover {
     scale: 1.05;
 }
-.currentProject .media {
-    /* scale: 1.05; */
-}
 img.media, video.media {
-    height: 20dvh;
-    /* pointer-events: none; */
+    height: 10dvh;
+    
     cursor: pointer;
+}
+
+@media screen and (min-width: 768px) {
+    img.media, video.media {
+        height: 20dvh;
+    }
+    .projectIndex {
+        margin-left: 5dvw;
+    }
+    .slideShow {
+        margin-left: 5dvw;
+    }
 }

@@ -1,26 +1,26 @@
 .projectCard {
     display: flex;
     justify-content: space-between;
-    margin: 2.5dvh 5dvw;
+    flex-direction: column;
+        margin: 2.5dvh 2.5dvw;
     gap: 10dvw;
 }
 .imageContainer {
     display: flex;
-    justify-content: flex-start;
-    width: 40dvw;
+    justify-content: center;
+    width: 95dvw;
+    height: 40dvh;
 }
 img.media, video.media {
     width: 100%;
     height: auto;
-    max-height: 50dvh;
     object-fit: contain;
-    transition: top 0.5s cubic-bezier();
 }
 .textContainer {
     display: flex;
     flex-direction: column;
     gap: 1dvh;
-    width: 40dvw;
+    width: 95dvw;
 }
 .rolesList {
     display: flex;
@@ -29,4 +29,22 @@ img.media, video.media {
 .role {
     font-family: var(--monoLight);
     font-size: var(--copy);
+}
+
+@media screen and (min-width: 768px) {
+    .projectCard{
+        flex-direction: row;
+        margin: 2.5dvh 5dvw;
+    }
+    .imageContainer {
+        width: 40dvw;
+        justify-content: flex-start;
+    }
+    img.media, video.media {
+        max-height: 50dvh;
+    }
+    .textContainer {
+        width: 40dvw;
+
+    }
 }
