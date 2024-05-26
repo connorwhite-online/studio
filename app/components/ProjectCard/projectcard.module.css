@@ -24,7 +24,7 @@ img.media, video.media {
 }
 .rolesList {
     display: flex;
-    gap: 1dvw;
+    gap: 2.5dvw;
 }
 .role {
     font-family: var(--monoLight);
@@ -46,5 +46,8 @@ img.media, video.media {
     .textContainer {
         width: 40dvw;
 
+    }
+    .rolesList {
+        gap: 1dvw;
     }
 }
