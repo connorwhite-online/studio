@@ -30,6 +30,9 @@
     font-size: var(--copy);
     cursor: pointer;
 }
+.typeFilter:hover {
+    opacity: 0.5;
+}
 .selected {
     font-family: var(--bold);
 }
@@ -37,14 +40,27 @@
     display: flex;
     flex-wrap: nowrap;
     overflow-x: scroll;
-    gap: 10px;
-    filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
-    margin-left: 5dvw;    
+    gap: 20px;
+    margin-left: 5dvw;
+    padding-bottom: 10px;
 }
 .slideShow::-webkit-scrollbar {
     display: none;
 }
-.media {
+.projectItem {
+    filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.25));
+}
+.currentProject {
+    filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
+}
+.projectItem:hover, .currentProject:hover {
+    scale: 1.05;
+}
+.currentProject .media {
+    /* scale: 1.05; */
+}
+img.media, video.media {
     height: 20dvh;
-    pointer-events: none;
+    /* pointer-events: none; */
+    cursor: pointer;
 }

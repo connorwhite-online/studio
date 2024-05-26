@@ -69,17 +69,20 @@ const ProjectGallery: React.FC<ProjectGalleryProps> = ({ projects }) => {
   };
 
   const formatIndex = (index: number) => {
-    return String(index + 1).padStart(2, '0'); // Adjusted to start from 1
+    return String(index).padStart(2, '0'); // Adjusted to start from 1
   };
 
   const handleProjectClick = (project: Project) => {
     setCurrentProject(project);
   };
 
+  const currentProjectIndex = filteredProjects.findIndex(project => project.id === currentProject.id);
+
+
   return (
     <div className={styles.projectGallery}>
       <div className={styles.galleryFilter}>
-        <div className={styles.projectIndex}>{formatIndex(filteredProjects.length) + '/' + formatIndex(filteredProjects.length)}</div>
+        <div className={styles.projectIndex}>{formatIndex(currentProjectIndex + 1) + '/' + formatIndex(filteredProjects.length)}</div>
         <div className={styles.filters}>
         <div className={`${styles.typeFilter} ${selectedTypes.length === 0 ? styles.selected : ''}`} onClick={() => clearTypes()}>All</div>
           {allTypes.map((type, index) => (
@@ -91,7 +94,7 @@ const ProjectGallery: React.FC<ProjectGalleryProps> = ({ projects }) => {
         {filteredProjects.map((project, index) => {
           const relativeURL = 'https://bdvkplyefikbvwvrumga.supabase.co/storage/v1/object/public/media/' + project.id + '/';
           return (
-            <div key={project.name} onClick={() => handleProjectClick(project)} className={styles.projectItem}>
+            <div key={project.name} onClick={() => handleProjectClick(project)} className={`${styles.projectItem} ${project.id === currentProject.id ? styles.currentProject : ''}`}>
               {isImage(project.files[0]) ? (
                 <img className={styles.media} src={relativeURL + project.files[0]} alt={`${project.name} media ${index + 1}`} height={150} draggable='false' />
               ) : isVideo(project.files[0]) ? (

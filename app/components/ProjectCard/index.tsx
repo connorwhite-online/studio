@@ -29,23 +29,27 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   };
 
   return (
-    <div className={styles.projectCard}>
-      <h2>{project.name}</h2>
-      {isImage(project.files[0]) ? (
-        <img className={styles.media} src={relativeURL + project.files[0]} alt={`${project.name} image`} />
-      ) : isVideo(project.files[0]) ? (
-        <video key={relativeURL + project.files[0]} className={styles.media} autoPlay muted loop playsInline>
-          <source src={relativeURL + project.files[0]} type="video/mp4" />
-        </video>
-      ) : null}
-      <p>{project.summary}</p>
-      <ul>
-        {project.role.map((role, index) => (
-          <li key={index}>{role}</li>
-        ))}
-      </ul>
-      <p>KPI: {project.kpi}</p>
-    </div>
+    <main className={styles.projectCard}>
+      <section className={styles.imageContainer}>
+        {isImage(project.files[0]) ? (
+          <img className={styles.media} src={relativeURL + project.files[0]} alt={`${project.name} image`}  />
+        ) : isVideo(project.files[0]) ? (
+          <video key={relativeURL + project.files[0]} className={styles.media} autoPlay muted loop playsInline >
+            <source src={relativeURL + project.files[0]} type="video/mp4" />
+          </video>
+        ) : null}
+      </section>
+      <section className={styles.textContainer}>
+        <h1>{project.name}</h1>
+        <ul className={styles.rolesList}>
+          {project.role.map((role, index) => (
+            <li key={index} className={styles.role}>{role}</li>
+          ))}
+        </ul>
+        <p>{project.summary}</p>
+        <p>{project.kpi}</p>
+      </section>
+    </main>
   );
 };
 

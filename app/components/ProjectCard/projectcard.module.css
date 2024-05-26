@@ -1,9 +1,32 @@
 .projectCard {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    margin: 2.5dvh 5dvw;
+    gap: 10dvw;
 }
-.mediaGallery {
+.imageContainer {
     display: flex;
-    gap: 10px;
-    overflow-x: scroll;
+    justify-content: flex-start;
+    width: 40dvw;
+}
+img.media, video.media {
+    width: 100%;
+    height: auto;
+    max-height: 50dvh;
+    object-fit: contain;
+    transition: top 0.5s cubic-bezier();
+}
+.textContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1dvh;
+    width: 40dvw;
+}
+.rolesList {
+    display: flex;
+    gap: 1dvw;
+}
+.role {
+    font-family: var(--monoLight);
+    font-size: var(--copy);
 }
