@@ -12,8 +12,9 @@
     height: 40dvh;
 }
 img.media, video.media {
-    width: 100%;
-    height: auto;
+    width: auto;
+    /* height: inherit; */
+    max-width: 95dvw;
     object-fit: contain;
 }
 .textContainer {
@@ -38,10 +39,13 @@ img.media, video.media {
     }
     .imageContainer {
         width: 40dvw;
+        height: 50dvh;
         justify-content: flex-start;
+        align-items: flex-start;
     }
     img.media, video.media {
         max-height: 50dvh;
+        max-width: 40dvw;
     }
     .textContainer {
         width: 40dvw;
