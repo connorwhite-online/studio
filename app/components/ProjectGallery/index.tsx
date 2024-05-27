@@ -1,6 +1,8 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ProjectCard from '../ProjectCard';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 import styles from './gallery.module.css';
 
 interface Project {
@@ -18,6 +20,9 @@ interface ProjectGalleryProps {
 }
 
 const ProjectGallery: React.FC<ProjectGalleryProps> = ({ projects }) => {
+
+  const projectRef = useRef<HTMLDivElement>(null);
+  const introTL = useRef<gsap.core.Timeline>();
 
   const [filteredProjects, setFilteredProjects] = useState<Project[]>(projects);
   const [currentProject, setCurrentProject] = useState<Project>(filteredProjects[0]);
@@ -78,9 +83,36 @@ const ProjectGallery: React.FC<ProjectGalleryProps> = ({ projects }) => {
 
   const currentProjectIndex = filteredProjects.findIndex(project => project.id === currentProject.id);
 
+  // Slideshow Intro Animation
+  useGSAP(() => {
+    introTL.current = gsap.timeline({})
+    .set(projectRef.current, {
+      autoAlpha: 1
+    })
+    .from(`.${styles.media}`, {
+      duration: 2,
+      x: 200,
+      opacity: 0,
+      ease: 'power4.out',
+      stagger: 0.2
+    })
+    .from(`.${styles.projectIndex}`, {
+      autoAlpha: 0,
+      duration: 1,
+    }, "<25%")
+    .from(`.${styles.typeFilter}`, {
+      // y: 50,
+      autoAlpha: 0,
+      transform: 'translateY(25px)',
+      ease: 'power4.out',
+      duration: 1,
+      stagger: 0.1
+    }, "<25%")
+  }, {dependencies: [], scope: projectRef})
+
 
   return (
-    <div className={styles.projectGallery}>
+    <div className={styles.projectGallery} ref={projectRef}>
       <div className={styles.galleryFilter}>
         <div className={styles.projectIndex}>{formatIndex(currentProjectIndex + 1) + '/' + formatIndex(filteredProjects.length)}</div>
         <div className={styles.filters}>

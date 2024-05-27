@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 import styles from './projectcard.module.css';
 
 interface Project {
@@ -16,6 +18,45 @@ interface ProjectCardProps {
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
+
+  const cardRef = useRef<HTMLDivElement>(null);
+  const introTL = useRef<gsap.core.Timeline>();
+
+  // Slideshow Intro Animation
+  useGSAP(() => {
+    introTL.current = gsap.timeline({})
+    .set(cardRef.current, {
+      autoAlpha: 1
+    })
+    .from(`.${styles.media}`, {
+      duration: 1,
+      delay: 1,
+      opacity: 0,
+      // transform: 'translateY(50px)',
+      ease: 'power4.out',
+      clipPath: 'inset(100%',
+      stagger: 0.2
+    })
+    .from("h1", {
+      opacity: 0,
+      transform: 'translateY(25px)',
+      duration: 1,
+      ease: 'power4.out',
+    }, "<25%")
+    .from(`.${styles.role}`, {
+      duration: 2,
+      opacity: 0,
+      ease: 'power4.out',
+      stagger: 0.2
+    }, "<25%")
+    .from("p", {
+      opacity: 0,
+      ease: 'power4.out',
+      duration: 2,
+      stagger: 0.5
+    }, "<25%")
+  }, {dependencies: [], scope: cardRef})
+
   const relativeURL = 'https://bdvkplyefikbvwvrumga.supabase.co/storage/v1/object/public/media/' + project.id + '/';
   
   const isImage = (file: string) => {
@@ -29,7 +70,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   };
 
   return (
-    <main className={styles.projectCard}>
+    <main className={styles.projectCard} ref={cardRef}>
       <section className={styles.imageContainer}>
         {isImage(project.files[0]) ? (
           <img className={styles.media} src={relativeURL + project.files[0]} alt={`${project.name} image`}  />

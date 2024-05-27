@@ -1,8 +1,9 @@
 .projectCard {
+    visibility: hidden;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-        margin: 2.5dvh 2.5dvw;
+    margin: 2.5dvh 2.5dvw;
     gap: 10dvw;
 }
 .imageContainer {
@@ -23,6 +24,9 @@ img.media, video.media {
     gap: 1dvh;
     width: 95dvw;
 }
+div.textContainer h1 {
+    clip-path: inset(0 0 0 0);
+}
 .rolesList {
     display: flex;
     gap: 2.5dvw;
@@ -36,6 +40,7 @@ img.media, video.media {
     .projectCard{
         flex-direction: row;
         margin: 2.5dvh 5dvw;
+        gap: 5dvw;
     }
     .imageContainer {
         width: 40dvw;
