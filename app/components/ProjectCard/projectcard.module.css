@@ -14,6 +14,7 @@
 }
 img.media, video.media {
     width: auto;
+    /* clip-path: inset(100%); */
     /* height: inherit; */
     max-width: 95dvw;
     object-fit: contain;
@@ -24,12 +25,10 @@ img.media, video.media {
     gap: 1dvh;
     width: 95dvw;
 }
-div.textContainer h1 {
-    clip-path: inset(0 0 0 0);
-}
 .rolesList {
     display: flex;
     gap: 2.5dvw;
+    clip-path: inset(0 0 0 0);
 }
 .role {
     font-family: var(--monoLight);
