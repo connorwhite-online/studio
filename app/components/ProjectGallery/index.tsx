@@ -13,6 +13,7 @@ interface Project {
   kpi: string;
   types: string[];
   files: string[];
+  date: string;
 }
 
 interface ProjectGalleryProps {
@@ -24,7 +25,7 @@ const ProjectGallery: React.FC<ProjectGalleryProps> = ({ projects }) => {
   const projectRef = useRef<HTMLDivElement>(null);
   const introTL = useRef<gsap.core.Timeline>();
 
-  const [filteredProjects, setFilteredProjects] = useState<Project[]>(projects);
+  const [filteredProjects, setFilteredProjects] = useState<Project[]>(projects.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()));
   const [currentProject, setCurrentProject] = useState<Project>(filteredProjects[0]);
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
 
@@ -63,9 +64,11 @@ const ProjectGallery: React.FC<ProjectGalleryProps> = ({ projects }) => {
     const filtered = projects.filter(project => {
       if (selectedTypes.length === 0) return true;
       return selectedTypes.some(type => project.types.includes(type));
-    });
+    })
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    
     setFilteredProjects(filtered);
-    setCurrentProject(filtered[0]); // Reset current project to the first one
+    setCurrentProject(filtered[0] || null); // Reset current project to the first one
   }, [projects, selectedTypes]);
 
   // Clear tags function
@@ -90,11 +93,11 @@ const ProjectGallery: React.FC<ProjectGalleryProps> = ({ projects }) => {
       autoAlpha: 1
     })
     .from(`.${styles.media}`, {
-      duration: 2,
-      x: 200,
+      duration: 1.5,
+      transform: 'translateX(500px)',
       opacity: 0,
       ease: 'power4.out',
-      stagger: 0.2
+      stagger: 0.1
     })
     .from(`.${styles.projectIndex}`, {
       autoAlpha: 0,

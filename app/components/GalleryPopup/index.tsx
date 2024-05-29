@@ -19,7 +19,7 @@ const GalleryPopup: React.FC<GalleryPopupProps> = ({ files, onClose }) => {
 
   const isVideo = (file: string) => {
     const ext = file.split('.').pop()?.toLowerCase();
-    return ['mp4', 'webm', 'ogg'].includes(ext ?? '');
+    return ['mp4', 'mov', 'ogg'].includes(ext ?? '');
   };
 
   const popupRef = useRef<HTMLDivElement>(null);

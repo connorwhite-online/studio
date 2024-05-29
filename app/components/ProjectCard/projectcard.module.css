@@ -43,6 +43,7 @@ img.media, video.media {
 @media screen and (min-width: 768px) {
     .projectCard{
         flex-direction: row;
+        justify-content: space-between;
         margin: 2.5dvh 5dvw;
         gap: 5dvw;
     }
@@ -50,7 +51,7 @@ img.media, video.media {
         width: 40dvw;
         height: 50dvh;
         justify-content: flex-start;
-        align-items: flex-start;
+        align-self: flex-start;
     }
     img.media, video.media {
         max-height: 50dvh;
@@ -62,7 +63,7 @@ img.media, video.media {
         bottom: auto;
     }
     .textContainer {
-        width: 40dvw;
+        width: 30dvw;
 
     }
     .rolesList {

@@ -12,6 +12,7 @@ interface Project {
   kpi: string;
   types: string[];
   files: string[];
+  date: string;
 }
 
 interface ProjectCardProps {
