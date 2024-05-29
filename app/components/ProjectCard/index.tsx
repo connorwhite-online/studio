@@ -56,7 +56,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
       }, "<50%")
       .from(`.${styles.role}`, {
         duration: 1,
-        opacity: 0,
+        autoAlpha: 0,
         transform: 'translateY(25px)',
         ease: 'power4.out',
         stagger: 0.2

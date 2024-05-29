@@ -1,4 +1,5 @@
 .galleryPopup {
+    min-width: 100dvw;
     visibility: hidden;
     clip-path: inset(0 0 100% 0);
     z-index: 100;
@@ -10,7 +11,7 @@
 }
 .closeButton {
     position: fixed;
-    top: 10px;
+    top: 20px;
     cursor: pointer;
     z-index: 200;
 }
@@ -22,7 +23,7 @@
     width: 95dvw;
     min-height: 100dvh;
     z-index: 101;
-    margin-right: 2.5dvw;
+    margin: 7.5dvh 2.5dvw 7.5dvh 0;
 }
 img.media, video.media {
     max-height: 90dvh;

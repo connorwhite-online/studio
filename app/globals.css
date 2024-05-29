@@ -66,6 +66,7 @@ p {
 button {
   font-family: var(--light);
     font-size: var(--copy);
+    text-decoration: none;
     cursor: pointer;
     background-color: rgba(217, 217, 217, 0.75);
     backdrop-filter: blur(4px);
