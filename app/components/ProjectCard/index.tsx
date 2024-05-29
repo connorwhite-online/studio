@@ -22,46 +22,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const introTL = useRef<gsap.core.Timeline>();
 
-  // // Slideshow Intro Animation
-  // useGSAP(() => {
-  //   introTL.current = gsap.timeline({})
-  //   .set(cardRef.current, {
-  //     autoAlpha: 1
-  //   })
-  //   .from(`.${styles.media}`, {
-  //     duration: 2,
-  //     // delay: 1,
-  //     ease: 'power4.out',
-  //     clipPath: 'inset(100%)',
-  //     stagger: 0.2
-  //   })
-  //   .from("h1", {
-  //     autoAlpha: 0,
-  //     clipPath: 'inset(0 0 100% 0)',
-  //     transform: 'translateY(25px)',
-  //     duration: 1,
-  //     ease: 'power4.out',
-  //   }, "<25%")
-  //   .from(`.${styles.role}`, {
-  //     duration: 2,
-  //     opacity: 0,
-  //     ease: 'power4.out',
-  //     stagger: 0.2
-  //   }, "<25%")
-  //   .from("p", {
-  //     opacity: 0,
-  //     ease: 'power4.out',
-  //     duration: 2,
-  //     stagger: 0.5
-  //   }, "<25%")
-  // }, {dependencies: [], scope: cardRef})
-
-  // useGSAP(() => {
-  //   introTL.current?.kill();
-  //   // introTL.current?.restart();
-  //   introTL.current?.seek(0);
-  // }, {dependencies: [project]})
-
   useGSAP(() => {
     if (introTL.current) {
       introTL.current.kill();
