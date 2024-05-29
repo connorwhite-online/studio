@@ -5,7 +5,7 @@
     bottom: 2.5dvh;
     top: auto;
     justify-content: center;
-    z-index: 100;
+    z-index: 99;
 }
 
 .nav {

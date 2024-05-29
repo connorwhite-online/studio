@@ -1,5 +1,5 @@
 .projects {
-    padding: 2.5dvh 0;
+    padding: 2.5dvh 0 5dvh 0;
     min-height: 100dvh;
 }
 @media screen and (min-width: 768px) {

@@ -1,7 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import styles from './projectcard.module.css';
+import GalleryPopup from '../GalleryPopup';
 
 interface Project {
   id: string;
@@ -21,6 +22,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
 
   const cardRef = useRef<HTMLDivElement>(null);
   const introTL = useRef<gsap.core.Timeline>();
+  const [showGallery, setShowGallery] = useState(false); // State for gallery visibility
+
 
   useGSAP(() => {
     if (introTL.current) {
@@ -45,6 +48,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         duration: 1,
         ease: 'power4.out',
       }, "<25%")
+      .from(`.${styles.viewGalleryButton}`, {
+        autoAlpha: 0,
+        duration: 1,
+        ease: 'power4.out',
+      }, "<50%")
       .from(`.${styles.role}`, {
         duration: 1,
         opacity: 0,
@@ -53,7 +61,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         stagger: 0.2
       }, "<25%")
       .from("p", {
-        opacity: 0,
+        autoAlpha: 0,
         ease: 'power2.out',
         duration: 2,
         stagger: 0.2
@@ -84,6 +92,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
             <source src={relativeURL + project.files[0]} type="video/mp4" />
           </video>
         ) : null}
+        <button className={styles.viewGalleryButton} onClick={() => setShowGallery(true)}>Gallery +</button>
       </section>
       <section className={styles.textContainer}>
         <h1>{project.name}</h1>
@@ -95,6 +104,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         <p>{project.summary}</p>
         <p>{project.kpi}</p>
       </section>
+      {showGallery && <GalleryPopup files={project.files.map(file => project.id + '/' + file)} onClose={() => setShowGallery(false)} />}
     </main>
   );
 };
