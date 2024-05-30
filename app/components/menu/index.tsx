@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import styles from "./menu.module.css";
 import { usePathname } from "next/navigation";
@@ -11,6 +11,7 @@ export default function Menu() {
     const pathname = usePathname();
 
     const [menuOpen, setMenuOpen] = useState(false);
+    const [theme, setTheme] = useState('light');
     const navRef = useRef<HTMLDivElement>(null);
     const iconRef = useRef<SVGSVGElement>(null);
     const menuTL = useRef<gsap.core.Timeline>();
@@ -38,10 +39,19 @@ export default function Menu() {
     }
     , { dependencies: [menuOpen] });
 
+    // Theme toggle handler
+    useEffect(() => {
+        document.documentElement.setAttribute('data-theme', theme);
+    }, [theme]);
+
+    const toggleTheme = () => {
+        setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
+    };
+
     return (
         <div className={styles.menu}>
             <nav className={styles.nav} ref={navRef}>
-                <div className={styles.mainNav} onClick={() => setMenuOpen(!menuOpen)}>
+                <div className={styles.mainNav} onClick={() => setMenuOpen(!menuOpen)} style={{ color: 'var(--icon-color)' }}>
                     <div className={styles.currentPath}>{pathname === '/' ? 'Home' : (pathname.charAt(1).toUpperCase())+(pathname.slice(2))}</div>
                     <MenuIcon ref={iconRef} className={styles.icon} />
                 </div>
@@ -60,6 +70,18 @@ export default function Menu() {
                     <Link href="/info" className={`${styles.navLink} ${pathname === '/info' ? styles.navLinkActive : ''}`} onClick={() => setMenuOpen(false)}>
                         Info
                     </Link>
+                    </li>
+                    <li>
+                        <div className={styles.themeToggleWrapper}>
+                            <input 
+                                type="checkbox" 
+                                className={styles.themeToggle} 
+                                id="themeToggle" 
+                                checked={theme === 'dark'} 
+                                onChange={toggleTheme} 
+                            />
+                            <label className={styles.slider} htmlFor="themeToggle"></label>
+                        </div>
                     </li>
                 </ul>
             </nav>

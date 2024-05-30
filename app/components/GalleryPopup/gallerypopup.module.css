@@ -23,7 +23,7 @@
     width: 95dvw;
     min-height: 100dvh;
     z-index: 101;
-    margin: 7.5dvh 2.5dvw 7.5dvh 0;
+    margin: 10dvh 2.5dvw 7.5dvh 0;
 }
 img.media, video.media {
     max-height: 90dvh;
@@ -42,6 +42,7 @@ img.media, video.media {
         width: auto;
         min-width: 97.5dvw;
         height: 100dvh;
+        margin: 0;
         /* margin-left: 2.5dvw; */
     }
     img.media, video.media {

@@ -3,6 +3,8 @@ html, body {
   padding: 0;
   min-width: 100dvw;
   min-height: 100dvh;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 @font-face {
@@ -34,13 +36,29 @@ html, body {
   --monoLight: 'Mono-Light';
   --dark: #000000;
   --white: #ffffff;
+  --shroudDark: rgba(76, 76, 76, 0.75);
+  --shroudLight: rgba(217, 217, 217, 0.75);
   --copy: 14px;
+}
+
+[data-theme="dark"] {
+  --background-color: var(--dark);
+  --text-color: var(--white);
+  --icon-color: var(--white);
+  --shroud-color: var(--shroudDark);
+}
+
+[data-theme="light"] {
+  --background-color: var(--white);
+  --text-color: var(--dark);
+  --icon-color: var(--dark);
+  --shroud-color: var(--shroudLight);
 }
 
 h1{
   font-family: var(--regular);
   font-size: 32px;
-  color: var(--dark);
+  color: var(--text-color);
   margin: 0;
 }
 ul {
@@ -55,20 +73,21 @@ li {
 }
 a {
   text-decoration: none;
-  color: var(--dark);
+  color: var(--text-color);
 }
 p {
   font-family: var(--regular);
   font-size: var(--copy);
-  color: var(--dark);
+  color: var(--text-color);
   margin: 0;
 }
 button {
   font-family: var(--light);
     font-size: var(--copy);
     text-decoration: none;
+    color: var(--text-color);
     cursor: pointer;
-    background-color: rgba(217, 217, 217, 0.75);
+    background-color: var(--shroud-color);
     backdrop-filter: blur(4px);
     border: none;
     border-radius: 5px;

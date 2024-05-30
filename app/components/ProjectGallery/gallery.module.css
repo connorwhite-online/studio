@@ -10,7 +10,7 @@
     /* display: flex; */
     width: 50px;
     text-align: center;
-    border: 1px solid var(--dark);
+    border: 1px solid var(--text-color);
     border-radius: 5px;
     padding: 2.5px;
     font-family: var(--monoLight);
@@ -28,12 +28,12 @@
     clip-path: inset(0 0 0 0);
 }
 .typeFilter {
-    font-family: var(--regular);
+    font-family: var(--light);
     font-size: var(--copy);
     cursor: pointer;
 }
 .selected {
-    font-family: var(--bold);
+    font-family: var(--regular);
 }
 .slideShow {
     display: flex;
