@@ -22,6 +22,10 @@ img.media, video.media {
     position: absolute;
     bottom: 25px;
 }
+.viewGalleryButton:hover {
+    transform: scale(1.05);
+    transition: cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s;
+}
 .textContainer {
     display: flex;
     flex-direction: column;
@@ -45,12 +49,12 @@ img.media, video.media {
 @media screen and (min-width: 768px) {
     .projectCard{
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: flex-start;
         margin: 2.5dvh 5dvw;
         gap: 5dvw;
     }
     .imageContainer {
-       max-width: 40dvw;
+       width: 40dvw;
         max-height: 50dvh;
         justify-content: flex-start;
         align-self: flex-start;

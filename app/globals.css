@@ -16,6 +16,10 @@ html, body {
   src: url('fonts/PPNeueMontreal-Light.woff2') format('woff2'); 
 }
 @font-face {
+  font-family: 'Montreal-Medium';
+  src: url('fonts/PPNeueMontreal-Medium.woff2') format('woff2'); 
+}
+@font-face {
   font-family: 'Montreal-Bold';
   src: url('fonts/PPNeueMontreal-Bold.woff2') format('woff2'); 
 }
@@ -31,6 +35,7 @@ html, body {
 :root {
   --regular: 'Montreal-Regular';
   --light: 'Montreal-Light';
+  --medium: 'Montreal-Medium';
   --bold: 'Montreal-Bold';
   --monoRegular: 'Mono-Regular';
   --monoLight: 'Mono-Light';

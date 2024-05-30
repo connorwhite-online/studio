@@ -11,7 +11,7 @@ export default function Menu() {
     const pathname = usePathname();
 
     const [menuOpen, setMenuOpen] = useState(false);
-    const [theme, setTheme] = useState('light');
+    const [theme, setTheme] = useState('dark');
     const navRef = useRef<HTMLDivElement>(null);
     const iconRef = useRef<SVGSVGElement>(null);
     const menuTL = useRef<gsap.core.Timeline>();
@@ -21,8 +21,9 @@ export default function Menu() {
         menuTL.current = gsap.timeline({paused: true})
         .to(iconRef.current, {rotateZ: 135, duration: 1.25, ease: "elastic.out(1,0.75)"})
         .set(`.${styles.subNav}`, {autoAlpha: 1, display: "block"}, "<")
-        .to(navRef.current, {width: '250px', height: '125px', duration: 0.5, ease: "power4.out"}, "<")
-        .to(`.${styles.navLink}`, {autoAlpha: 1, display: "block", duration: 1, transform: 'translateY(0px)', stagger: 0.1, ease: "power2.out"}, 0.2);
+        .to(navRef.current, {width: '250px', height: '150px', duration: 0.5, ease: "power4.out"}, "<")
+        .to(`.${styles.navLink}` , {autoAlpha: 1, display: "block", duration: 1, transform: 'translateY(0px)', stagger: 0.1, ease: "power2.out"}, 0.2)
+        .to(`.${styles.themeToggleWrapper}` , {autoAlpha: 1, duration: 1, ease: "power2.out"}, "<75%");
     }, { dependencies: [] });
 
     // Menu toggle animation
@@ -71,13 +72,13 @@ export default function Menu() {
                         Info
                     </Link>
                     </li>
-                    <li>
+                    <li className={styles.toggleListItem}>
                         <div className={styles.themeToggleWrapper}>
                             <input 
                                 type="checkbox" 
                                 className={styles.themeToggle} 
                                 id="themeToggle" 
-                                checked={theme === 'dark'} 
+                                checked={theme === 'light'} 
                                 onChange={toggleTheme} 
                             />
                             <label className={styles.slider} htmlFor="themeToggle"></label>
