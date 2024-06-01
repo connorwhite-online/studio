@@ -32,13 +32,24 @@ img.media, video.media {
     gap: 1dvh;
     width: 95dvw;
 }
+.linkBox {
+    display: flex;
+}
+.linkBox a {
+    padding: 5px 10px;
+    margin: 5px 0;
+    border: 1px solid var(--text-color);
+    border-radius: 5px;
+    font-family: var(--light);
+    font-size: var(--copy);
+}
 .rolesList {
     display: flex;
     gap: 2.5dvw;
     clip-path: inset(0 0 0 0);
 }
 .role {
-    font-family: var(--light);
+    font-family: var(--monoLight);
     font-size: var(--copy);
     visibility: hidden;
 }

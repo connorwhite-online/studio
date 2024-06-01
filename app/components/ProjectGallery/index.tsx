@@ -14,6 +14,7 @@ interface Project {
   types: string[];
   files: string[];
   date: string;
+  link: string;
 }
 
 interface ProjectGalleryProps {

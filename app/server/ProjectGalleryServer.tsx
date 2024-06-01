@@ -10,12 +10,13 @@ interface Project {
   types: string[];
   files: string[];
   date: string;
+  link: string;
 }
 
 const fetchProjects = async (): Promise<Project[]> => {
   const { data: projects, error } = await supabase
     .from('projects')
-    .select('date, id, name, role, summary, kpi, types, files');
+    .select('date, id, name, role, summary, kpi, types, files, link');
 
   if (error) {
     console.error('Error fetching projects:', error);

@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import styles from './projectcard.module.css';
 import GalleryPopup from '../GalleryPopup';
+import Link from 'next/link';
 
 interface Project {
   id: string;
@@ -13,6 +14,7 @@ interface Project {
   types: string[];
   files: string[];
   date: string;
+  link: string;
 }
 
 interface ProjectCardProps {
@@ -66,6 +68,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         ease: 'power2.out',
         duration: 2,
         stagger: 0.2
+      }, "<25%")
+      .from("a", {
+        autoAlpha: 0,
+        duration: 1,
+        ease: 'power4.out',
       }, "<25%");
 
     introTL.current.play();
@@ -96,7 +103,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         <button className={styles.viewGalleryButton} onClick={() => setShowGallery(true)}>Gallery +</button>
       </section>
       <section className={styles.textContainer}>
-        <h1>{project.name}</h1>
+      
+          <h1>{project.name}</h1>
+        
         <ul className={styles.rolesList}>
           {project.role.map((role, index) => (
             <li key={index} className={styles.role}>{role}</li>
@@ -104,6 +113,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         </ul>
         <p>{project.summary}</p>
         <p>{project.kpi}</p>
+        
+          <div className={styles.linkBox}>
+          <Link href={project.link} target="_blank">
+            View Project
+            </Link>
+          </div>
+        
       </section>
       {showGallery && <GalleryPopup files={project.files.map(file => project.id + '/' + file)} onClose={() => setShowGallery(false)} />}
     </main>
