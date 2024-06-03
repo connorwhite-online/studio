@@ -27,12 +27,6 @@ export function Model(props: JSX.IntrinsicElements['group']) {
   const group = useRef<THREE.Group>(null!)
   const tl = useRef<gsap.core.Timeline>()
 
-  // useFrame(({ clock }) => {
-  //   const t = clock.getElapsedTime()
-  //   group.current.rotation.y += Math.PI / 500
-  
-  // })
-
   useGSAP(() => {
     tl.current = gsap.timeline({ yoyo: true, repeat: -1 })
     .fromTo(group.current.rotation, {
