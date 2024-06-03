@@ -1,7 +1,9 @@
 import * as THREE from 'three'
-import React, { useRef } from 'react'
+import React, { use, useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -12,22 +14,49 @@ type GLTFResult = GLTF & {
     Knob: THREE.Mesh
     Lidar_Lens: THREE.Mesh
     Top: THREE.Mesh
-    // Backdrop: THREE.Mesh
-    Plane: THREE.Mesh
-    Plane001: THREE.Mesh
   }
   materials: {
     ['Steel - Satin']: THREE.MeshPhysicalMaterial
     Knob: THREE.MeshStandardMaterial
     Lens: THREE.MeshPhysicalMaterial
-    // Backdrop: THREE.MeshStandardMaterial
   }
 }
 
 export function Model(props: JSX.IntrinsicElements['group']) {
   const { nodes, materials } = useGLTF('/device.gltf') as GLTFResult
+  const group = useRef<THREE.Group>(null!)
+  const tl = useRef<gsap.core.Timeline>()
+
+  // useFrame(({ clock }) => {
+  //   const t = clock.getElapsedTime()
+  //   group.current.rotation.y += Math.PI / 500
+  
+  // })
+
+  useGSAP(() => {
+    tl.current = gsap.timeline({ yoyo: true, repeat: -1 })
+    .fromTo(group.current.rotation, {
+      x: 2.542,
+      y: -0.833,
+      z: 1.502
+    }, {
+      // z: .1,
+      y: Math.PI * 3, 
+      duration: 6, 
+      ease: 'power4.inOut',
+      delay: 1,
+    })
+    
+  }, { dependencies: [] })
+
+
   return (
-      <group rotation={[2.542, -0.833, 1.102]} scale={0.05} {...props} dispose={null}>
+      <group 
+      ref={group} 
+      rotation={[2.542, -0.833, 1.102]} 
+      // rotation={[0, 0, 0]} 
+      scale={0.075} 
+      {...props} dispose={null}>
         <mesh
           castShadow
           receiveShadow
