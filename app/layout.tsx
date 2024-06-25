@@ -4,7 +4,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Connor White",
-  description: "Work from the personal studio of designer and engineer, Connor White",
+  description: "Work from the personal studio of designer and engineer, Connor White.",
 };
 
 export default function RootLayout({
