@@ -31,6 +31,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
 
 
   useGSAP(() => {
+
     if (introTL.current) {
       introTL.current.kill();
     }
