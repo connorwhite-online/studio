@@ -23,6 +23,8 @@ interface ProjectCardProps {
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
 
+  if (!project) return null;
+
   const cardRef = useRef<HTMLDivElement>(null);
   const introTL = useRef<gsap.core.Timeline>();
   const [showGallery, setShowGallery] = useState(false); // State for gallery visibility
@@ -63,8 +65,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         ease: 'power4.out',
         stagger: 0.2
       }, "<25%")
-      .from("p", {
+      .fromTo("p", {
         autoAlpha: 0,
+      }, {
+        autoAlpha: 1,
         ease: 'power2.out',
         duration: 2,
         stagger: 0.2

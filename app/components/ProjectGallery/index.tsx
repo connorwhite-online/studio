@@ -23,6 +23,8 @@ interface ProjectGalleryProps {
 
 const ProjectGallery: React.FC<ProjectGalleryProps> = ({ projects }) => {
 
+  if (!projects) return null;
+
   const projectRef = useRef<HTMLDivElement>(null);
   const introTL = useRef<gsap.core.Timeline>();
 
