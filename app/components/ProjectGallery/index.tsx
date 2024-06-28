@@ -23,8 +23,6 @@ interface ProjectGalleryProps {
 
 const ProjectGallery: React.FC<ProjectGalleryProps> = ({ projects }) => {
 
-  if (!projects) return null;
-
   const projectRef = useRef<HTMLDivElement>(null);
   const introTL = useRef<gsap.core.Timeline>();
 
@@ -91,6 +89,9 @@ const ProjectGallery: React.FC<ProjectGalleryProps> = ({ projects }) => {
 
   // Slideshow Intro Animation
   useGSAP(() => {
+
+    if (!projects) return null;
+
     introTL.current = gsap.timeline({})
     .set(projectRef.current, {
       autoAlpha: 1

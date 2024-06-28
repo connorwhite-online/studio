@@ -23,7 +23,7 @@ interface ProjectCardProps {
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
 
-  if (!project) return null;
+  
 
   const cardRef = useRef<HTMLDivElement>(null);
   const introTL = useRef<gsap.core.Timeline>();
@@ -32,6 +32,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
 
   useGSAP(() => {
 
+    if (!project) return null;
+    
     if (introTL.current) {
       introTL.current.kill();
     }
