@@ -1,5 +1,6 @@
 'use client';
 import React, { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import ProjectCard from '../ProjectCard';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -33,13 +34,13 @@ const ProjectGallery: React.FC<ProjectGalleryProps> = ({ projects }) => {
   // Helper function to check if the file is an image
   const isImage = (file: string) => {
     const ext = file.split('.').pop()?.toLowerCase();
-    return ['jpg', 'jpeg', 'png', 'gif', 'bmp'].includes(ext ?? '');
+    return ['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(ext ?? '');
   };
 
   // Helper function to check if the file is a video
   const isVideo = (file: string) => {
     const ext = file.split('.').pop()?.toLowerCase();
-    return ['mp4', 'webm', 'ogg'].includes(ext ?? '');
+    return ['mp4', 'webm', 'mov'].includes(ext ?? '');
   };
 
   // Get all unique types from the projects
@@ -135,7 +136,7 @@ const ProjectGallery: React.FC<ProjectGalleryProps> = ({ projects }) => {
           return (
             <div key={project.name} onClick={() => handleProjectClick(project)} className={`${styles.projectItem} ${project.id === currentProject.id ? styles.currentProject : ''}`}>
               {isImage(project.files[0]) ? (
-                <img className={styles.media} src={relativeURL + project.files[0]} alt={`${project.name} media ${index + 1}`} height={150} draggable='false' />
+                <Image className={styles.media} src={relativeURL + project.files[0]} alt={`${project.name} media ${index + 1}`} height={150} width={150} draggable='false' placeholder='blur' blurDataURL='blur.png' />
               ) : isVideo(project.files[0]) ? (
                 <video className={styles.media} autoPlay muted loop playsInline height={150}>
                   <source src={relativeURL + project.files[0]} type="video/mp4" />

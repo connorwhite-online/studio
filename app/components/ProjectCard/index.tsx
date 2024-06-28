@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import Image from 'next/image';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import styles from './projectcard.module.css';
@@ -61,12 +62,15 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         duration: 1,
         ease: 'power4.out',
       }, "<50%")
-      .from(`.${styles.role}`, {
-        duration: 1,
+      .fromTo(`.${styles.role}`, {
         autoAlpha: 0,
         transform: 'translateY(25px)',
+      }, {
+        duration: 1,
+        autoAlpha: 1,
+        transform: 'translateY(0px)',
         ease: 'power4.out',
-        stagger: 0.2
+        stagger: 0.1
       }, "<25%")
       .fromTo("p", {
         autoAlpha: 0,
@@ -76,8 +80,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         duration: 2,
         stagger: 0.2
       }, "<25%")
-      .from("a", {
+      .fromTo("a", {
         autoAlpha: 0,
+      }, {
+        autoAlpha: 1,
         duration: 1,
         ease: 'power4.out',
       }, "<25%");
@@ -89,19 +95,19 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   
   const isImage = (file: string) => {
     const ext = file.split('.').pop()?.toLowerCase();
-    return ['jpg', 'jpeg', 'png', 'gif', 'bmp'].includes(ext ?? '');
+    return ['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(ext ?? '');
   };
 
   const isVideo = (file: string) => {
     const ext = file.split('.').pop()?.toLowerCase();
-    return ['mp4', 'webm', 'ogg'].includes(ext ?? '');
+    return ['mp4', 'webm', 'mov'].includes(ext ?? '');
   };
 
   return (
     <main className={styles.projectCard} ref={cardRef}>
       <section className={styles.imageContainer}>
         {isImage(project.files[0]) ? (
-          <img className={styles.media} key={project.id + project.files[0]} src={relativeURL + project.files[0]} alt={`${project.name} image`}  />
+          <Image priority className={styles.media} key={project.id + project.files[0]} src={relativeURL + project.files[0]} alt={`${project.name} image`} fill={true} draggable='false' placeholder='blur' blurDataURL='blur.png' />
         ) : isVideo(project.files[0]) ? (
           <video key={project.id + project.files[0]} className={styles.media} autoPlay muted loop playsInline >
             <source src={relativeURL + project.files[0]} type="video/mp4" />

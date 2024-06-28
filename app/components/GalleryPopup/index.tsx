@@ -1,5 +1,6 @@
 'use client';
 import React, { useRef } from 'react';
+import Image from 'next/image';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import styles from './gallerypopup.module.css';
@@ -54,7 +55,7 @@ const GalleryPopup: React.FC<GalleryPopupProps> = ({ files, onClose }) => {
         {files.map((file, index) => (
           <div key={index} className={styles.mediaContainer}>
             {isImage(file) ? (
-              <img className={styles.media} src={relativeURL + file} alt={`Gallery item ${index + 1}`} />
+              <Image className={styles.media} src={relativeURL + file} alt={`Gallery item ${index + 1}`} height={750} width={750} draggable='false' placeholder='blur' blurDataURL='blur.png' />
             ) : isVideo(file) ? (
               <video className={styles.media} autoPlay muted loop playsInline>
                 <source src={relativeURL + file} type="video/mp4" />

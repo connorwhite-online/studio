@@ -1,5 +1,5 @@
 .galleryPopup {
-    min-width: 100dvw;
+    /* min-width: 100dvw; */
     visibility: hidden;
     clip-path: inset(0 0 100% 0);
     z-index: 100;
@@ -25,9 +25,10 @@
     z-index: 101;
     margin: 10dvh 2.5dvw 7.5dvh 0;
 }
+
 img.media, video.media {
-    max-height: 90dvh;
-    max-width: 95dvw;
+    height: auto;
+    width: 95dvw;
     pointer-events: none;
 }
 
@@ -46,7 +47,9 @@ img.media, video.media {
         /* margin-left: 2.5dvw; */
     }
     img.media, video.media {
-        max-height: 80dvh;
-        max-width: 80dvw;
+        height: 75dvh;
+        width: auto;
+        /* max-height: 80dvh;
+        max-width: 80dvw; */
     }
 }

@@ -9,14 +9,18 @@
 .imageContainer {
     display: flex;
     justify-content: center;
-    max-width: 95dvw;
-    max-height: 40dvh;
+    width: 95dvw;
+    height: 40dvh;
+    /* max-width: 95dvw; */
+    /* max-height: 40dvh; */
     position: relative;
 }
 img.media, video.media {
     height: auto;
     max-width: 100%;
     object-fit: contain;
+    object-position: center;
+    position: relative;
 }
 .viewGalleryButton {
     position: absolute;
@@ -65,14 +69,15 @@ img.media, video.media {
         gap: 5dvw;
     }
     .imageContainer {
-       width: 40dvw;
-        max-height: 50dvh;
+        width: 40dvw;
+        height: 50dvh;
         justify-content: flex-start;
         align-self: flex-start;
     }
     img.media, video.media {
         max-height: 50dvh;
         max-width: 40dvw;
+        object-position: left;
     }
     .viewGalleryButton {
         top: 5px;
