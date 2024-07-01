@@ -60,6 +60,17 @@ html, body {
   --shroud-color: var(--shroudLight);
 }
 
+/* .loader {
+  font-family: var(--regular);
+  color: var(--text-color);
+  font-size: 40px;
+} */
+
+.introCopy, h1.loader {
+  font-family: var(--monoLight);
+  font-size: 24px;
+}
+
 h1{
   font-family: var(--regular);
   font-size: 32px;
