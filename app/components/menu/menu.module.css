@@ -16,14 +16,13 @@
     justify-content: space-between;
     padding: 10px;
     height: 20px;
-    width: auto;
+    width: 150px;
     border-radius: 7.5px;
 }
 .mainNav {
     order: 2;
     display: flex;
     justify-content: space-between;
-    /* gap: 100px; */
     width: 150px;
     align-self: center;
     align-items: center;
@@ -42,7 +41,6 @@
     clip-path: inset(0 0 0 0);
 }
 .navLink {
-    /* display: none; */
     visibility: hidden;
     display: none;
     font-family: var(--light);

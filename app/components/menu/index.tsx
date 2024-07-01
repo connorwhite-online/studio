@@ -21,8 +21,8 @@ export default function Menu() {
         menuTL.current = gsap.timeline({paused: true})
         .to(iconRef.current, {rotateZ: 135, duration: 1.25, ease: "elastic.out(1,0.75)"})
         .set(`.${styles.subNav}`, {autoAlpha: 1, display: "block"}, "<")
-        .to(navRef.current, {width: '250px', height: '150px', duration: 0.5, ease: "power4.out"}, "<")
-        .to(`.${styles.navLink}` , {autoAlpha: 1, display: "block", duration: 1, transform: 'translateY(0px)', stagger: 0.1, ease: "power2.out"}, 0.2)
+        .to(`.${styles.nav}`, {width: '250px', height: '150px', duration: 0.5, ease: "power4.out"}, "<")
+        .to(`.${styles.navLink}` , {autoAlpha: 1, display: 'block', duration: 1, transform: 'translateY(0px)', stagger: 0.1, ease: "power2.out"}, 0.2)
         .to(`.${styles.themeToggleWrapper}` , {autoAlpha: 1, duration: 1, ease: "power2.out"}, "<75%");
     }, { dependencies: [] });
 
@@ -50,8 +50,8 @@ export default function Menu() {
     };
 
     return (
-        <div className={styles.menu}>
-            <nav className={styles.nav} ref={navRef}>
+        <div className={styles.menu} ref={navRef}>
+            <nav className={styles.nav}>
                 <div className={styles.mainNav} onClick={() => setMenuOpen(!menuOpen)} style={{ color: 'var(--icon-color)' }}>
                     <div className={styles.currentPath}>{pathname === '/' ? 'Home' : (pathname.charAt(1).toUpperCase())+(pathname.slice(2))}</div>
                     <MenuIcon ref={iconRef} className={styles.icon} />
