@@ -71,9 +71,21 @@ html, body {
   font-size: 24px;
 }
 
-h1{
+h1 {
   font-family: var(--regular);
   font-size: 32px;
+  color: var(--text-color);
+  margin: 0;
+}
+h2 {
+  font-family: var(--light);
+  font-size: 24px;
+  color: var(--text-color);
+  margin: 0;
+}
+h3 {
+  font-family: var(--monoRegular);
+  font-size: 12px;
   color: var(--text-color);
   margin: 0;
 }
