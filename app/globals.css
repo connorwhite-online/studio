@@ -66,6 +66,7 @@ html, body {
   padding: 2.5dvh 2.5dvw;
   align-content: flex-start;
   text-wrap: wrap;
+  position: absolute;
 }
 
 .introCopy, h1.loader {

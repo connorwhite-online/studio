@@ -14,16 +14,18 @@ function Loader() {
 const Scene: React.FC = () => {
 
   return (
+    <>
+    <Intro />
     <Canvas 
         style={{ width: "100dvw", height: "100dvh", zIndex: 98, position: 'absolute'}}
         camera={{fov: 75, position: [0, 0, 5]}}
     >
         <Suspense fallback={<Loader />}>
           <Model />
-          <Intro />
         </Suspense>
         <Environment preset="studio" environmentIntensity={0.5}/>
     </Canvas>
+    </>
   );
 };
 

@@ -1,17 +1,10 @@
 .info {
     width: 95dvw;
-    /* min-height: 85dvh; */
     padding: 5dvh 2.5dvw 10dvh 2.5dvw;
     display: flex;
     flex-direction: column;
     gap: 5vh;
-    /* justify-content: flex-end; */
 }
-
-.intro {
-    /* overflow: scroll; */
-}
-
 .introCopy {
     font-size: 16px;
 }
