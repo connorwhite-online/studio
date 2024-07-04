@@ -11,13 +11,13 @@ export default function Info() {
                 My design ethos is rooted in stark minimalism that allows the space for simple elements to exhibit their elegance. Intuitive usability is the foundation of all my visual decisions and motion design.
                 <br />
                 <br />
-                I think you can tell a lot about someone by their living space. I surround myself with objects and furniture I've meticulously collected over the years, avoiding redundancy, and constantly purging that which does not add value.
+                I think you can tell a lot about someone by their living space. I surround myself with objects and furniture I&#39;ve meticulously collected over the years, avoiding redundancy, and constantly purging that which does not add value.
                 <br />
                 <br />
-                Most products being built today are unimportant, ill-considered, and a waste of valuable resources. Moving forward, I'm prioritizing projects and people bringing beauty into the world or leaving our planet in better shape than they found it. 
+                Most products being built today are unimportant, ill-considered, and a waste of valuable resources. Moving forward, I&#39;m prioritizing projects and people bringing beauty into the world or leaving our planet in better shape than they found it. 
                 <br />
                 <br />
-                If that's you, I'd love to hear from you!
+                If that&#39;s you, I&#39;d love to hear from you!
                 </p>
             </section>
             <section className={styles.directory}>
