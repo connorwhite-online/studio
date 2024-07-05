@@ -65,7 +65,7 @@ html, body {
   height: 95dvh;
   padding: 2.5dvh 2.5dvw;
   align-content: flex-start;
-  text-wrap: wrap;
+  text-wrap: nowrap;
   position: absolute;
 }
 
@@ -86,7 +86,7 @@ h1 {
 }
 h2 {
   font-family: var(--light);
-  font-size: 24px;
+  font-size: 22px;
   color: var(--text-color);
   margin: 0;
 }
@@ -134,9 +134,13 @@ video::-webkit-media-controls {
 }
 
 @media screen and (min-width: 768px) {
+
   .wrapper {
     width: auto;
     text-wrap: nowrap;
     align-content: center;
+  }
+  h2 {
+    font-size: 24px;
   }
 }
