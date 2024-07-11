@@ -1,8 +1,43 @@
+'use client';
+import React, { useRef } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 import styles from './info.module.css';
 
 export default function Info() {
+
+    const infoRef = useRef<HTMLDivElement>(null);
+    const infoTL = useRef<gsap.core.Timeline>();
+
+    useGSAP(() => {
+        if (!infoRef.current) return;
+        infoTL.current = gsap.timeline()
+        .set(infoRef.current, {
+            autoAlpha: 1,
+            // delay: 1,
+        })
+        .fromTo('p', {
+            opacity: 0,
+        }, {
+            opacity: 1,
+            duration: 1.5,
+            ease: 'power2.inOut',
+        })
+        .fromTo('h2, h3', {
+            x: -25,
+            opacity: 0,
+        }, {
+            x: 0,
+            opacity: 1,
+            duration: 1,
+            ease: 'power4.out',
+            stagger: 0.1,
+        }, "<25%")
+    }, {dependencies: []});
+
+
     return (
-        <main className={styles.info}>
+        <main ref={infoRef} className={styles.info}>
             <section className={styles.intro}>
                 <p className={styles.introCopy}>
                 I&#39;m an independent designer and engineer based in Los Angeles, currently building web experiences with a focus on motion, interaction, and real-time 3D rendering. I work with small and large teams to produce experiences that balance a high level of craft with practicality.
@@ -11,10 +46,7 @@ export default function Info() {
                 My design ethos is rooted in stark minimalism that allows the space for simple elements to exhibit their elegance. Intuitive usability is the foundation of all my visual decisions and motion design.
                 <br />
                 <br />
-                I think you can tell a lot about someone by their living space. I surround myself with objects and furniture I&#39;ve meticulously collected over the years, avoiding redundancy, and constantly purging that which does not add value.
-                <br />
-                <br />
-                Most products being built today are unimportant, ill-considered, and a waste of valuable resources. Moving forward, I&#39;m prioritizing projects and people bringing beauty into the world or leaving our planet in better shape than they found it. 
+                Most products being built today are momentary, ill-considered, wastes of precious resources. Moving forward, I&#39;m prioritizing projects and people bringing beauty into the world or working to leave our planet in better shape than they found it. 
                 <br />
                 <br />
                 If that&#39;s you, I&#39;d love to hear from you!
