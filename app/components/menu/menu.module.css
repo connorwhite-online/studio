@@ -33,6 +33,7 @@
     font-size: 16px;
 }
 .subNav {
+    visibility: hidden;
     order: 1;
     display: none;
 }
@@ -41,11 +42,12 @@
     clip-path: inset(0 0 0 0);
 }
 .navLink {
-    visibility: hidden;
-    display: none;
+    /* visibility: hidden; */
+    /* display: none; */
+    display: block;
     font-family: var(--light);
     font-size: 16px;
-    transform: translateY(25px);
+    /* transform: translateX(-25px); */
 }
 
 .navLinkActive {
