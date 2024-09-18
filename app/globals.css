@@ -41,8 +41,8 @@ html, body {
   --monoLight: 'Mono-Light';
   --dark: #000000;
   --white: #ffffff;
-  --shroudDark: rgba(76, 76, 76, 0.75);
-  --shroudLight: rgba(217, 217, 217, 0.75);
+  --shroudDark: rgba(76, 76, 76, 0.5);
+  --shroudLight: rgba(217, 217, 217, 0.5);
   --copy: 14px;
 }
 

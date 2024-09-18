@@ -40,16 +40,13 @@ export default function Info() {
         <main ref={infoRef} className={styles.info}>
             <section className={styles.intro}>
                 <p className={styles.introCopy}>
-                I&#39;m an independent designer and engineer based in Los Angeles, currently building web experiences with a focus on motion, interaction, and real-time 3D rendering. I work with small and large teams to produce experiences that balance a high level of craft with practicality.
+                I&#39;m a designer engineer based in Los Angeles, currently building the future of community engagement at <b><a href="https://www.tyb.xyz/" target="_blank" rel="noopener noreferrer">TYB</a></b>.
                 <br />
                 <br />
-                My design ethos is rooted in stark minimalism that allows the space for simple elements to exhibit their elegance. Intuitive usability is the foundation of all my visual decisions and motion design.
+                My work ranges from system design and implementation, to experiments with real-time 3D rendering and machine learning integration.
                 <br />
                 <br />
-                Most products being built today are momentary, ill-considered, wastes of precious resources. Moving forward, I&#39;m prioritizing projects and people bringing beauty into the world or working to leave our planet in better shape than they found it. 
-                <br />
-                <br />
-                If that&#39;s you, I&#39;d love to hear from you!
+                I&#39;m available for select projects in culture and environmental advocacy. If you&#39;d like to work together, please do reach out.
                 </p>
             </section>
             <section className={styles.directory}>

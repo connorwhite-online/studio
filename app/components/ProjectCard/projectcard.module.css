@@ -26,8 +26,9 @@ img.media, video.media {
     position: absolute;
     bottom: 25px;
 }
-.viewGalleryButton:hover, .linkBox:hover {
-    transform: scale(1.05);
+.viewGalleryButton:hover, .linkBox a:hover {
+    color: var(--background-color);
+    background-color: var(--text-color);
     transition: cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s;
 }
 .textContainer {
