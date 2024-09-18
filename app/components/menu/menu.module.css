@@ -3,7 +3,6 @@
     width: 100dvw;
     display: flex;
     bottom: 2.5dvh;
-    top: auto;
     justify-content: center;
     z-index: 99;
 }
@@ -12,114 +11,68 @@
     background-color: var(--shroud-color);
     backdrop-filter: blur(4px);
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
-    padding: 10px;
-    height: 20px;
-    width: 150px;
-    border-radius: 7.5px;
-}
-.mainNav {
-    order: 2;
-    display: flex;
-    justify-content: space-between;
-    width: 150px;
-    align-self: center;
     align-items: center;
-    cursor: pointer;
+    padding: 10px; /* Reduced horizontal padding */
+    border-radius: 7.5px;
+    gap: 10px; /* Added gap for consistent spacing */
 }
-.currentPath {
-    font-family: var(--regular);
-    font-size: 16px;
-}
-.subNav {
-    visibility: hidden;
-    order: 1;
-    display: none;
-}
-.subNav li {
-    margin-bottom: 10px;
-    clip-path: inset(0 0 0 0);
-}
+
 .navLink {
-    /* visibility: hidden; */
-    /* display: none; */
-    display: block;
-    font-family: var(--light);
-    font-size: 16px;
-    /* transform: translateX(-25px); */
+    color: var(--text-color);
+    display: flex; /* Ensure proper alignment */
+    align-items: center;
+    justify-content: center;
+    width: 32px; /* Set fixed width for icons */
+    height: 32px; /* Set fixed height for icons */
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+.navLink svg {
+    width: 20px; /* Set icon size */
+    height: 20px; /* Set icon size */
 }
 
 .navLinkActive {
-    font-family: var(--medium);
-}
-
-.icon {
-    cursor: pointer;
-}
-.toggleListItem {
-    display: flex;
-    justify-content: center;
-}
-.themeToggleWrapper {
-    visibility: hidden;
-    position: relative;
-    display: inline-block;
-    width: 40px;
-    height: 24px;
+    /* fill: var(--text-color); */
+    background-color: var(--shroud-color);
 }
 
 .themeToggle {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
     background-color: var(--text-color);
-    transition: .4s;
-    border-radius: 24px;
+    width: 32px; /* Reduced toggle width */
+    height: 20px; /* Reduced toggle height */
+    border-radius: 9999px;
+    position: relative;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 16px;
-    width: 16px;
-    left: 4px;
-    bottom: 4px;
+.themeToggle[data-state='checked'] {
+    background-color: var(--text-color);
+}
+
+.themeToggle[data-state='checked']::after {
+    transform: translateX(12px); /* Adjusted for smaller toggle */
+}
+
+.themeToggle::after {
+    content: '';
+    display: block;
+    width: 16px; /* Reduced thumb size */
+    height: 16px; /* Reduced thumb size */
+    border-radius: 9999px;
     background-color: var(--background-color);
-    transition: .4s;
-    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: transform 100ms;
+    transform: translateX(0px);
 }
 
-.themeToggle:checked + .slider {
-    background-color: var(--text-color);
-}
-
-.themeToggle:checked + .slider:before {
-    transform: translateX(16px);
-}
-
-@media screen and (min-width: 768px){
+@media screen and (min-width: 768px) {
     .menu {
         top: 2.5dvh;
         bottom: auto;
-    }
-    .mainNav {
-        order: 1;
-    }
-    .subNav {
-        order: 2;
-    }
-    .subNav li {
-        margin-bottom: 0;
-        margin-top: 10px;
     }
 }

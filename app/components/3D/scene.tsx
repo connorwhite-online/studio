@@ -20,10 +20,12 @@ const Scene: React.FC = () => {
         style={{ width: "100dvw", height: "100dvh", zIndex: 97, position: 'absolute'}}
         camera={{fov: 75, position: [0, 0, 5]}}
     >
+        {/* <ambientLight intensity={1.0} />  */}
+        {/* <directionalLight position={[5, 5, 5]} intensity={1.5} /> */}
         <Suspense fallback={<Loader />}>
           <Model />
         </Suspense>
-        <Environment preset="studio" environmentIntensity={0.5}/>
+        <Environment preset="studio" environmentIntensity={0.75}/> {/* Increased environment intensity */}
     </Canvas>
     </>
   );

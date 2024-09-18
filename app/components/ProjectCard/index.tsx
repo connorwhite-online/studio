@@ -80,7 +80,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         duration: 2,
         stagger: 0.2
       }, "<25%")
-      .fromTo("a", {
+      .fromTo(`.${styles.linkBox}`, {
         autoAlpha: 0,
       }, {
         autoAlpha: 1,

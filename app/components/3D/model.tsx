@@ -1,9 +1,10 @@
 import * as THREE from 'three'
-import React, { use, useRef } from 'react'
-import { useGLTF } from '@react-three/drei'
+import React, { useMemo, useRef } from 'react'
+import { useGLTF, useEnvironment } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
+// import { SandblastMaterial } from './SandblastMaterial'
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -25,9 +26,18 @@ type GLTFResult = GLTF & {
 
 export function Model(props: JSX.IntrinsicElements['group']) {
   const { nodes, materials } = useGLTF('/device-06-21.gltf') as GLTFResult;
+  // const envMap = useEnvironment({ preset: 'studio' })
 
   const group = useRef<THREE.Group>(null!)
   const tl = useRef<gsap.core.Timeline>()
+
+  // const sandblastMaterial = useMemo(() => {
+  //   const material = new SandblastMaterial()
+  //   if (material.uniforms) {
+  //     material.uniforms.envMap.value = envMap
+  //   }
+  //   return material
+  // }, [envMap])
 
   useGSAP(() => {
     if (!group.current) return
@@ -70,7 +80,7 @@ export function Model(props: JSX.IntrinsicElements['group']) {
         castShadow
         receiveShadow
         geometry={nodes.Bottom002.geometry}
-        material={materials.BakedAluminum}
+        material={materials['BakedAluminum']}
         position={[0, 0, -0.2]}
         rotation={[0, 0, -Math.PI / 2]}
         scale={0.5}
@@ -79,7 +89,7 @@ export function Model(props: JSX.IntrinsicElements['group']) {
         castShadow
         receiveShadow
         geometry={nodes.Button002.geometry}
-        material={materials.BakedAluminum}
+        material={materials['BakedAluminum']}
         position={[0, 0, -0.2]}
         rotation={[0, 0, -Math.PI / 2]}
         scale={0.5}
@@ -106,7 +116,7 @@ export function Model(props: JSX.IntrinsicElements['group']) {
         castShadow
         receiveShadow
         geometry={nodes.Top002.geometry}
-        material={materials.BakedAluminum}
+        material={materials['BakedAluminum']}
         position={[0, 0, -0.2]}
         rotation={[0, 0, -Math.PI / 2]}
         scale={0.5}
