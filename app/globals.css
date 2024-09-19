@@ -39,10 +39,14 @@ html, body {
   --bold: 'Montreal-Bold';
   --monoRegular: 'Mono-Regular';
   --monoLight: 'Mono-Light';
-  --dark: #000000;
-  --white: #ffffff;
-  --shroudDark: rgba(76, 76, 76, 0.5);
+  --dark: #151414;
+  --white: #F5F5F5;
+  --shroudDark: rgba(62, 58, 58, 0.5);
   --shroudLight: rgba(217, 217, 217, 0.5);
+  --activeLight: rgba(21, 20, 20, 0.75);
+  --activeDark: rgba(245, 245, 245, 0.75);
+  --hoverLight: rgba(62, 58, 58, 0.25);
+  --hoverDark: rgba(245, 245, 245, 0.25);
   --copy: 14px;
 }
 
@@ -51,6 +55,8 @@ html, body {
   --text-color: var(--white);
   --icon-color: var(--white);
   --shroud-color: var(--shroudDark);
+  --active-color: var(--activeDark);
+  --hover-color: var(--hoverDark);
 }
 
 [data-theme="light"] {
@@ -58,6 +64,8 @@ html, body {
   --text-color: var(--dark);
   --icon-color: var(--dark);
   --shroud-color: var(--shroudLight);
+  --active-color: var(--activeLight);
+  --hover-color: var(--hoverLight);
 }
 
 .wrapper {

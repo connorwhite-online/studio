@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import styles from "./menu.module.css";
 import { usePathname } from "next/navigation";
-import { HomeIcon, ImageIcon, InfoCircledIcon } from "@radix-ui/react-icons";
+import { ArchiveIcon, CubeIcon, ImageIcon, InfoCircledIcon, ReaderIcon } from "@radix-ui/react-icons";
 import { Switch } from "@radix-ui/react-switch";
 
 export default function Menu() {
@@ -22,10 +22,10 @@ export default function Menu() {
         <div className={styles.menu}>
             <nav className={styles.nav}>
                 <Link href="/" className={`${styles.navLink} ${pathname === '/' ? styles.navLinkActive : ''}`}>
-                    <HomeIcon />
+                    <CubeIcon />
                 </Link>
                 <Link href="/projects" className={`${styles.navLink} ${pathname === '/projects' ? styles.navLinkActive : ''}`}>
-                    <ImageIcon />
+                    <ReaderIcon />
                 </Link>
                 <Link href="/info" className={`${styles.navLink} ${pathname === '/info' ? styles.navLinkActive : ''}`}>
                     <InfoCircledIcon />

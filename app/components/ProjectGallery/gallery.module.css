@@ -46,16 +46,14 @@
 .slideShow::-webkit-scrollbar {
     display: none;
 }
-.projectItem {
-    filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.25));
-}
+/* .projectItem {
+   
+} */
 .currentProject {
-    filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
+    border-bottom: 2px solid var(--text-color);
 }
 .projectItem:hover, .currentProject:hover {
-    /* transform: scale(1.05); */
-    /* filter: invert(.75); */
-    filter: blur(2px);
+    border-bottom: 1px solid var(--active-color);
 }
 img.media, video.media {
     height: 10dvh;

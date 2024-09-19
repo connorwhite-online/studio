@@ -34,15 +34,21 @@
     height: 20px; /* Set icon size */
 }
 
+.navLink:hover {
+    background-color: var(--hover-color);
+}
+
 .navLinkActive {
     /* fill: var(--text-color); */
-    background-color: var(--shroud-color);
+    background-color: var(--active-color);
+    color: var(--background-color);
+    /* border: 1px solid var(--shroud-color); */
 }
 
 .themeToggle {
     background-color: var(--text-color);
-    width: 32px; /* Reduced toggle width */
-    height: 20px; /* Reduced toggle height */
+    width: 32px;
+    height: 20px;
     border-radius: 9999px;
     position: relative;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -53,14 +59,14 @@
 }
 
 .themeToggle[data-state='checked']::after {
-    transform: translateX(12px); /* Adjusted for smaller toggle */
+    transform: translateX(12px);
 }
 
 .themeToggle::after {
     content: '';
     display: block;
-    width: 16px; /* Reduced thumb size */
-    height: 16px; /* Reduced thumb size */
+    width: 16px;
+    height: 16px;
     border-radius: 9999px;
     background-color: var(--background-color);
     position: absolute;
