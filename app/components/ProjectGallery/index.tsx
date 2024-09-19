@@ -134,7 +134,7 @@ const ProjectGallery: React.FC<ProjectGalleryProps> = ({ projects }) => {
         {filteredProjects.map((project, index) => {
           const relativeURL = 'https://bdvkplyefikbvwvrumga.supabase.co/storage/v1/object/public/media/' + project.id + '/';
           return (
-            <div key={project.name} onClick={() => handleProjectClick(project)} className={`${styles.projectItem} ${project.id === currentProject.id ? styles.currentProject : ''}`}>
+            <div key={project.name} onClick={() => handleProjectClick(project)} className={`${project.id === currentProject.id ? styles.currentProject : styles.projectItem}`}>
               {isImage(project.files[0]) ? (
                 <Image className={styles.media} src={relativeURL + project.files[0]} alt={`${project.name} media ${index + 1}`} height={150} width={150} draggable='false' placeholder='blur' blurDataURL='blur.png' />
               ) : isVideo(project.files[0]) ? (

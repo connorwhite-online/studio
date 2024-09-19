@@ -46,14 +46,8 @@
 .slideShow::-webkit-scrollbar {
     display: none;
 }
-/* .projectItem {
-   
-} */
 .currentProject {
     border-bottom: 2px solid var(--text-color);
-}
-.projectItem:hover, .currentProject:hover {
-    border-bottom: 1px solid var(--active-color);
 }
 img.media, video.media {
     height: 10dvh;
@@ -71,5 +65,8 @@ img.media, video.media {
     }
     .slideShow {
         margin-left: 5dvw;
+    }
+    .projectItem:hover {
+        border-bottom: 1px solid var(--active-color);
     }
 }

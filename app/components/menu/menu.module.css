@@ -34,10 +34,6 @@
     height: 20px; /* Set icon size */
 }
 
-.navLink:hover {
-    background-color: var(--hover-color);
-}
-
 .navLinkActive {
     /* fill: var(--text-color); */
     background-color: var(--active-color);
@@ -80,5 +76,8 @@
     .menu {
         top: 2.5dvh;
         bottom: auto;
+    }
+    .navLink:hover {
+        background-color: var(--hover-color);
     }
 }
