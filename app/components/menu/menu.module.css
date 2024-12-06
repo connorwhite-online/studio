@@ -13,8 +13,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px; /* Reduced horizontal padding */
-    border-radius: 7.5px;
+    padding: 8px; /* Reduced horizontal padding */
+    border-radius: 50px;
     gap: 10px; /* Added gap for consistent spacing */
 }
 
@@ -23,9 +23,8 @@
     display: flex; /* Ensure proper alignment */
     align-items: center;
     justify-content: center;
-    width: 32px; /* Set fixed width for icons */
-    height: 32px; /* Set fixed height for icons */
-    border-radius: 6px;
+    padding: 8px;
+    border-radius: 25px;
     transition: background-color 0.3s ease;
 }
 
