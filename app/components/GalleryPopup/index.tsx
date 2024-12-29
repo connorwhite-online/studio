@@ -4,6 +4,7 @@ import Image from 'next/image';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import styles from './gallerypopup.module.css';
+import Close from '@/app/icons/Close';
 
 interface GalleryPopupProps {
   files: string[];
@@ -50,7 +51,10 @@ const GalleryPopup: React.FC<GalleryPopupProps> = ({ files, onClose }) => {
 
   return (
     <div className={styles.galleryPopup} ref={popupRef}>
-      <button className={styles.closeButton} onClick={onClose}>Close</button>
+      <button className={styles.closeButton} onClick={onClose}>
+        <Close size={16} />
+        Close
+      </button>
       <div className={styles.galleryContent}>
         {files.map((file, index) => (
           <div key={index} className={styles.mediaContainer}>

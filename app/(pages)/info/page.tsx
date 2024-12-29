@@ -40,7 +40,7 @@ export default function Info() {
         <main ref={infoRef} className={styles.info}>
             <section className={styles.intro}>
                 <p className={styles.introCopy}>
-                I&#39;m a design engineer based in Los Angeles, currently building the future of community engagement at <b><a href="https://www.tyb.xyz/" target="_blank" rel="noopener noreferrer">TYB</a></b>.
+                I&#39;m a design engineer based in Los Angeles, currently building the future of community engagement at <a href="https://www.tyb.xyz/" target="_blank" rel="noopener noreferrer" className={styles.inlineLink}>Try Your Best</a>.
                 <br />
                 <br />
                 My work ranges from system design and implementation, to experiments with real-time 3D rendering and machine learning integration.

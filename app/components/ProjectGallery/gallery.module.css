@@ -24,16 +24,20 @@
 }
 .filters {
     display: flex;
-    gap: 10px;
+    gap: 4px;
     clip-path: inset(0 0 0 0);
 }
 .typeFilter {
-    font-family: var(--light);
+    font-family: var(--regular);
     font-size: var(--copy);
     cursor: pointer;
+    background-color: var(--shroud-color);
+    padding: 4px 8px;
+    border-radius: 25px;
 }
 .selected {
-    font-family: var(--medium);
+    background-color: var(--active-color);
+    color: var(--background-color);
 }
 .slideShow {
     display: flex;

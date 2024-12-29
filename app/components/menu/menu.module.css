@@ -28,11 +28,6 @@
     transition: background-color 0.3s ease;
 }
 
-.navLink svg {
-    width: 20px; /* Set icon size */
-    height: 20px; /* Set icon size */
-}
-
 .navLinkActive {
     /* fill: var(--text-color); */
     background-color: var(--active-color);
@@ -41,34 +36,20 @@
 }
 
 .themeToggle {
-    background-color: var(--text-color);
-    width: 32px;
-    height: 20px;
-    border-radius: 9999px;
-    position: relative;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    color: var(--text-color);
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
 }
 
-.themeToggle[data-state='checked'] {
-    background-color: var(--text-color);
-}
-
-.themeToggle[data-state='checked']::after {
-    transform: translateX(12px);
-}
-
-.themeToggle::after {
-    content: '';
-    display: block;
-    width: 16px;
-    height: 16px;
-    border-radius: 9999px;
-    background-color: var(--background-color);
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    transition: transform 100ms;
-    transform: translateX(0px);
+.themeToggle:hover {
+    background-color: var(--hover-color);
 }
 
 @media screen and (min-width: 768px) {
@@ -79,4 +60,36 @@
     .navLink:hover {
         background-color: var(--hover-color);
     }
+}
+
+.themeSwitch {
+    display: flex;
+    border: 1px solid var(--text-color);
+    /* background-color: var(--shroud-color); */
+    /* backdrop-filter: blur(4px); */
+    border-radius: 25px;
+    padding: 5px;
+    gap: 4px;
+}
+
+.themeOption {
+    background: none;
+    border: none;
+    padding: 6px;
+    cursor: pointer;
+    color: var(--text-color);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.themeOption:hover {
+    background-color: var(--shroud-color);
+}
+
+.themeOption.active {
+    background-color: var(--active-color);
+    color: var(--background-color);
 }

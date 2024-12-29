@@ -1,10 +1,12 @@
 import React, { useRef, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import styles from './projectcard.module.css';
 import GalleryPopup from '../GalleryPopup';
-import Link from 'next/link';
+import ImageIcon from '@/app/icons/Image';
+import LinkIcon from '@/app/icons/Link';
 
 interface Project {
   id: string;
@@ -57,20 +59,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         duration: 1,
         ease: 'power4.out',
       }, "<25%")
-      .from(`.${styles.viewGalleryButton}`, {
+      .fromTo(`.${styles.buttonContainer}`, {
         autoAlpha: 0,
-        duration: 1,
-        ease: 'power4.out',
-      }, "<50%")
-      .fromTo(`.${styles.role}`, {
-        autoAlpha: 0,
-        transform: 'translateY(25px)',
       }, {
-        duration: 1,
         autoAlpha: 1,
-        transform: 'translateY(0px)',
+        duration: 1,
         ease: 'power4.out',
-        stagger: 0.1
       }, "<25%")
       .fromTo("p", {
         autoAlpha: 0,
@@ -79,13 +73,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         ease: 'power2.out',
         duration: 2,
         stagger: 0.2
-      }, "<25%")
-      .fromTo(`.${styles.linkBox}`, {
-        autoAlpha: 0,
-      }, {
-        autoAlpha: 1,
-        duration: 1,
-        ease: 'power4.out',
       }, "<25%");
 
     introTL.current.play();
@@ -113,26 +100,21 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
             <source src={relativeURL + project.files[0]} type="video/mp4" />
           </video>
         ) : null}
-        <button className={styles.viewGalleryButton} onClick={() => setShowGallery(true)}>Gallery +</button>
       </section>
       <section className={styles.textContainer}>
-      
-          <h1>{project.name}</h1>
-        
-        <ul className={styles.rolesList}>
-          {project.role.map((role, index) => (
-            <li key={index} className={styles.role}>{role}</li>
-          ))}
-        </ul>
+        <h1>{project.name}</h1>
+        <div className={styles.buttonContainer}>
+          <button className={styles.button} onClick={() => setShowGallery(true)}>
+            <ImageIcon size={16} />
+            Gallery
+          </button>
+          <Link href={project.link} target="_blank" className={styles.button}>
+            <LinkIcon size={16} />
+            View Project
+          </Link>
+        </div>
         <p>{project.summary}</p>
         <p>{project.kpi}</p>
-        
-          <div className={styles.linkBox}>
-          <Link href={project.link} target="_blank">
-            View Project
-            </Link>
-          </div>
-        
       </section>
       {showGallery && <GalleryPopup files={project.files.map(file => project.id + '/' + file)} onClose={() => setShowGallery(false)} />}
     </main>

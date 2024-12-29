@@ -14,11 +14,20 @@
     top: 20px;
     cursor: pointer;
     z-index: 200;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 8px;
+    border: 1px solid var(--text-color);
+    border-radius: 8px;
+    font-family: var(--regular);
+    font-size: var(--copy);
+    background: none;
+    color: var(--text-color);
 }
 .closeButton:hover {
     background-color: var(--text-color);
     color: var(--background-color);
-    border: none;
     transition: cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s;
 }
 .galleryContent{

@@ -21,6 +21,11 @@
    clip-path: inset(0);
 }
 
+.inlineLink {
+    font-family: var(--bold);
+    color: var(--dreamBlue);
+}
+
 @media screen and (min-width: 768px) {
     .info {
         flex-direction: row;
@@ -32,8 +37,5 @@
     }
     .intro {
         width: 40dvw;
-    }
-    .directory {
-      
     }
 }

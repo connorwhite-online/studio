@@ -47,6 +47,8 @@ html, body {
   --activeDark: rgba(245, 245, 245, 0.75);
   --hoverLight: rgba(62, 58, 58, 0.25);
   --hoverDark: rgba(245, 245, 245, 0.25);
+  --dreamBlueLight: #3A5CCC;
+  --dreamBlueDark: #5373E7;
   --copy: 14px;
 }
 
@@ -57,6 +59,7 @@ html, body {
   --shroud-color: var(--shroudDark);
   --active-color: var(--activeDark);
   --hover-color: var(--hoverDark);
+  --dreamBlue: var(--dreamBlueDark);
 }
 
 [data-theme="light"] {
@@ -66,6 +69,7 @@ html, body {
   --shroud-color: var(--shroudLight);
   --active-color: var(--activeLight);
   --hover-color: var(--hoverLight);
+  --dreamBlue: var(--dreamBlueLight);
 }
 
 .wrapper {
