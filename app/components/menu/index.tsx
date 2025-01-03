@@ -18,22 +18,22 @@ const Menu: React.FC<MenuProps> = () => {
     const menuRef = useRef<HTMLDivElement>(null);
 
     // Initial reveal animation
-    useGSAP(() => {
-        if (!menuRef.current) return;
+    // useGSAP(() => {
+    //     if (!menuRef.current) return;
 
-        gsap.set(menuRef.current, {
-            opacity: 0,
-            clipPath: 'polygon(100% 0, 100% 0, 100% 0, 100% 0)'
-        });
+    //     gsap.set(menuRef.current, {
+    //         opacity: 0,
+    //         clipPath: 'polygon(100% 0, 100% 0, 100% 0, 100% 0)'
+    //     });
 
-        gsap.to(menuRef.current, {
-            opacity: 1,
-            clipPath: 'polygon(200% -100%, -100% -100%, -100% 200%, 200% 200%)',
-            duration: 1.2,
-            ease: 'power3.out',
-            delay: 0.2
-        });
-    }, { scope: menuRef });
+    //     gsap.to(menuRef.current, {
+    //         opacity: 1,
+    //         clipPath: 'polygon(200% -100%, -100% -100%, -100% 200%, 200% 200%)',
+    //         duration: 1.2,
+    //         ease: 'power3.out',
+    //         delay: 0.2
+    //     });
+    // }, { scope: menuRef });
 
     // Your existing active background animation
     useEffect(() => {
