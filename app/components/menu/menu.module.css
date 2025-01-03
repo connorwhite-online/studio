@@ -8,8 +8,9 @@
 }
 
 .nav {
-    background-color: var(--shroud-color);
+    background-color: var(--glass-25);
     backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -24,7 +25,7 @@
     left: 8px;
     top: 8px;
     height: calc(100% - 16px);
-    background-color: var(--active-color);
+    background-color: var(--glass-75);
     border-radius: 25px;
     z-index: 0;
     transform: none;
@@ -52,6 +53,6 @@
         bottom: auto;
     }
     .navLink:hover {
-        background-color: var(--hover-color);
+        background-color: var(--glass-25);
     }
 }

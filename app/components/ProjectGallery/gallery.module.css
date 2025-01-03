@@ -31,12 +31,12 @@
     font-family: var(--regular);
     font-size: var(--copy);
     cursor: pointer;
-    background-color: var(--shroud-color);
+    background-color: var(--glass-10);
     padding: 4px 8px;
     border-radius: 25px;
 }
 .selected {
-    background-color: var(--active-color);
+    background-color: var(--glass-75);
     color: var(--background-color);
 }
 .slideShow {
@@ -58,13 +58,13 @@ img.media, video.media {
     height: 10dvh;
     width: auto;
     cursor: pointer;
-    filter: brightness(0.25);
+    filter: brightness(0.5);
     transition: filter 0.3s ease;
 }
 
 .currentProject img.media,
 .currentProject video.media {
-    filter: brightness(.75);
+    filter: brightness(1);
     transition: filter 0.3s ease;
 
 }

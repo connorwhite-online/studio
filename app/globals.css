@@ -58,9 +58,10 @@ html, body {
   --background-color: var(--dark);
   --text-color: var(--white);
   --icon-color: var(--white);
-  --shroud-color: var(--alphaWhite10);
-  --active-color: var(--alphaWhite75);
-  --hover-color: var(--alphaWhite25);
+  --glass-10: var(--alphaWhite10);
+  --glass-75: var(--alphaWhite75);
+  --glass-25: var(--alphaWhite25);
+  --glass-50: var(--alphaWhite50);
   --dreamBlue: var(--dreamBlueDark);
 }
 
@@ -68,9 +69,10 @@ html, body {
   --background-color: var(--white);
   --text-color: var(--dark);
   --icon-color: var(--dark);
-  --shroud-color: var(--alphaBlack10);
-  --active-color: var(--alphaBlack75);
-  --hover-color: var(--alphaBlack25);
+  --glass-10: var(--alphaBlack10);
+  --glass-75: var(--alphaBlack75);
+  --glass-25: var(--alphaBlack25);
+  --glass-50: var(--alphaBlack50);
   --dreamBlue: var(--dreamBlueLight);
 }
 
@@ -137,8 +139,6 @@ button {
     text-decoration: none;
     color: var(--text-color);
     cursor: pointer;
-    background-color: var(--shroud-color);
-    backdrop-filter: blur(4px);
     border: none;
     border-radius: 5px;
     padding: 5px 10px;
