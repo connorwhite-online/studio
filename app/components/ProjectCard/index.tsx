@@ -52,19 +52,19 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         scale: .75,
         stagger: 0.2
       })
-      .from("h1", {
+      .from(`.${styles.projectTitle}`, {
         autoAlpha: 0,
         clipPath: 'inset(0 0 100% 0)',
         transform: 'translateY(25px)',
         duration: 1,
         ease: 'power4.out',
       }, "<25%")
-      .fromTo(`.${styles.buttonContainer}`, {
+      .from(`.${styles.button}`, {
         autoAlpha: 0,
-      }, {
-        autoAlpha: 1,
+        scale: 0.9,
         duration: 1,
         ease: 'power4.out',
+        stagger: 0.15
       }, "<25%")
       .fromTo("p", {
         autoAlpha: 0,
@@ -102,7 +102,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         ) : null}
       </section>
       <section className={styles.textContainer}>
-        <h1>{project.name}</h1>
+        <h1 className={styles.projectTitle}>{project.name}</h1>
         <div className={styles.buttonContainer}>
           <button className={styles.button} onClick={() => setShowGallery(true)}>
             <ImageIcon size={16} />

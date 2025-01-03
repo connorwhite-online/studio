@@ -50,13 +50,23 @@
 .slideShow::-webkit-scrollbar {
     display: none;
 }
-.currentProject {
-    border-bottom: 2px solid var(--text-color);
-}
+/* .currentProject {
+    filter: brightness(1);
+    transition: filter 0.3s ease;
+} */
 img.media, video.media {
     height: 10dvh;
     width: auto;
     cursor: pointer;
+    filter: brightness(0.25);
+    transition: filter 0.3s ease;
+}
+
+.currentProject img.media,
+.currentProject video.media {
+    filter: brightness(.75);
+    transition: filter 0.3s ease;
+
 }
 
 @media screen and (min-width: 768px) {
@@ -70,7 +80,8 @@ img.media, video.media {
     .slideShow {
         margin-left: 5dvw;
     }
-    .projectItem:hover {
-        border-bottom: 1px solid var(--active-color);
+    .projectItem:hover img.media,
+    .projectItem:hover video.media {
+        filter: brightness(1);
     }
 }

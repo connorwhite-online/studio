@@ -36,6 +36,11 @@ img.media, video.media {
     flex-direction: column;
     gap: 1dvh;
     width: 95dvw;
+    margin: 0 0 5dvh 0;
+}
+.projectTitle {
+    margin: 0;
+    visibility: hidden;
 }
 .linkBox {
     display: flex;
@@ -112,6 +117,7 @@ img.media, video.media {
     }
     .textContainer {
         width: 30dvw;
+        margin: 0 0 0 0;
 
     }
     .rolesList {
