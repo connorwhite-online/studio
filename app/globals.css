@@ -41,12 +41,14 @@ html, body {
   --monoLight: 'Mono-Light';
   --dark: #151414;
   --white: #F5F5F5;
-  --shroudDark: rgba(62, 58, 58, 0.5);
-  --shroudLight: rgba(217, 217, 217, 0.5);
-  --activeLight: rgba(21, 20, 20, 0.75);
-  --activeDark: rgba(245, 245, 245, 0.75);
-  --hoverLight: rgba(62, 58, 58, 0.25);
-  --hoverDark: rgba(245, 245, 245, 0.25);
+  --alphaBlack50: rgba(20, 20, 20, 0.5);
+  --alphaWhite50: rgba(245, 245, 245, 0.5);
+  --alphaBlack75: rgba(20, 20, 20, 0.75);
+  --alphaWhite75: rgba(245, 245, 245, 0.75);
+  --alphaBlack25: rgba(20, 20, 20, 0.25);
+  --alphaWhite25: rgba(245, 245, 245, 0.25);
+  --alphaBlack10: rgba(20, 20, 20, 0.1);
+  --alphaWhite10: rgba(245, 245, 245, 0.1);
   --dreamBlueLight: #3A5CCC;
   --dreamBlueDark: #5373E7;
   --copy: 14px;
@@ -56,9 +58,9 @@ html, body {
   --background-color: var(--dark);
   --text-color: var(--white);
   --icon-color: var(--white);
-  --shroud-color: var(--shroudDark);
-  --active-color: var(--activeDark);
-  --hover-color: var(--hoverDark);
+  --shroud-color: var(--alphaWhite10);
+  --active-color: var(--alphaWhite75);
+  --hover-color: var(--alphaWhite25);
   --dreamBlue: var(--dreamBlueDark);
 }
 
@@ -66,9 +68,9 @@ html, body {
   --background-color: var(--white);
   --text-color: var(--dark);
   --icon-color: var(--dark);
-  --shroud-color: var(--shroudLight);
-  --active-color: var(--activeLight);
-  --hover-color: var(--hoverLight);
+  --shroud-color: var(--alphaBlack10);
+  --active-color: var(--alphaBlack75);
+  --hover-color: var(--alphaBlack25);
   --dreamBlue: var(--dreamBlueLight);
 }
 
@@ -130,7 +132,7 @@ p {
   margin: 0;
 }
 button {
-  font-family: var(--light);
+  font-family: var(--regular);
     font-size: var(--copy);
     text-decoration: none;
     color: var(--text-color);

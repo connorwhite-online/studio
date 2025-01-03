@@ -9,47 +9,41 @@
 
 .nav {
     background-color: var(--shroud-color);
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(8px);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px; /* Reduced horizontal padding */
+    padding: 8px;
     border-radius: 50px;
-    gap: 10px; /* Added gap for consistent spacing */
+    gap: 10px;
+    position: relative;
+}
+
+.activeBackground {
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    height: calc(100% - 16px);
+    background-color: var(--active-color);
+    border-radius: 25px;
+    z-index: 0;
+    transform: none;
 }
 
 .navLink {
     color: var(--text-color);
-    display: flex; /* Ensure proper alignment */
-    align-items: center;
-    justify-content: center;
-    padding: 8px;
-    border-radius: 25px;
-    transition: background-color 0.3s ease;
-}
-
-.navLinkActive {
-    /* fill: var(--text-color); */
-    background-color: var(--active-color);
-    color: var(--background-color);
-    /* border: 1px solid var(--shroud-color); */
-}
-
-.themeToggle {
-    background: none;
-    border: none;
-    padding: 8px;
-    cursor: pointer;
-    color: var(--text-color);
-    border-radius: 25px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color 0.3s ease;
+    width: 40px;
+    height: 40px;
+    border-radius: 25px;
+    position: relative;
+    z-index: 1;
 }
 
-.themeToggle:hover {
-    background-color: var(--hover-color);
+.navLinkActive {
+    color: var(--background-color);
 }
 
 @media screen and (min-width: 768px) {
@@ -60,36 +54,4 @@
     .navLink:hover {
         background-color: var(--hover-color);
     }
-}
-
-.themeSwitch {
-    display: flex;
-    border: 1px solid var(--text-color);
-    /* background-color: var(--shroud-color); */
-    /* backdrop-filter: blur(4px); */
-    border-radius: 25px;
-    padding: 5px;
-    gap: 4px;
-}
-
-.themeOption {
-    background: none;
-    border: none;
-    padding: 6px;
-    cursor: pointer;
-    color: var(--text-color);
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-}
-
-.themeOption:hover {
-    background-color: var(--shroud-color);
-}
-
-.themeOption.active {
-    background-color: var(--active-color);
-    color: var(--background-color);
 }

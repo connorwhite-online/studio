@@ -1,6 +1,6 @@
 import { GoogleAnalytics } from "@next/third-parties/google";
 import type { Metadata } from "next";
-import Menu from "./components/menu";
+import Menu from "./components/Menu";
 import "./globals.css";
 
 export const metadata: Metadata = {
