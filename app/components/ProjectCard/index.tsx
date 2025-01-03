@@ -34,12 +34,19 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
 
 
   useGSAP(() => {
-
     if (!project) return null;
     
+    // Kill any existing timeline
     if (introTL.current) {
       introTL.current.kill();
     }
+    
+    // Reset all animated elements to their initial state
+    gsap.set(cardRef.current, { autoAlpha: 0 });
+    gsap.set(`.${styles.media}`, { clearProps: "all" });
+    gsap.set(`.${styles.projectTitle}`, { clearProps: "all" });
+    gsap.set(`.${styles.button}`, { clearProps: "all" });
+    gsap.set("p", { clearProps: "all" });
     
     introTL.current = gsap.timeline({})
       .set(cardRef.current, {
@@ -76,6 +83,20 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
       }, "<25%");
 
     introTL.current.play();
+
+    // Cleanup function
+    return () => {
+      if (introTL.current) {
+        introTL.current.kill();
+        gsap.set([
+          cardRef.current,
+          `.${styles.media}`,
+          `.${styles.projectTitle}`,
+          `.${styles.button}`,
+          "p"
+        ], { clearProps: "all" });
+      }
+    };
   }, [project]);
 
   const relativeURL = 'https://bdvkplyefikbvwvrumga.supabase.co/storage/v1/object/public/media/' + project.id + '/';
