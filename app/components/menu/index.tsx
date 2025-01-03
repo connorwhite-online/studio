@@ -9,7 +9,9 @@ import ThemeToggle from "../ThemeToggle";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
-export default function Menu() {
+interface MenuProps {}
+
+const Menu: React.FC<MenuProps> = () => {
     const pathname = usePathname();
     const activeBackgroundRef = useRef<HTMLDivElement>(null);
     const navRef = useRef<HTMLDivElement>(null);
@@ -66,7 +68,7 @@ export default function Menu() {
     return (
         <div className={styles.menu} ref={menuRef}>
             <nav className={styles.nav} ref={navRef}>
-                <div className={styles.activeBackground} ref={activeBackgroundRef} />
+                <div className={styles.activeBackground} ref={activeBackgroundRef}></div>
                 <Link href="/" className={`${styles.navLink} ${pathname === '/' ? styles.navLinkActive : ''}`}>
                     <Home size={24} />
                 </Link>
@@ -78,3 +80,5 @@ export default function Menu() {
         </div>
     );
 }
+
+export default Menu;
