@@ -47,16 +47,17 @@ const Menu: React.FC<MenuProps> = () => {
         gsap.timeline()
             .to(activeBackgroundRef.current, {
                 scaleY: 0.75,
-                scaleX: 2,
+                scaleX: 1.5,
                 duration: 0.075,
-                ease: "power2.in"
+                ease: "power2.in",
+                delay: 0.01
             }, 0)
             .to(activeBackgroundRef.current, {
                 scaleY: 1,
                 scaleX: 1,
                 duration: 0.1,
                 ease: "power2.out"
-            }, 0.075)
+            }, 0.085)
             .to(activeBackgroundRef.current, {
                 x: xPosition,
                 width: activeLink.getBoundingClientRect().width,
