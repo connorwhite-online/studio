@@ -8,7 +8,8 @@
 }
 
 .nav {
-    background-color: var(--glass-10);
+    background-color: var(--alpha-100);
+    border: 1px solid var(--alpha-300);
     -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
     transform: translate3d(0, 0, 0);
@@ -26,14 +27,14 @@
     left: 8px;
     top: 8px;
     height: calc(100% - 16px);
-    background-color: var(--glass-75);
+    background-color: var(--alpha-300);
     border-radius: 25px;
     z-index: 0;
     transform: none;
 }
 
 .navLink {
-    color: var(--text-color);
+    color: var(--gray-800);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -45,7 +46,7 @@
 }
 
 .navLinkActive {
-    color: var(--background-color);
+    color: var(--gray-1000);
 }
 
 @media screen and (min-width: 768px) {
@@ -54,6 +55,7 @@
         bottom: auto;
     }
     .navLink:hover {
-        background-color: var(--glass-25);
+        color: var(--gray-1000);
+        transition: all 0.3s ease-in-out;
     }
 }

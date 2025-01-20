@@ -17,24 +17,6 @@ const Menu: React.FC<MenuProps> = () => {
     const navRef = useRef<HTMLDivElement>(null);
     const menuRef = useRef<HTMLDivElement>(null);
 
-    // Initial reveal animation
-    // useGSAP(() => {
-    //     if (!menuRef.current) return;
-
-    //     gsap.set(menuRef.current, {
-    //         opacity: 0,
-    //         clipPath: 'polygon(100% 0, 100% 0, 100% 0, 100% 0)'
-    //     });
-
-    //     gsap.to(menuRef.current, {
-    //         opacity: 1,
-    //         clipPath: 'polygon(200% -100%, -100% -100%, -100% 200%, 200% 200%)',
-    //         duration: 1.2,
-    //         ease: 'power3.out',
-    //         delay: 0.2
-    //     });
-    // }, { scope: menuRef });
-
     // Your existing active background animation
     useEffect(() => {
         if (!activeBackgroundRef.current || !navRef.current) return;
@@ -46,11 +28,11 @@ const Menu: React.FC<MenuProps> = () => {
 
         gsap.timeline()
             .to(activeBackgroundRef.current, {
-                scaleY: 0.75,
-                scaleX: 1.5,
+                scaleY: 0.85,
+                scaleX: 1.25,
                 duration: 0.075,
                 ease: "power2.in",
-                delay: 0.01
+                // delay: 0.01
             }, 0)
             .to(activeBackgroundRef.current, {
                 scaleY: 1,
@@ -61,7 +43,7 @@ const Menu: React.FC<MenuProps> = () => {
             .to(activeBackgroundRef.current, {
                 x: xPosition,
                 width: activeLink.getBoundingClientRect().width,
-                duration: 1,
+                duration: 0.75,
                 ease: "elastic.out(1, 1)"
             }, 0);
     }, [pathname]);

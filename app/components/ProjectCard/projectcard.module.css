@@ -27,8 +27,8 @@ img.media, video.media {
     bottom: 25px;
 }
 .viewGalleryButton:hover, .linkBox a:hover {
-    background-color: var(--text-color);
-    color: var(--background-color);
+    background-color: var(--gray-1000);
+    color: var(--gray-100);
     transition: cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s;
 }
 .textContainer {
@@ -48,7 +48,7 @@ img.media, video.media {
 .linkBox a {
     padding: 5px 10px;
     margin: 5px 0;
-    border: 1px solid var(--text-color);
+    border: 1px solid var(--alpha-500);
     border-radius: 5px;
     font-family: var(--light);
     font-size: var(--copy);
@@ -78,7 +78,7 @@ img.media, video.media {
     align-items: center;
     gap: 8px;
     padding: 4px 8px;
-    border: 1px solid var(--text-color);
+    border: 1px solid var(--alpha-500);
     border-radius: 8px;
     font-family: var(--regular);
     font-size: var(--copy);
@@ -87,8 +87,8 @@ img.media, video.media {
 }
 
 .button:hover {
-    background-color: var(--text-color);
-    color: var(--background-color);
+    background-color: var(--gray-1000);
+    color: var(--gray-100);
     transition: cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s;
 }
 

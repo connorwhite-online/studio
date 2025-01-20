@@ -1,4 +1,5 @@
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { ThemeProvider } from 'next-themes'
 import type { Metadata } from "next";
 import Menu from "./components/menu";
 import "./globals.css";
@@ -14,10 +15,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme="dark">
+    <html lang="en" suppressHydrationWarning>
       <body>
-        <Menu />
-        {children}
+        <ThemeProvider
+          attribute="data-theme"
+          defaultTheme="system"
+          enableSystem={true}
+          value={{
+            light: "light",
+            dark: "dark",
+            system: "system"
+          }}
+        >
+          <Menu />
+          {children}
+        </ThemeProvider>
       </body>
       <GoogleAnalytics gaId="G-250C59M66F" />
     </html>

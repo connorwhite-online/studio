@@ -1,25 +1,21 @@
 'use client';
-import React, { useState, useEffect, useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
+import { useTheme } from "next-themes";
 import styles from "./themetoggle.module.css";
 import Sun from "@/app/icons/Sun";
 import Moon from "@/app/icons/Moon";
 import gsap from "gsap";
 
 export default function ThemeToggle() {
-    const [theme, setTheme] = useState<'light' | 'dark'>('dark');
+    const { theme, setTheme } = useTheme();
+    const [mounted, setMounted] = useState(false);
     const iconRef = useRef<HTMLDivElement>(null);
     const textRef = useRef<HTMLSpanElement>(null);
     const containerRef = useRef<HTMLButtonElement>(null);
     const isAnimating = useRef(false);
 
     useEffect(() => {
-        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-        const systemTheme = mediaQuery.matches ? 'dark' : 'light';
-        const savedTheme = localStorage.getItem('theme');
-        const initialTheme = savedTheme || systemTheme;
-        
-        setTheme(initialTheme as 'light' | 'dark');
-        document.documentElement.setAttribute('data-theme', initialTheme);
+        setMounted(true);
     }, []);
 
     const handleThemeChange = () => {
@@ -50,8 +46,6 @@ export default function ThemeToggle() {
               ease: "power4.out",
               onComplete: () => {
                 setTheme(newTheme);
-                localStorage.setItem('theme', newTheme);
-                document.documentElement.setAttribute('data-theme', newTheme);
             }
           }, 0)
           .set(textRef.current, { y: 5 })
@@ -61,11 +55,12 @@ export default function ThemeToggle() {
               duration: 0.5,
               ease: "power4.out",
           });
-
-        // setTheme(newTheme);
-        // localStorage.setItem('theme', newTheme);
-        // document.documentElement.setAttribute('data-theme', newTheme);
     };
+
+    // Prevent hydration mismatch by not rendering until mounted
+    if (!mounted) {
+        return null;
+    }
 
     return (
         <button 

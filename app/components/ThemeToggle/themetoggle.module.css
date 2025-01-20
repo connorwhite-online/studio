@@ -3,10 +3,10 @@
     align-items: center;
     gap: 8px;
     background: none;
-    border: 1px solid var(--text-color);
+    border: 1px solid var(--alpha-500);
     padding: 10px 10px;
     cursor: pointer;
-    color: var(--text-color);
+    color: var(--gray-1000);
     border-radius: 25px;
     font-family: var(--regular);
     font-size: var(--copy);
@@ -15,8 +15,8 @@
 }
 
 .themeToggle:hover {
-    background-color: var(--text-color);
-    color: var(--background-color);
+    background-color: var(--gray-1000);
+    color: var(--gray-100);
 }
 
 .iconWrapper {

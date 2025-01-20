@@ -7,14 +7,11 @@
     z-index: 5;
 }
 .projectIndex {
-    /* display: flex; */
-    width: 50px;
     text-align: center;
-    border: 1px solid var(--text-color);
     border-radius: 5px;
-    padding: 2.5px;
     font-family: var(--monoLight);
-    font-size: --copy;
+    color: var(--gray-900);
+    font-size: 20px;
     margin-left: 2.5dvw;
 }
 .galleryFilter {
@@ -31,13 +28,16 @@
     font-family: var(--regular);
     font-size: var(--copy);
     cursor: pointer;
-    background-color: var(--glass-10);
+    color: var(--gray-900);
+    background-color: var(--alpha-100);
+    border: 1px solid var(--alpha-200);
     padding: 4px 8px;
     border-radius: 25px;
 }
 .selected {
-    background-color: var(--glass-75);
-    color: var(--background-color);
+    background-color: var(--alpha-300);
+    border: 1px solid var(--alpha-500);
+    color: var(--gray-1000);
 }
 .slideShow {
     display: flex;
