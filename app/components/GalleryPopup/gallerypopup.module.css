@@ -7,7 +7,7 @@
     display: flex;
     justify-content: center;
     top: 0;
-    background-color: var(--bg-100);
+    background-color: var(--bg-main);
 }
 .closeButton {
     position: fixed;
