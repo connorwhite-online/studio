@@ -2,11 +2,12 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import { ThemeProvider } from 'next-themes'
 import type { Metadata } from "next";
 import Menu from "./components/menu";
+import Scene from "./components/Scene";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Connor White",
-  description: "Work from the personal studio of designer and engineer, Connor White.",
+  description: "Work from the personal studio of software designer and engineer, Connor White.",
 };
 
 export default function RootLayout({
@@ -27,6 +28,7 @@ export default function RootLayout({
             system: "system"
           }}
         >
+          <Scene />
           <Menu />
           {children}
         </ThemeProvider>

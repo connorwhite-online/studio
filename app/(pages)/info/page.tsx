@@ -23,6 +23,13 @@ export default function Info() {
             duration: 1.5,
             ease: 'power2.inOut',
         })
+        .fromTo(`.${styles.directory}`, {
+            opacity: 0,
+        }, {
+            opacity: 1,
+            duration: 1,
+            ease: 'power2.inOut',
+        }, "<25%")
         .fromTo('h2, h3', {
             x: -25,
             opacity: 0,
