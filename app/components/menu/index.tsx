@@ -5,6 +5,7 @@ import styles from "./menu.module.css";
 import { usePathname } from "next/navigation";
 import Home from "@/app/icons/Home";
 import Info from "@/app/icons/Info";
+import Touch from "@/app/icons/Touch";
 import ThemeToggle from "../ThemeToggle";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -54,6 +55,9 @@ const Menu: React.FC<MenuProps> = () => {
                 <div className={styles.activeBackground} ref={activeBackgroundRef}></div>
                 <Link href="/" className={`${styles.navLink} ${pathname === '/' ? styles.navLinkActive : ''}`}>
                     <Home size={24} />
+                </Link>
+                <Link href="/interactions" className={`${styles.navLink} ${pathname === '/interactions' ? styles.navLinkActive : ''}`}>
+                    <Touch size={24} />
                 </Link>
                 <Link href="/info" className={`${styles.navLink} ${pathname === '/info' ? styles.navLinkActive : ''}`}>
                     <Info size={24} />

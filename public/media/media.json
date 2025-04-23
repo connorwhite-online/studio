@@ -1,0 +1,24 @@
+{
+  "mediaItems": [
+    {
+      "id": "1",
+      "videoUrl": "/media/manipulate.mp4",
+      "title": "Hand-Tracking"
+    },
+    {
+      "id": "2",
+      "videoUrl": "/media/sqft.mp4",
+      "title": "Cursor-Tracking"
+    },
+    {
+      "id": "3",
+      "videoUrl": "/media/webgl-gallery.mp4",
+      "title": "WebGL Gallery"
+    },
+    {
+      "id": "4",
+      "videoUrl": "/media/tyb-sidenav.mp4",
+      "title": "Side Nav"
+    }
+  ]
+} 
