@@ -1,44 +1,33 @@
 'use client';
 import styles from "./page.module.css";
-import { useState, useEffect } from 'react';
-import Satellite from './icons/Satellite';
+import TimeStatus from './components/TimeStatus';
 
 export default function Home() {
-  const [time, setTime] = useState<string>('');
-  const [loading, setLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    // Get Los Angeles time
-    const updateTime = () => {
-      const laTime = new Date().toLocaleString('en-US', {
-        timeZone: 'America/Los_Angeles',
-        hour: 'numeric',
-        minute: 'numeric',
-        hour12: true
-      });
-      setTime(laTime);
-    };
-
-    updateTime();
-    
-    // Update time every minute
-    const intervalId = setInterval(updateTime, 30000);
-    setLoading(false);
-    
-    return () => clearInterval(intervalId);
-  }, []);
+  const titleText = "Connor is a software designer and engineer, interested mostly in interaction design, both experimental and practical.";
+  const words = titleText.split(' ');
 
   return (
     <main className={styles.main}>
       <div className={styles.container}>
-        <h2 className={styles.title}>Connor is a software designer and engineer, interested mostly in interaction design, both experimental and practical.</h2>
+        <h2 className={styles.title}>
+          {words.map((word, index) => (
+            <span
+              key={index}
+              style={{
+                display: 'inline-block',
+                marginRight: '0.25em',
+                opacity: 0,
+                filter: 'blur(10px)',
+                animation: `fadeInBlur 0.8s forwards ease-out`,
+                animationDelay: `${index * 0.05}s`
+              }}
+            >
+              {word}
+            </span>
+          ))}
+        </h2>
         
-        <div className={styles.timeContainer}>
-          <Satellite className={styles.satellite} size={20} />
-          <p className={styles.timeText}>
-            Based in Los Angeles ({time})
-          </p>
-        </div>
+        <TimeStatus showStatus={false} className={styles.timeContainer} />
       </div>
     </main>
   );

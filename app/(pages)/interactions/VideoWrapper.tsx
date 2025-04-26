@@ -25,6 +25,29 @@ export default function VideoWrapper({
   const [isLoading, setIsLoading] = useState(true);
   const [videoErrors, setVideoErrors] = useState<Record<string, boolean>>({});
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const [numColumns, setNumColumns] = useState(1);
+
+  // Update columns based on window width
+  useEffect(() => {
+    const updateColumns = () => {
+      if (window.innerWidth >= 1024) {
+        setNumColumns(3);
+      } else if (window.innerWidth >= 640) {
+        setNumColumns(2);
+      } else {
+        setNumColumns(1);
+      }
+    };
+    
+    // Set initial value
+    updateColumns();
+    
+    // Add event listener
+    window.addEventListener('resize', updateColumns);
+    
+    // Cleanup
+    return () => window.removeEventListener('resize', updateColumns);
+  }, []);
 
   useEffect(() => {
     const fetchMediaItems = async () => {
@@ -83,42 +106,60 @@ export default function VideoWrapper({
   
   return (
     <div className={styles.videoGrid}>
-      {videos
-        .sort((a, b) => b.id.localeCompare(a.id)) // Sort videos in reverse order by id
-        .map((item, index) => {
-        const videoType = getVideoType(item.videoUrl);
-        return (
-          <div 
-            key={item.id} 
-            className={styles.videoCard}
-          >
-            {!videoErrors[item.id] ? (
-              <video
-                ref={el => videoRefs.current[index] = el}
-                autoPlay
-                loop
-                muted
-                playsInline
-                preload="metadata"
-                onError={() => handleVideoError(item.id)}
-              >
-                <source src={item.videoUrl} type={videoType} />
-                Your browser does not support the video tag.
-              </video>
-            ) : (
-              <div className={styles.videoError}>
-                <p>Video could not be loaded</p>
-                <p className={styles.videoErrorPath}>{item.videoUrl}</p>
-              </div>
-            )}
-            {item.title && (
-              <div className={styles.videoTitle}>
-                {item.title}
-              </div>
-            )}
-          </div>
-        );
-      })}
+      {(() => {
+        // First sort by newest first
+        const sortedVideos = [...videos].sort((a, b) => b.id.localeCompare(a.id));
+        
+        // Determine number of columns based on viewport width
+        let numRows = Math.ceil(sortedVideos.length / numColumns);
+        
+        // Organize into column-first order
+        const reorganizedVideos = [];
+        
+        for (let col = 0; col < numColumns; col++) {
+          for (let row = 0; row < numRows; row++) {
+            const index = row * numColumns + col;
+            if (index < sortedVideos.length) {
+              reorganizedVideos.push(sortedVideos[index]);
+            }
+          }
+        }
+        
+        return reorganizedVideos.map((item, index) => {
+          const videoType = getVideoType(item.videoUrl);
+          return (
+            <div 
+              key={item.id} 
+              className={styles.videoCard}
+            >
+              {!videoErrors[item.id] ? (
+                <video
+                  ref={el => videoRefs.current[videos.indexOf(item)] = el}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="metadata"
+                  onError={() => handleVideoError(item.id)}
+                >
+                  <source src={item.videoUrl} type={videoType} />
+                  Your browser does not support the video tag.
+                </video>
+              ) : (
+                <div className={styles.videoError}>
+                  <p>Video could not be loaded</p>
+                  <p className={styles.videoErrorPath}>{item.videoUrl}</p>
+                </div>
+              )}
+              {item.title && (
+                <div className={styles.videoTitle}>
+                  {item.title}
+                </div>
+              )}
+            </div>
+          );
+        });
+      })()}
     </div>
   );
 } 

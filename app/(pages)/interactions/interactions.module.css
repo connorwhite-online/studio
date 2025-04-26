@@ -34,7 +34,7 @@
     height: auto;
     border-radius: 16px;
     display: block;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .videoTitle {
@@ -179,8 +179,8 @@
 
 @media screen and (min-width: 1024px) {
     .interactions {
-        padding: 15dvh 5dvw 5dvh 5dvw;
-        width: 90dvw;
+        padding: 15dvh 1dvw 5dvh 1dvw;
+        width: 98dvw;
     }
     
     .videoGrid {

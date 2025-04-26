@@ -3,6 +3,8 @@ import React, { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import styles from './info.module.css';
+import TimeStatus from '@/app/components/TimeStatus';
+import SpotifyWidget from '@/app/components/SpotifyWidget';
 
 export default function Info() {
 
@@ -23,7 +25,7 @@ export default function Info() {
             duration: 1.5,
             ease: 'power2.inOut',
         })
-        .fromTo(`.${styles.directory}`, {
+        .fromTo(`.${styles.directory}, .${styles.statusContainer}, .${styles.spotifyContainer}`, {
             opacity: 0,
         }, {
             opacity: 1,
@@ -76,6 +78,14 @@ export default function Info() {
                 <br />
                 I&#39;m available for select projects in culture and environmental advocacy. If you&#39;d like to work together, please do reach out.
                 </p>
+                
+                <div className={styles.statusContainer}>
+                    <TimeStatus showStatus={true} />
+                </div>
+                
+                <div className={styles.spotifyContainer}>
+                    <SpotifyWidget />
+                </div>
             </section>
             <section className={styles.directory}>
                 <a 

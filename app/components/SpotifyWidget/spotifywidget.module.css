@@ -1,0 +1,96 @@
+.spotifyContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.titleContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.spotifyIcon {
+  color: var(--gray-1000);
+}
+
+.trackListContainer {
+  max-height: 220px;
+  overflow-y: auto;
+  padding-right: 4px;
+  /* For Firefox */
+  scrollbar-width: thin;
+}
+
+/* For Chrome, Edge, and Safari */
+.trackListContainer::-webkit-scrollbar {
+  width: 4px;
+}
+
+.trackListContainer::-webkit-scrollbar-track {
+  background: var(--alpha-50);
+  border-radius: 4px;
+}
+
+.trackListContainer::-webkit-scrollbar-thumb {
+  background: var(--alpha-200);
+  border-radius: 4px;
+}
+
+.trackList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.trackItem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 4px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.trackItem:hover {
+  background-color: var(--alpha-100);
+  transform: translateX(5px);
+}
+
+.albumCover {
+  width: 48px;
+  height: 48px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.trackInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.trackTitle {
+  font-family: var(--medium);
+}
+
+.trackArtist {
+  font-family: var(--regular);
+  font-size: 14px;
+  color: #666;
+}
+
+.loadingState, .errorState {
+  font-size: 0.875rem;
+  color: #666;
+  padding: 1rem 0;
+}
+
+.errorHelp {
+  font-size: 0.75rem;
+  color: #999;
+  margin-top: 0.5rem;
+} 

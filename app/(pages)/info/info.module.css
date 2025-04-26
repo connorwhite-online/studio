@@ -9,7 +9,6 @@
     z-index: 2;
 }
 .introCopy {
-    font-size: 16px;
     padding: 24px;
     border-radius: 24px;
     background-color: var(--alpha-100-light);
@@ -39,6 +38,20 @@
 .inlineLink {
     font-family: var(--bold);
     color: var(--dreamBlue);
+}
+
+.statusContainer {
+    margin-top: 16px;
+}
+
+.spotifyContainer {
+    margin-top: 16px;
+    padding: 16px;
+    border-radius: 24px;
+    background-color: var(--alpha-100-light);
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+    transform: translate3d(0, 0, 0);
 }
 
 @media screen and (min-width: 768px) {

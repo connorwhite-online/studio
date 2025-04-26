@@ -1,0 +1,105 @@
+'use client';
+import { useState, useEffect } from 'react';
+import Spotify from '@/app/icons/Spotify';
+import styles from './spotifywidget.module.css';
+import Speaker from '@/app/icons/Speaker';
+
+type Track = {
+  title: string;
+  artist: string;
+  albumImageUrl: string;
+  songUrl: string;
+  playedAt?: string;
+};
+
+interface SpotifyWidgetProps {
+  className?: string;
+}
+
+export default function SpotifyWidget({ className = '' }: SpotifyWidgetProps) {
+  const [tracks, setTracks] = useState<Track[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchRecentlyPlayedTracks = async () => {
+      try {
+        const response = await fetch('/api/spotify');
+        
+        const data = await response.json();
+        
+        if (!response.ok) {
+          throw new Error(data.error || 'Failed to fetch Spotify data');
+        }
+        
+        setTracks(data.tracks);
+        setLoading(false);
+      } catch (error: any) {
+        console.error('Error fetching Spotify data:', error);
+        setError(error.message || 'Could not load Spotify tracks');
+        setLoading(false);
+      }
+    };
+
+    fetchRecentlyPlayedTracks();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className={`${styles.spotifyContainer} ${className}`}>
+        <div className={styles.titleContainer}>
+          <Spotify className={styles.spotifyIcon} size={20} />
+          <h2 className={styles.title}>Recently played:</h2>
+        </div>
+        <div className={styles.loadingState}>Loading tracks...</div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className={`${styles.spotifyContainer} ${className}`}>
+        <div className={styles.titleContainer}>
+          <Spotify className={styles.spotifyIcon} size={20} />
+          <h2 className={styles.title}>Recently played:</h2>
+        </div>
+        <div className={styles.errorState}>
+          {error}
+          <p className={styles.errorHelp}>Check the browser console for more details.</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className={`${styles.spotifyContainer} ${className}`}>
+      <div className={styles.titleContainer}>
+        <Spotify className={styles.spotifyIcon} size={20} />
+        <h2 className={styles.title}>Recently played:</h2>
+      </div>
+      <div className={styles.trackListContainer}>
+        <div className={styles.trackList}>
+          {tracks.map((track, index) => (
+            <a 
+              key={index} 
+              href={track.songUrl} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className={styles.trackItem}
+            >
+              <img 
+                src={track.albumImageUrl} 
+                alt={`${track.title} album cover`} 
+                className={styles.albumCover}
+              />
+              <div className={styles.trackInfo}>
+                <p className={styles.trackTitle}>{track.title}</p>
+                <p className={styles.trackArtist}>{track.artist}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+} 
