@@ -60,23 +60,23 @@ async function checkTokenScopes() {
     console.log('- Expires in:', tokenData.expires_in, 'seconds');
     console.log('- Scopes:', tokenData.scope || 'No scope information returned');
     
-    // Check if user-read-recently-played scope is present
+    // Check if user-library-read scope is present
     const scopes = tokenData.scope?.split(' ') || [];
-    if (!scopes.includes('user-read-recently-played')) {
-      console.error('❌ The token does NOT have the required user-read-recently-played scope');
-      console.error('This is why the recently played tracks endpoint is failing');
+    if (!scopes.includes('user-library-read')) {
+      console.error('❌ The token does NOT have the required user-library-read scope');
+      console.error('This is why the liked songs endpoint is failing');
       console.log('\nPlease see the README.md file for instructions on how to generate a new token with the correct scope.');
       return;
     } else {
-      console.log('✅ Found user-read-recently-played scope');
+      console.log('✅ Found user-library-read scope');
     }
     
-    // Test recently played endpoint
+    // Test saved tracks endpoint
     const accessToken = tokenData.access_token;
     
-    console.log('\nTesting recently played endpoint...');
-    const recentlyPlayedResponse = await fetch(
-      'https://api.spotify.com/v1/me/player/recently-played?limit=1',
+    console.log('\nTesting saved tracks endpoint...');
+    const savedTracksResponse = await fetch(
+      'https://api.spotify.com/v1/me/tracks?limit=1',
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -84,25 +84,25 @@ async function checkTokenScopes() {
       }
     );
     
-    if (recentlyPlayedResponse.ok) {
-      console.log('✅ Successfully accessed recently played endpoint');
-      const data = await recentlyPlayedResponse.json();
+    if (savedTracksResponse.ok) {
+      console.log('✅ Successfully accessed saved tracks endpoint');
+      const data = await savedTracksResponse.json();
       console.log(`Found ${data.items?.length || 0} tracks`);
       
       if (data.items?.length === 0) {
-        console.log('\n⚠️ No recently played tracks found');
-        console.log('This could be because you haven\'t played any tracks recently or because of a limitation in your Spotify account.');
+        console.log('\n⚠️ No saved tracks found');
+        console.log('This could be because you don\'t have any liked songs in your Spotify library.');
       } else {
         const track = data.items[0].track;
-        console.log(`Most recent track: "${track.name}" by ${track.artists.map((a: { name: string }) => a.name).join(', ')}`);
+        console.log(`Most recent liked track: "${track.name}" by ${track.artists.map((a: { name: string }) => a.name).join(', ')}`);
       }
     } else {
-      console.error('❌ Error accessing recently played endpoint');
-      const errorData = await recentlyPlayedResponse.json();
+      console.error('❌ Error accessing saved tracks endpoint');
+      const errorData = await savedTracksResponse.json();
       console.error(errorData);
       
-      if (recentlyPlayedResponse.status === 403) {
-        console.log('\n⚠️ It appears your token lacks the user-read-recently-played scope');
+      if (savedTracksResponse.status === 403) {
+        console.log('\n⚠️ It appears your token lacks the user-library-read scope');
         console.log('Please generate a new token with this scope using the instructions in README.md');
       }
     }

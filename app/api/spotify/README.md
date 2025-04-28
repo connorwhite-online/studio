@@ -1,15 +1,15 @@
 # Spotify API Integration
 
-This endpoint fetches recently played tracks from the Spotify API.
+This endpoint fetches the user's most recently liked songs (Saved Tracks) from the Spotify API.
 
 ## Required Scopes
 
 For this API to work properly, your Spotify refresh token must have the following scopes:
-- `user-read-recently-played` - Required to access the user's recently played tracks
+- `user-library-read` - Required to access the user's saved tracks (Liked Songs)
 
 ## Checking Your Current Token Scopes
 
-If you're seeing the "Could not load Spotify tracks" error, it's likely that your refresh token doesn't have the required `user-read-recently-played` scope.
+If you're seeing the "Could not load Spotify tracks" error, it's likely that your refresh token doesn't have the required `user-library-read` scope.
 
 You can check your token's scopes using the provided utility script, which automatically reads your credentials from `.env.local`:
 
@@ -21,7 +21,7 @@ npx ts-node --project tsconfig.json app/api/spotify/check-token.ts
 The script will:
 1. Read your Spotify credentials from `.env.local`
 2. Verify the token's scopes
-3. Test if you can access the recently played tracks endpoint
+3. Test if you can access the saved tracks endpoint
 4. Display detailed information about any issues found
 
 ## Updating Your Spotify Token
@@ -35,7 +35,7 @@ If your current token doesn't have the required scopes, you'll need to generate 
 
 5. Use the following URL to request authorization (replace `YOUR_CLIENT_ID` with your actual client ID):
    ```
-   https://accounts.spotify.com/authorize?client_id=YOUR_CLIENT_ID&response_type=code&redirect_uri=http://localhost:3000/callback&scope=user-read-recently-played
+   https://accounts.spotify.com/authorize?client_id=YOUR_CLIENT_ID&response_type=code&redirect_uri=http://localhost:3000/callback&scope=user-library-read
    ```
 
 6. After authorization, you'll be redirected to your callback URL with a code parameter in the URL. Copy this code.
@@ -81,5 +81,5 @@ If you're still having issues after updating your token:
    - `SPOTIFY_CLIENT_SECRET`
    - `SPOTIFY_REFRESH_TOKEN`
 3. Make sure you're not accidentally using a token from a different Spotify app
-4. Check that you've recently played some tracks in Spotify (the API won't return anything if there are no recently played tracks)
+4. Check that you have liked songs in your Spotify library (the API won't return anything if there are no liked songs)
 5. Try running the `check-token.ts` script again to verify your token is working 

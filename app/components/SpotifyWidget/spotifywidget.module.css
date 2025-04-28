@@ -2,7 +2,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 16px;
 }
 
 .titleContainer {
@@ -11,8 +11,17 @@
   gap: 8px;
 }
 
-.spotifyIcon {
-  color: var(--gray-1000);
+.icon {
+  color: var(--gray-900);
+}
+
+.title {
+  font-family: var(--monoRegular);
+  letter-spacing: -0.06em;
+  color: var(--gray-900);
+  margin: 0;
+  font-size: 0.9rem;
+  text-wrap: nowrap;
 }
 
 .trackListContainer {
@@ -47,6 +56,7 @@
 .trackItem {
   display: flex;
   align-items: center;
+  margin-right: 1px;
   gap: 16px;
   padding: 4px;
   border-radius: 8px;
@@ -71,6 +81,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 4px;
 }
 
 .trackTitle {

@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import Menu from "./components/menu";
 import Scene from "./components/Scene";
 import "./globals.css";
+import '@radix-ui/themes/styles.css';
 
 export const metadata: Metadata = {
   title: "Connor White",

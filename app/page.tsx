@@ -1,6 +1,6 @@
 'use client';
 import styles from "./page.module.css";
-import TimeStatus from './components/TimeStatus';
+import Time from './components/Time';
 
 export default function Home() {
   const titleText = "Connor is a software designer and engineer, interested mostly in interaction design, both experimental and practical.";
@@ -27,7 +27,7 @@ export default function Home() {
           ))}
         </h2>
         
-        <TimeStatus showStatus={false} className={styles.timeContainer} />
+        <Time showIcon={true} className={styles.timeContainer} />
       </div>
     </main>
   );

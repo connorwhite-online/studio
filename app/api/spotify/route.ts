@@ -76,6 +76,46 @@ async function getRecentlyPlayedTracks() {
   }
 }
 
+// Get user's saved tracks (Liked Songs)
+async function getLikedSongs() {
+  try {
+    const accessToken = await getAccessToken();
+    
+    const response = await fetch(
+      'https://api.spotify.com/v1/me/tracks?limit=3&offset=0',
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+        cache: 'no-store',
+      }
+    );
+    
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error('Spotify API error:', errorData);
+      throw new Error(`Spotify API responded with ${response.status}`);
+    }
+
+    const data = await response.json();
+    
+    if (!data.items || data.items.length === 0) {
+      return [];
+    }
+    
+    return data.items.map((item: any) => ({
+      title: item.track.name,
+      artist: item.track.artists.map((artist: any) => artist.name).join(', '),
+      albumImageUrl: item.track.album.images[0].url,
+      songUrl: item.track.external_urls.spotify,
+      addedAt: item.added_at
+    }));
+  } catch (error) {
+    console.error('Error fetching Spotify liked songs:', error);
+    return [];
+  }
+}
+
 export async function GET() {
   try {
     if (!CLIENT_ID || !CLIENT_SECRET || !REFRESH_TOKEN) {
@@ -84,10 +124,10 @@ export async function GET() {
       }, { status: 500 });
     }
     
-    const tracks = await getRecentlyPlayedTracks();
+    const tracks = await getLikedSongs();
     
     if (!tracks.length) {
-      return NextResponse.json({ error: 'No recently played tracks found or unable to fetch tracks' }, { status: 404 });
+      return NextResponse.json({ error: 'No liked songs found or unable to fetch tracks' }, { status: 404 });
     }
     
     return NextResponse.json({ tracks });

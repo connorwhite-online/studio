@@ -1,33 +1,39 @@
 .info {
     position: relative;
-    visibility: hidden;
-    width: 95dvw;
+    visibility: visible;
+    width: 100%;
+    max-width: 95dvw;
     padding: 5dvh 2.5dvw 10dvh 2.5dvw;
     display: flex;
     flex-direction: column;
-    gap: 5vh;
+    gap: 16px;
     z-index: 2;
-}
-.introCopy {
-    padding: 24px;
-    border-radius: 24px;
-    background-color: var(--alpha-100-light);
-    -webkit-backdrop-filter: blur(2px);
-    backdrop-filter: blur(2px);
-    transform: translate3d(0, 0, 0);
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    margin: 0 auto;
 }
 
-.directory {
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.widget {
+    display: flex;
+    flex-direction: column;
     padding: 24px;
     border-radius: 24px;
-    display: flex;
-    height: fit-content;
-    flex-direction: column;
-    gap: 2.5dvh;
-    background-color: var(--alpha-100-light);
+    background-color: var(--alpha-100);
     -webkit-backdrop-filter: blur(2px);
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(8px);
     transform: translate3d(0, 0, 0);
+    width: 100%;
+    gap: 16px;
+    box-sizing: border-box;
 }
 
 .link {
@@ -40,33 +46,25 @@
     color: var(--dreamBlue);
 }
 
-.statusContainer {
-    margin-top: 16px;
-}
-
-.spotifyContainer {
-    margin-top: 16px;
-    padding: 16px;
-    border-radius: 24px;
-    background-color: var(--alpha-100-light);
-    -webkit-backdrop-filter: blur(2px);
-    backdrop-filter: blur(2px);
-    transform: translate3d(0, 0, 0);
+.statusText {
+    color: var(--gray-900);
 }
 
 @media screen and (min-width: 768px) {
     .info {
         flex-direction: row;
-        justify-content: flex-start;
-        gap: 10vw;
-        padding: 20dvh 5dvw 5dvh 5dvw;
-        width: 90dvw;
-        height: 75dvh;
+        justify-content: center;
+        align-items: flex-start;
+        column-count: 2;
+        gap: 16px;
+        padding: 15dvh 5dvw 5dvh 5dvw;
+        width: 100%;
+        max-width: 1200px;
+        height: 80dvh;
     }
-    .intro {
-        width: 40dvw;
-    }
-    .link {
-        /* padding: 0 2.5dvw; */
+    
+    .column {
+        max-width: 400px;
+        width: calc(50% - 8px);
     }
 }

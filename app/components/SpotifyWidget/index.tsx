@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Spotify from '@/app/icons/Spotify';
 import styles from './spotifywidget.module.css';
 import Speaker from '@/app/icons/Speaker';
+import { Skeleton } from '@radix-ui/themes';
 
 type Track = {
   title: string;
@@ -10,6 +11,7 @@ type Track = {
   albumImageUrl: string;
   songUrl: string;
   playedAt?: string;
+  addedAt?: string;
 };
 
 interface SpotifyWidgetProps {
@@ -22,7 +24,7 @@ export default function SpotifyWidget({ className = '' }: SpotifyWidgetProps) {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchRecentlyPlayedTracks = async () => {
+    const fetchLikedSongs = async () => {
       try {
         const response = await fetch('/api/spotify');
         
@@ -41,17 +43,29 @@ export default function SpotifyWidget({ className = '' }: SpotifyWidgetProps) {
       }
     };
 
-    fetchRecentlyPlayedTracks();
+    fetchLikedSongs();
   }, []);
 
   if (loading) {
     return (
       <div className={`${styles.spotifyContainer} ${className}`}>
         <div className={styles.titleContainer}>
-          <Spotify className={styles.spotifyIcon} size={20} />
-          <h2 className={styles.title}>Recently played:</h2>
+          <Speaker className={styles.icon} size={20} />
+          <p className={styles.title}>Heavy in rotation:</p>
         </div>
-        <div className={styles.loadingState}>Loading tracks...</div>
+        <div className={styles.trackListContainer}>
+          <div className={styles.trackList}>
+            {Array.from({ length: 3 }).map((_, index) => (
+              <div key={index} className={styles.trackItem}>
+                <Skeleton height="48px" width="48px" />
+                <div className={styles.trackInfo}>
+                  <Skeleton height="16px" width="120px" />
+                  <Skeleton height="14px" width="80px" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     );
   }
@@ -60,8 +74,8 @@ export default function SpotifyWidget({ className = '' }: SpotifyWidgetProps) {
     return (
       <div className={`${styles.spotifyContainer} ${className}`}>
         <div className={styles.titleContainer}>
-          <Spotify className={styles.spotifyIcon} size={20} />
-          <h2 className={styles.title}>Recently played:</h2>
+          <Speaker className={styles.icon} size={20} />
+          <p className={styles.title}>Heavy in rotation:</p>
         </div>
         <div className={styles.errorState}>
           {error}
@@ -74,8 +88,8 @@ export default function SpotifyWidget({ className = '' }: SpotifyWidgetProps) {
   return (
     <div className={`${styles.spotifyContainer} ${className}`}>
       <div className={styles.titleContainer}>
-        <Spotify className={styles.spotifyIcon} size={20} />
-        <h2 className={styles.title}>Recently played:</h2>
+        <Speaker className={styles.icon} size={20} />
+        <p className={styles.title}>Heavy in rotation:</p>
       </div>
       <div className={styles.trackListContainer}>
         <div className={styles.trackList}>
