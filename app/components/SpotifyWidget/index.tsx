@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import Spotify from '@/app/icons/Spotify';
 import styles from './spotifywidget.module.css';
 import Speaker from '@/app/icons/Speaker';
@@ -57,10 +58,10 @@ export default function SpotifyWidget({ className = '' }: SpotifyWidgetProps) {
           <div className={styles.trackList}>
             {Array.from({ length: 3 }).map((_, index) => (
               <div key={index} className={styles.trackItem}>
-                <Skeleton height="48px" width="48px" />
+                <Skeleton height="48px" width="48px" style={{ borderRadius: '4px' }} />
                 <div className={styles.trackInfo}>
-                  <Skeleton height="16px" width="120px" />
-                  <Skeleton height="14px" width="80px" />
+                  <Skeleton height="16px" width="120px" style={{ borderRadius: '4px' }} />
+                  <Skeleton height="14px" width="80px" style={{ borderRadius: '4px' }} />
                 </div>
               </div>
             ))}
@@ -101,10 +102,12 @@ export default function SpotifyWidget({ className = '' }: SpotifyWidgetProps) {
               rel="noopener noreferrer"
               className={styles.trackItem}
             >
-              <img 
+              <Image 
                 src={track.albumImageUrl} 
                 alt={`${track.title} album cover`} 
                 className={styles.albumCover}
+                width={48}
+                height={48}
               />
               <div className={styles.trackInfo}>
                 <p className={styles.trackTitle}>{track.title}</p>

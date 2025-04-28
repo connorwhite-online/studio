@@ -8,6 +8,12 @@ const nextConfig = {
             port: '',
             pathname: '/storage/v1/object/public/media/**',
           },
+          {
+            protocol: 'https',
+            hostname: 'i.scdn.co',
+            port: '',
+            pathname: '/**',
+          },
         ],
       },
 };
