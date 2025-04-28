@@ -232,6 +232,33 @@ button {
   }
 }
 
+@keyframes pulseSatellite {
+  0% {
+    opacity: 0.3;
+    stroke-opacity: 0.3;
+  }
+  50% {
+    opacity: 0.9;
+    stroke-opacity: 0.9;
+  }
+  100% {
+    opacity: 0.3;
+    stroke-opacity: 0.3;
+  }
+}
+
+@keyframes pulseSpeaker {
+  0% {
+    transform: scale(0.8);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(0.8);
+  }
+}
+
 video::-webkit-media-controls {
   display: none;
 }

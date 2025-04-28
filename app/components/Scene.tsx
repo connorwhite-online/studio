@@ -10,11 +10,24 @@ import styles from './scene.module.css';
 // 3D amorphous cloud/sphere component
 const AmorphousSphere = () => {
   const meshRef = useRef<THREE.Mesh>(null);
+  const [isMobile, setIsMobile] = useState(false);
+  
+  // Check if device is mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobile = window.matchMedia("(max-width: 768px)").matches;
+      setIsMobile(mobile);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
   
   // Create a spring animation for the scale
   const props = useSpring({
     from: { scale: 0 },
-    to: { scale: 1.8 },
+    to: { scale: isMobile ? 1.2 : 1.8 },
     config: { mass: 4, tension: 110, friction: 22 }
   });
   

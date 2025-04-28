@@ -12,7 +12,8 @@
     border: 1px solid var(--alpha-300);
     -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0) scaleX(0.8);
+    opacity: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -26,11 +27,14 @@
     position: absolute;
     left: 8px;
     top: 8px;
-    height: calc(100% - 16px);
+    /* height: calc(100% - 16px); */
+    height: 40px;
     background-color: var(--alpha-300);
     border-radius: 25px;
     z-index: 0;
     transform: none;
+    opacity: 0;
+    visibility: hidden;
 }
 
 .navLink {
@@ -47,6 +51,12 @@
 
 .navLinkActive {
     color: var(--gray-1000);
+}
+
+/* Theme toggle wrapper - initial state is handled in JavaScript */
+.themeToggleWrapper {
+    position: relative;
+    z-index: 1;
 }
 
 @media screen and (min-width: 768px) {
