@@ -117,13 +117,13 @@ export default function Info() {
                 A design engineer obsessed with simplifying complex products and making their visual elements move beautifully.
                 <br />
                 <br />
-                I&#8217;m currently building the most fun B2B tool on the internet for community engagement platform <a href="https://www.tyb.xyz/" target="_blank" rel="noopener noreferrer" className={styles.inlineLink}>Try Your Best</a>.
+                I&#39;m currently building the most fun B2B tool on the internet for community engagement platform <a href="https://www.tyb.xyz/" target="_blank" rel="noopener noreferrer" className={styles.inlineLink}>Try Your Best</a>.
                 <br />
                 <br />
                 My work ranges from system design and implementation, to experiments with real-time 3D rendering and machine learning integration.
                 <br />
                 <br />
-                I&#8217;m available for select projects that make me excited to stare at a computer even longer than I already do. If you&#8217;d like to talk about a project, let's connect!
+                I&#39;m available for select projects that make me excited to stare at a computer even longer than I already do. If you&#39;d like to talk about a project, let&#39;s connect!
                 </p>
                 </section>
             </div>
