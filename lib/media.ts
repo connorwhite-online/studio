@@ -18,21 +18,26 @@ export function getLocalMedia(maxResults: number = 10): MediaItem[] {
   const mediaItems: MediaItem[] = [
     {
       id: '1',
+      videoUrl: '/media/tyb-loader.mp4',
+      title: 'Loading State'
+    },
+    {
+      id: '2',
       videoUrl: '/media/manipulate.mov',
       title: 'Hand-Tracking'
     },
     {
-      id: '2',
+      id: '3',
       videoUrl: '/media/sqft.mp4',
       title: 'Cursor-Tracking'
     },
     {
-      id: '3',
+      id: '4',
       videoUrl: '/media/webgl-gallery.mov',
       title: 'WebGL Gallery'
     },
     {
-      id: '4',
+      id: '5',
       videoUrl: '/media/tyb-sidenav.mp4',
       title: 'Side Nav'
     }
