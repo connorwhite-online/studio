@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState, useRef } from 'react';
-import styles from './interactions.module.css';
+import styles from './VideoWrapper.module.css';
 import { MediaItem } from '@/lib/media';
 
 // Loading indicator component

@@ -1,0 +1,74 @@
+.videoGrid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.videoCard {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    border: 1px solid var(--gray-300);
+    background-color: var(--alpha-100-light);
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+    transform: translate3d(0, 0, 0);
+    height: fit-content;
+    align-self: start;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.skeleton {
+    position: relative;
+}
+
+.videoSkeleton {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 24px;
+    background: linear-gradient(90deg, 
+        var(--alpha-50-light) 25%, 
+        var(--alpha-100-light) 50%, 
+        var(--alpha-50-light) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+}
+
+.dateSkeleton {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    width: 80px;
+    height: 20px;
+    border-radius: 12px;
+    background: linear-gradient(90deg, 
+        var(--alpha-200) 25%, 
+        var(--alpha-300) 50%, 
+        var(--alpha-200) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+@media screen and (min-width: 640px) {
+    .videoGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .videoGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+} 

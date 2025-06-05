@@ -1,8 +1,6 @@
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { ThemeProvider } from 'next-themes'
 import type { Metadata } from "next";
-import Menu from "./components/menu";
-import Scene from "./components/Scene";
 import "./globals.css";
 import '@radix-ui/themes/styles.css';
 
@@ -29,8 +27,6 @@ export default function RootLayout({
             system: "system"
           }}
         >
-          <Scene />
-          <Menu />
           {children}
         </ThemeProvider>
       </body>

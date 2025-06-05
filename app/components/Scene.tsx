@@ -27,7 +27,7 @@ const AmorphousSphere = () => {
   // Create a spring animation for the scale
   const props = useSpring({
     from: { scale: 0 },
-    to: { scale: isMobile ? 1.2 : 1.8 },
+    to: { scale: isMobile ? 0.6 : 1.5 },
     config: { mass: 4, tension: 110, friction: 22 }
   });
   
@@ -41,7 +41,7 @@ const AmorphousSphere = () => {
   
   return (
     <a.group scale={props.scale}>
-      <Icosahedron args={[1.2, 16]} ref={meshRef}>
+      <Icosahedron args={[0.8, 16]} ref={meshRef}>
         <MeshDistortMaterial
           color="#ffffff"
           attach="material"
@@ -71,7 +71,7 @@ const Scene: React.FC = () => {
   return (
     <div className={styles.sceneContainer}>
      {visible && (
-        <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
+        <Canvas camera={{ position: [0, 0, 4], fov: 45 }}>
           <ambientLight intensity={0.5} />
           <pointLight position={[10, 10, 10]} intensity={1} />
           <AmorphousSphere />

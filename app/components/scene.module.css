@@ -1,11 +1,7 @@
 .sceneContainer {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100vw;
-  height: 100vh;
+  position: relative;
+  width: 100%;
+  height: 200px;
   z-index: 1;
   pointer-events: none;
   overflow: hidden;
@@ -34,8 +30,8 @@
 }
 
 .fallbackSphere {
-  width: 300px;
-  height: 300px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
   background: radial-gradient(circle at 30% 30%, red, blue);
   animation: rotate 8s infinite linear;
@@ -69,10 +65,10 @@
 }
 
 .basicElement {
-  width: 400px;
-  height: 400px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
-  background: rgba(70, 70, 70, 0.5); /* More visible */
+  background: rgba(70, 70, 70, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -85,4 +81,20 @@
   border-radius: 50%;
   background: radial-gradient(circle at 30% 30%, #ffffff, #aaaaaa);
   box-shadow: 0 0 40px rgba(255, 255, 255, 0.8);
+}
+
+@media screen and (min-width: 768px) {
+  .sceneContainer {
+    height: 240px;
+  }
+  
+  .fallbackSphere {
+    width: 180px;
+    height: 180px;
+  }
+  
+  .basicElement {
+    width: 240px;
+    height: 240px;
+  }
 } 

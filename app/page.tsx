@@ -1,6 +1,9 @@
 'use client';
 import styles from "./page.module.css";
 import Time from './components/Time';
+import Scene from './components/Scene';
+import InteractionsSection from './components/InteractionsSection';
+import InfoSection from './components/InfoSection';
 
 export default function Home() {
   const titleText = "Connor is a software designer and engineer, interested mostly in interaction design, both experimental and practical.";
@@ -9,25 +12,41 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <div className={styles.container}>
-        <h2 className={styles.title}>
-          {words.map((word, index) => (
-            <span
-              key={index}
-              style={{
-                display: 'inline-block',
-                marginRight: '0.25em',
-                opacity: 0,
-                filter: 'blur(10px)',
-                animation: `fadeInBlur 0.8s forwards ease-out`,
-                animationDelay: `${index * 0.05}s`
-              }}
-            >
-              {word}
-            </span>
-          ))}
-        </h2>
+        {/* Scene Section */}
+        <section className={styles.sceneSection}>
+          <Scene />
+        </section>
         
-        <Time showIcon={true} className={styles.timeContainer} />
+        {/* Bio Section */}
+        <section className={styles.bioSection}>
+          <h2 className={styles.title}>
+            {words.map((word, index) => (
+              <span
+                key={index}
+                style={{
+                  display: 'inline-block',
+                  marginRight: '0.25em',
+                  opacity: 0,
+                  filter: 'blur(10px)',
+                  animation: `fadeInBlur 0.8s forwards ease-out`,
+                  animationDelay: `${index * 0.05}s`
+                }}
+              >
+                {word}
+              </span>
+            ))}
+          </h2>
+        </section>
+        
+        {/* Interactions Section */}
+        <section className={styles.section}>
+          <InteractionsSection />
+        </section>
+        
+        {/* Info Section */}
+        <section className={styles.section}>
+          <InfoSection />
+        </section>
       </div>
     </main>
   );

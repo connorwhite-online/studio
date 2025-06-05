@@ -2,12 +2,12 @@
 import React, { useRef, useEffect, useState } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import styles from './info.module.css';
+import styles from './InfoSection.module.css';
 import Time from '@/app/components/Time';
 import SpotifyWidget from '@/app/components/SpotifyWidget';
 import clsx from 'clsx';
 
-export default function Info() {
+export default function InfoSection() {
     const [status, setStatus] = useState<string>('');
     const infoRef = useRef<HTMLDivElement>(null);
     const infoTL = useRef<gsap.core.Timeline>();
@@ -53,7 +53,6 @@ export default function Info() {
         infoTL.current = gsap.timeline()
         .set(infoRef.current, {
             autoAlpha: 1,
-            // delay: 1,
         })
         .fromTo('p', {
             opacity: 0,
@@ -104,7 +103,7 @@ export default function Info() {
     };
 
     return (
-        <main ref={infoRef} className={styles.info}>
+        <div ref={infoRef} className={styles.info}>
             <div className={styles.column}>
                 <section className={clsx(styles.widget)}>
                     <Time showIcon={true} />
@@ -180,6 +179,6 @@ export default function Info() {
                         <SpotifyWidget />
                 </section>
             </div>
-        </main>
+        </div>
     );
-}
+} 

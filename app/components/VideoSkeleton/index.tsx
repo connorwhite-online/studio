@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './interactions.module.css';
+import styles from './VideoSkeleton.module.css';
 
 export default function VideoSkeleton() {
   // Create different numbers of skeleton items based on screen size
