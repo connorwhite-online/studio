@@ -1,0 +1,81 @@
+/* Gooey menu page container - clean background, centered menu */
+.gooeyMenuContainer {
+    width: 100vw;
+    height: 100vh;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .gooeyMenuContainer {
+        background: #000000;
+    }
+}
+
+/* Menu styling - centered and static position */
+.menu {
+    position: static;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    z-index: 99;
+}
+
+.nav {
+    background-color: var(--alpha-100);
+    border: 1px solid var(--alpha-300);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    transform: translate3d(0, 0, 0) scaleX(0.8);
+    opacity: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    border-radius: 50px;
+    gap: 10px;
+    position: relative;
+}
+
+.activeBackground {
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    height: 40px;
+    background-color: var(--alpha-300);
+    border-radius: 25px;
+    z-index: 0;
+    transform: none;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.navLink {
+    color: var(--gray-800);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 25px;
+    position: relative;
+    z-index: 1;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.navLinkActive {
+    color: var(--gray-1000);
+}
+
+.navLink:hover {
+    color: var(--gray-1000);
+    transition: all 0.3s ease-in-out;
+} 
