@@ -28,21 +28,41 @@ export default function HorizontalVideoWrapper({
   useEffect(() => {
     const fetchMediaItems = async () => {
       try {
-        const response = await fetch('/api/media');
+        console.log('HorizontalVideoWrapper: Fetching media from /api/media');
+        let response = await fetch('/api/media');
+        
+        console.log('HorizontalVideoWrapper: Response status:', response.status);
+        console.log('HorizontalVideoWrapper: Response headers:', Object.fromEntries(response.headers.entries()));
         
         if (!response.ok) {
           throw new Error(`Failed to fetch media: ${response.status}`);
         }
         
-        const data = await response.json();
+        let data = await response.json();
+        console.log('HorizontalVideoWrapper: API response data:', data);
+        
+        // If API returns empty results, try direct fetch from static file as fallback
+        if (!data.mediaItems || data.mediaItems.length === 0) {
+          console.log('HorizontalVideoWrapper: API returned empty results, trying direct fetch from /media/media.json');
+          response = await fetch('/media/media.json');
+          
+          if (!response.ok) {
+            throw new Error(`Failed to fetch media from static file: ${response.status}`);
+          }
+          
+          data = await response.json();
+          console.log('HorizontalVideoWrapper: Static file response data:', data);
+        }
         
         if (!data.mediaItems || data.mediaItems.length === 0) {
+          console.error('HorizontalVideoWrapper: No media items found in any source:', data);
           throw new Error('No videos found');
         }
         
+        console.log('HorizontalVideoWrapper: Successfully loaded', data.mediaItems.length, 'videos');
         setVideos(data.mediaItems);
       } catch (error) {
-        console.error('Error loading videos:', error);
+        console.error('HorizontalVideoWrapper: Error loading videos:', error);
         onError(error instanceof Error ? error.message : 'Failed to load videos');
       } finally {
         setIsLoading(false);

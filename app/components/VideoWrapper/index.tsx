@@ -52,24 +52,44 @@ export default function VideoWrapper({
   useEffect(() => {
     const fetchMediaItems = async () => {
       try {
+        console.log('VideoWrapper: Fetching media from /api/media');
         // Fetch media items from our new API endpoint
-        const response = await fetch('/api/media');
+        let response = await fetch('/api/media');
+        
+        console.log('VideoWrapper: Response status:', response.status);
+        console.log('VideoWrapper: Response headers:', Object.fromEntries(response.headers.entries()));
         
         if (!response.ok) {
           throw new Error(`Failed to fetch media: ${response.status}`);
         }
         
-        const data = await response.json();
+        let data = await response.json();
+        console.log('VideoWrapper: API response data:', data);
+        
+        // If API returns empty results, try direct fetch from static file as fallback
+        if (!data.mediaItems || data.mediaItems.length === 0) {
+          console.log('VideoWrapper: API returned empty results, trying direct fetch from /media/media.json');
+          response = await fetch('/media/media.json');
+          
+          if (!response.ok) {
+            throw new Error(`Failed to fetch media from static file: ${response.status}`);
+          }
+          
+          data = await response.json();
+          console.log('VideoWrapper: Static file response data:', data);
+        }
         
         if (!data.mediaItems || data.mediaItems.length === 0) {
+          console.error('VideoWrapper: No media items found in any source:', data);
           throw new Error('No videos found');
         }
         
+        console.log('VideoWrapper: Successfully loaded', data.mediaItems.length, 'videos');
         setVideos(data.mediaItems);
         // Initialize refs array with the correct length
         videoRefs.current = Array(data.mediaItems.length).fill(null);
       } catch (error) {
-        console.error('Error loading videos:', error);
+        console.error('VideoWrapper: Error loading videos:', error);
         onError(error instanceof Error ? error.message : 'Failed to load videos');
       } finally {
         setIsLoading(false);
