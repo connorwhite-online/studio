@@ -90,7 +90,7 @@ export default function SpotifyWidget({ className = '' }: SpotifyWidgetProps) {
     <div className={`${styles.spotifyContainer} ${className}`}>
       <div className={styles.header}>
         <Speaker className={styles.icon} size={20} />
-        <h2>In rotation</h2>
+        <h2>On rotation</h2>
       </div>
       <div className={styles.trackListContainer}>
         <div className={styles.trackList}>

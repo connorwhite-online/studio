@@ -90,8 +90,8 @@
   -webkit-backdrop-filter: blur(12px);
   color: var(--gray-100);
   padding: 8px 8px;
-  font-family: var(--medium);
-  font-size: 10px;
+  font-family: var(--regular);
+  font-size: 12px;
   text-align: left;
   border-radius: 0 12px 0 12px;
 }
