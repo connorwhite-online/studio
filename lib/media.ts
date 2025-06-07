@@ -34,7 +34,7 @@ export async function getLocalMedia(maxResults: number = 10): Promise<MediaItem[
  */
 export async function getMediaItemsFromFile(maxResults: number = 10): Promise<MediaItem[]> {
   try {
-    // Use fs to read the file directly to avoid import caching
+    // Try file system first, then fallback to HTTP request
     const fs = await import('fs');
     const path = await import('path');
     
@@ -66,7 +66,9 @@ export async function getMediaItemsFromFile(maxResults: number = 10): Promise<Me
         }
       }
       
-      return [];
+      // Fallback: try to fetch from public URL
+      console.log('Attempting fallback: fetching from public URL');
+      return await getMediaItemsFromPublicUrl(maxResults);
     }
     
     const fileContents = fs.readFileSync(filePath, 'utf8');
@@ -78,16 +80,58 @@ export async function getMediaItemsFromFile(maxResults: number = 10): Promise<Me
     }
     
     const items = (data.mediaItems as MediaItem[]).slice(0, maxResults);
-    console.log(`Successfully loaded ${items.length} media items`);
+    console.log(`Successfully loaded ${items.length} media items from file system`);
     
     return items;
   } catch (error) {
-    console.error('Error loading media items:', error);
+    console.error('Error loading media items from file system:', error);
     console.error('Error details:', {
       name: error instanceof Error ? error.name : 'Unknown',
       message: error instanceof Error ? error.message : 'Unknown error',
       stack: error instanceof Error ? error.stack : undefined
     });
+    
+    // Fallback: try to fetch from public URL
+    console.log('Attempting fallback after error: fetching from public URL');
+    return await getMediaItemsFromPublicUrl(maxResults);
+  }
+}
+
+/**
+ * Fallback function to get media items from public URL
+ * Used when file system access fails in production
+ */
+async function getMediaItemsFromPublicUrl(maxResults: number = 10): Promise<MediaItem[]> {
+  try {
+    // Determine the base URL - in production this should work with relative URLs
+    const baseUrl = process.env.VERCEL_URL 
+      ? `https://${process.env.VERCEL_URL}` 
+      : process.env.NODE_ENV === 'production' 
+        ? 'https://www.connorwhite.studio'
+        : 'http://localhost:3000';
+    
+    const response = await fetch(`${baseUrl}/media/media.json`, {
+      cache: 'no-store'
+    });
+    
+    if (!response.ok) {
+      console.error(`Failed to fetch media.json from URL: ${response.status}`);
+      return [];
+    }
+    
+    const data = await response.json();
+    
+    if (!data.mediaItems || !Array.isArray(data.mediaItems)) {
+      console.error('Invalid media.json structure from URL:', data);
+      return [];
+    }
+    
+    const items = (data.mediaItems as MediaItem[]).slice(0, maxResults);
+    console.log(`Successfully loaded ${items.length} media items from public URL`);
+    
+    return items;
+  } catch (error) {
+    console.error('Error loading media items from URL:', error);
     return [];
   }
 } 
