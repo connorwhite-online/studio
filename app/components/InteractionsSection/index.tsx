@@ -20,7 +20,6 @@ export default function InteractionsSection() {
   const [forcingRefresh, setForcingRefresh] = useState(false);
   const [refreshKey, setRefreshKey] = useState(0);
   const interactionsRef = useRef<HTMLDivElement>(null);
-  const interactionsTL = useRef<gsap.core.Timeline>();
 
   // Initial setup
   useEffect(() => {
@@ -34,34 +33,13 @@ export default function InteractionsSection() {
     setError(message);
   };
 
-  // Main content animation
+  // Set content visible (no animation)
   useGSAP(() => {
     if (!interactionsRef.current || loading) return;
     
-    setTimeout(() => {
-      const videoCards = document.querySelectorAll(`.${styles.videoCard}`);
-      
-      if (videoCards.length > 0) {
-        interactionsTL.current = gsap.timeline()
-          .set(interactionsRef.current, {
-            autoAlpha: 1,
-          })
-          .fromTo(videoCards, {
-            opacity: 0,
-            y: 30,
-          }, {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            stagger: 0.1,
-            ease: 'power2.out',
-          });
-      } else {
-        gsap.set(interactionsRef.current, {
-          autoAlpha: 1,
-        });
-      }
-    }, 50);
+    gsap.set(interactionsRef.current, {
+      autoAlpha: 1,
+    });
   }, { dependencies: [loading, refreshKey] });
 
   const handleRefreshClick = () => {

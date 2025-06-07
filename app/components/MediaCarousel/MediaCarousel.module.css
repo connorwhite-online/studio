@@ -1,0 +1,221 @@
+.carousel {
+  width: 100%;
+  position: relative;
+}
+
+.embla {
+  overflow: hidden;
+  border-radius: 12px;
+  height: 500px;
+}
+
+.emblaContainer {
+  display: flex;
+  gap: 0;
+  transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  padding: 0;
+}
+
+.emblaSlide {
+  flex: 0 0 100%;
+  min-width: 0;
+  max-height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.videoCard {
+  position: relative;
+  width: auto;
+  max-width: 600px;
+  max-height: 500px;
+  height: auto;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--gray-200);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.6s ease-out,
+              opacity 0.4s ease-in-out;
+  transform: scale(0.9);
+  opacity: 0.4;
+}
+
+.videoCardActive {
+  transform: scale(1);
+  opacity: 1;
+  transition: transform 0.5s ease-out 0.25s,
+              opacity 0.3s ease-in-out 0.15s;
+}
+
+.videoCard video {
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  object-fit: contain;
+  border-radius: 12px;
+  display: block;
+}
+
+.videoError {
+  color: var(--gray-600);
+  text-align: center;
+  padding: 20px;
+  font-family: var(--monoRegular);
+  font-size: 14px;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.videoErrorPath {
+  font-size: 12px;
+  opacity: 0.7;
+  margin-top: 8px;
+  word-break: break-all;
+}
+
+.videoTitle {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: var(--alpha-400);
+  color: var(--gray-100);
+  padding: 8px 8px;
+  font-family: var(--medium);
+  font-size: 10px;
+  text-align: left;
+  border-radius: 0 12px 0 0;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 12px;
+}
+
+.navButton {
+  padding: 8px;
+  border-radius: 8px;
+  border: none;
+  background: var(--gray-300);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+}
+
+.navButton:hover {
+  background: var(--gray-400);
+  transform: scale(1.01);
+}
+
+.navButton:active {
+  transform: scale(0.95);
+}
+
+.navIcon {
+  width: 8px;
+  height: 8px;
+  border: 2px solid var(--gray-800);
+  border-bottom: none;
+  border-right: none;
+  transform: rotate(-45deg);
+}
+
+.navButton:last-child .navIcon {
+  transform: rotate(135deg);
+}
+
+.indicators {
+  display: flex;
+  gap: 8px;
+  padding: 12px;
+  background: var(--alpha-200);
+  border-radius: 8px;
+}
+
+.indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 8px;
+  border: none;
+  background: var(--gray-500);
+  cursor: pointer;
+  transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
+              background-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transform: scale(1);
+  flex-shrink: 0;
+  display: block;
+  padding: 0;
+  margin: 0;
+  min-width: 8px;
+  min-height: 8px;
+  box-sizing: border-box;
+}
+
+.indicatorActive {
+  width: 16px;
+  height: 8px;
+  border-radius: 8px;
+  background: var(--dreamBlue);
+  transform: scale(1.05);
+}
+
+.indicator:hover:not(.indicatorActive) {
+  background: var(--gray-600);
+  transform: scale(1.15);
+}
+
+.indicator:active {
+  transform: scale(0.85);
+  transition: transform 0.1s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Smooth spring animations */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.emblaSlide {
+  animation: slideIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Responsive adjustments */
+@media screen and (min-width: 768px) {
+  .emblaContainer {
+    gap: 0;
+    padding: 0;
+  }
+  
+  .emblaSlide {
+    flex: 0 0 100%;
+  }
+  
+  .videoCard {
+    max-width: 800px;
+  }
+  
+  .controls {
+    margin-top: 16px;
+    gap: 4px;
+  }
+  
+} 

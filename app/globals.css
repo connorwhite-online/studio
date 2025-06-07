@@ -7,6 +7,30 @@ html, body {
   color: var(--color-main);
 }
 
+/* Progressive linear blur at the top of the screen */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1000;
+  pointer-events: none;
+  mask: linear-gradient(
+    to bottom,
+    black 0%,
+    transparent 100%
+  );
+  -webkit-mask: linear-gradient(
+    to bottom,
+    black 0%,
+    transparent 100%
+  );
+}
+
 @font-face {
   font-family: 'Montreal-Regular';
   src: url('fonts/PPNeueMontreal-Regular.woff2') format('woff2'); 

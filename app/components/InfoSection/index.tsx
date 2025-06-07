@@ -10,7 +10,6 @@ import clsx from 'clsx';
 export default function InfoSection() {
     const [status, setStatus] = useState<string>('');
     const infoRef = useRef<HTMLDivElement>(null);
-    const infoTL = useRef<gsap.core.Timeline>();
 
     useEffect(() => {
         const updateStatus = () => {
@@ -50,34 +49,9 @@ export default function InfoSection() {
 
     useGSAP(() => {
         if (!infoRef.current) return;
-        infoTL.current = gsap.timeline()
-        .set(infoRef.current, {
+        gsap.set(infoRef.current, {
             autoAlpha: 1,
-        })
-        .fromTo('p', {
-            opacity: 0,
-        }, {
-            opacity: 1,
-            duration: 1.5,
-            ease: 'power2.inOut',
-        })
-        .fromTo(`.${styles.widget}`, {
-            opacity: 0,
-        }, {
-            opacity: 1,
-            duration: 1,
-            ease: 'power2.inOut',
-        }, "<25%")
-        .fromTo('h2, h3', {
-            x: -25,
-            opacity: 0,
-        }, {
-            x: 0,
-            opacity: 1,
-            duration: 1,
-            ease: 'power4.out',
-            stagger: 0.1,
-        }, "<25%")
+        });
     }, {dependencies: []});
 
     const handleMouseEnter = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -85,8 +59,8 @@ export default function InfoSection() {
         if (h3Element) {
             gsap.to(h3Element, {
                 x: 10,
-                duration: 0.3,
-                ease: 'power2.out'
+                duration: 0.25,
+                ease: 'power4.in'
             });
         }
     };
@@ -96,8 +70,8 @@ export default function InfoSection() {
         if (h3Element) {
             gsap.to(h3Element, {
                 x: 0,
-                duration: 0.3,
-                ease: 'power2.out'
+                duration: 0.25,
+                ease: 'power4.in'
             });
         }
     };
@@ -113,12 +87,6 @@ export default function InfoSection() {
                 </section>
                 <section className={clsx(styles.widget)}>
                 <p className={styles.introCopy}>
-                A design engineer obsessed with simplifying complex products and making their visual elements move beautifully.
-                <br />
-                <br />
-                I&#39;m currently building the most fun B2B tool on the internet for community engagement platform <a href="https://www.tyb.xyz/" target="_blank" rel="noopener noreferrer" className={styles.inlineLink}>Try Your Best</a>.
-                <br />
-                <br />
                 My work ranges from system design and implementation, to experiments with real-time 3D rendering and machine learning integration.
                 <br />
                 <br />

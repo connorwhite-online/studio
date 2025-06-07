@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 import { getMediaItemsFromFile } from '@/lib/media';
 
-// Set revalidation time
-export const revalidate = 3600; // 1 hour
+// Set revalidation time (disabled for development)
+// export const revalidate = 3600; // 1 hour
 
 export async function GET(request: Request) {
   try {
@@ -25,7 +25,7 @@ export async function GET(request: Request) {
       count: mediaItems.length
     }, {
       headers: {
-        'Cache-Control': 'public, max-age=3600, s-maxage=3600'
+        'Cache-Control': 'no-store, no-cache, must-revalidate'
       }
     });
   } catch (error) {

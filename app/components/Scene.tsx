@@ -27,7 +27,7 @@ const AmorphousSphere = () => {
   // Create a spring animation for the scale
   const props = useSpring({
     from: { scale: 0 },
-    to: { scale: isMobile ? 0.6 : 1.5 },
+    to: { scale: 1.5 },
     config: { mass: 4, tension: 110, friction: 22 }
   });
   
@@ -58,25 +58,13 @@ const AmorphousSphere = () => {
 
 // Main Scene component
 const Scene: React.FC = () => {
-  const [mounted, setMounted] = useState(false);
-  const [visible, setVisible] = useState(true);
-  
-  useEffect(() => {
-    setMounted(true);
-    console.log("3D Scene component mounted");
-  }, []);
-  
-  if (!mounted) return null;
-  
   return (
     <div className={styles.sceneContainer}>
-     {visible && (
-        <Canvas camera={{ position: [0, 0, 4], fov: 45 }}>
-          <ambientLight intensity={0.5} />
-          <pointLight position={[10, 10, 10]} intensity={1} />
-          <AmorphousSphere />
-        </Canvas>
-      )}
+      <Canvas camera={{ position: [0, 0, 4], fov: 45 }}>
+        <ambientLight intensity={0.5} />
+        <pointLight position={[10, 10, 10]} intensity={1} />
+        <AmorphousSphere />
+      </Canvas>
     </div>
   );
 };

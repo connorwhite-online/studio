@@ -4,6 +4,7 @@ import { useTheme } from "next-themes";
 import styles from "./themetoggle.module.css";
 import Sun from "@/app/icons/Sun";
 import Moon from "@/app/icons/Moon";
+import Settings from "@/app/icons/Settings";
 import gsap from "gsap";
 
 export default function ThemeToggle() {
@@ -22,7 +23,15 @@ export default function ThemeToggle() {
         if (isAnimating.current) return;
         isAnimating.current = true;
         
-        const newTheme = theme === 'light' ? 'dark' : 'light';
+        // Cycle through: system -> light -> dark -> system
+        let newTheme: string;
+        if (theme === 'system') {
+            newTheme = 'light';
+        } else if (theme === 'light') {
+            newTheme = 'dark';
+        } else {
+            newTheme = 'system';
+        }
 
         // Create a timeline for synchronized animations
         const tl = gsap.timeline({
@@ -57,27 +66,47 @@ export default function ThemeToggle() {
           });
     };
 
+    // Get display text and icon for current theme
+    const getThemeDisplay = () => {
+        switch (theme) {
+            case 'light':
+                return {
+                    text: 'Light Theme',
+                    icon: <Sun size={16} />
+                };
+            case 'dark':
+                return {
+                    text: 'Dark Theme',
+                    icon: <Moon size={16} />
+                };
+            case 'system':
+            default:
+                return {
+                    text: 'System Theme',
+                    icon: <Settings size={16} />
+                };
+        }
+    };
+
     // Prevent hydration mismatch by not rendering until mounted
     if (!mounted) {
         return null;
     }
+
+    const { text, icon } = getThemeDisplay();
 
     return (
         <button 
             ref={containerRef}
             onClick={handleThemeChange}
             className={styles.themeToggle}
-            aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} theme`}
+            aria-label={`Current theme: ${text}. Click to change theme`}
         >
             <div ref={iconRef} className={styles.iconWrapper}>
-                {theme === 'light' ? (
-                    <Sun size={16} />
-                ) : (
-                    <Moon size={16} />
-                )}
+                {icon}
             </div>
             <span ref={textRef} className={styles.textWrapper}>
-                {theme === 'light' ? 'Light' : 'Dark'}
+                {text}
             </span>
         </button>
     );

@@ -19,6 +19,16 @@
       "id": "4",
       "videoUrl": "/media/tyb-sidenav.mp4",
       "title": "Side Nav"
+    },
+    {
+      "id": "5",
+      "videoUrl": "/media/tyb-loader.mp4",
+      "title": "Loading State"
+    },
+    {
+      "id": "6",
+      "videoUrl": "/media/gooey-blob-menu.mp4",
+      "title": "Gooey Nav"
     }
   ]
 } 

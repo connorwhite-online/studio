@@ -3,105 +3,6 @@
     position: relative;
 }
 
-.videoScroll {
-    display: flex;
-    gap: 1rem;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding: 0 0 1rem 0;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-}
-
-.videoScroll::-webkit-scrollbar {
-    height: 6px;
-}
-
-.videoScroll::-webkit-scrollbar-track {
-    background: var(--alpha-100);
-    border-radius: 3px;
-}
-
-.videoScroll::-webkit-scrollbar-thumb {
-    background: var(--gray-400);
-    border-radius: 3px;
-}
-
-.videoScroll::-webkit-scrollbar-thumb:hover {
-    background: var(--gray-600);
-}
-
-.videoCard {
-    position: relative;
-    overflow: hidden;
-    border-radius: 12px;
-    border: 1px solid var(--gray-300);
-    background-color: var(--alpha-100-light);
-    -webkit-backdrop-filter: blur(2px);
-    backdrop-filter: blur(2px);
-    transform: translate3d(0, 0, 0);
-    height: fit-content;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    flex-shrink: 0;
-    width: 280px;
-    min-width: 280px;
-}
-
-.videoCard video {
-    width: 100%;
-    height: auto;
-    border-radius: 12px;
-    display: block;
-    object-fit: contain;
-}
-
-.videoTitle {
-    position: absolute;
-    bottom: 8px;
-    left: 8px;
-    background-color: var(--gray-200);
-    color: var(--gray-1000);
-    padding: 6px 10px;
-    border-radius: 6px;
-    font-family: var(--regular);
-    font-size: 11px;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    max-width: 70%;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-}
-
-.videoError {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    aspect-ratio: 16/9;
-    background-color: rgba(0, 0, 0, 0.1);
-    color: var(--fg);
-    font-size: 12px;
-    border-radius: 12px;
-    padding: 10px;
-    text-align: center;
-}
-
-.videoError p {
-    margin: 0;
-    font-size: 12px;
-}
-
-.videoErrorPath {
-    font-family: var(--monoRegular);
-    font-size: 10px !important;
-    opacity: 0.7;
-    word-break: break-all;
-    max-width: 90%;
-    margin-top: 5px !important;
-}
-
 .loading {
     display: flex;
     justify-content: center;
@@ -114,7 +15,7 @@
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background-color: var(--fg);
+    background-color: var(--color-main);
     opacity: 0.3;
 }
 
@@ -130,16 +31,5 @@
     100% {
         opacity: 0.3;
         transform: scale(1);
-    }
-}
-
-@media screen and (min-width: 768px) {
-    .videoCard {
-        width: 320px;
-        min-width: 320px;
-    }
-    
-    .videoScroll {
-        gap: 1.25rem;
     }
 } 

@@ -4,11 +4,10 @@ import Time from './components/Time';
 import Scene from './components/Scene';
 import InteractionsSection from './components/InteractionsSection';
 import InfoSection from './components/InfoSection';
+import Bio from './components/Bio';
+import ThemeToggle from './components/ThemeToggle';
 
 export default function Home() {
-  const titleText = "Connor is a software designer and engineer, interested mostly in interaction design, both experimental and practical.";
-  const words = titleText.split(' ');
-
   return (
     <main className={styles.main}>
       <div className={styles.container}>
@@ -18,25 +17,7 @@ export default function Home() {
         </section>
         
         {/* Bio Section */}
-        <section className={styles.bioSection}>
-          <h2 className={styles.title}>
-            {words.map((word, index) => (
-              <span
-                key={index}
-                style={{
-                  display: 'inline-block',
-                  marginRight: '0.25em',
-                  opacity: 0,
-                  filter: 'blur(10px)',
-                  animation: `fadeInBlur 0.8s forwards ease-out`,
-                  animationDelay: `${index * 0.05}s`
-                }}
-              >
-                {word}
-              </span>
-            ))}
-          </h2>
-        </section>
+        <Bio />
         
         {/* Interactions Section */}
         <section className={styles.section}>
@@ -46,6 +27,11 @@ export default function Home() {
         {/* Info Section */}
         <section className={styles.section}>
           <InfoSection />
+        </section>
+        
+        {/* Theme Toggle Section */}
+        <section className={styles.themeSection}>
+          <ThemeToggle />
         </section>
       </div>
     </main>

@@ -5,45 +5,27 @@ export interface MediaItem {
 }
 
 /**
- * Gets a list of local media items from the codebase
+ * Gets a list of local media items from the API
  * @param maxResults Maximum number of items to return
- * @returns Array of media items
+ * @returns Promise resolving to array of media items
  */
-export function getLocalMedia(maxResults: number = 10): MediaItem[] {
-  // In a client component, we can't directly import JSON files or use fs module
-  // So this is a hardcoded version - in a real app, you might:
-  // 1. Create an API endpoint that reads this file for you
-  // 2. Use a data fetching library to load the JSON
-  
-  const mediaItems: MediaItem[] = [
-    {
-      id: '1',
-      videoUrl: '/media/tyb-loader.mp4',
-      title: 'Loading State'
-    },
-    {
-      id: '2',
-      videoUrl: '/media/manipulate.mov',
-      title: 'Hand-Tracking'
-    },
-    {
-      id: '3',
-      videoUrl: '/media/sqft.mp4',
-      title: 'Cursor-Tracking'
-    },
-    {
-      id: '4',
-      videoUrl: '/media/webgl-gallery.mov',
-      title: 'WebGL Gallery'
-    },
-    {
-      id: '5',
-      videoUrl: '/media/tyb-sidenav.mp4',
-      title: 'Side Nav'
+export async function getLocalMedia(maxResults: number = 10): Promise<MediaItem[]> {
+  try {
+    const response = await fetch(`/api/media?limit=${maxResults}`, {
+      cache: 'no-store' // Ensure fresh data
+    });
+    
+    if (!response.ok) {
+      throw new Error(`Failed to fetch media: ${response.status}`);
     }
-  ];
-
-  return mediaItems.slice(0, maxResults);
+    
+    const data = await response.json();
+    return data.mediaItems || [];
+  } catch (error) {
+    console.error('Error fetching media items:', error);
+    // Fallback to empty array if API fails
+    return [];
+  }
 }
 
 /**
@@ -52,8 +34,14 @@ export function getLocalMedia(maxResults: number = 10): MediaItem[] {
  */
 export async function getMediaItemsFromFile(maxResults: number = 10): Promise<MediaItem[]> {
   try {
-    // For server components or API routes, you can directly import the JSON
-    const data = await import('../public/media/media.json');
+    // Use fs to read the file directly to avoid import caching
+    const fs = await import('fs');
+    const path = await import('path');
+    
+    const filePath = path.join(process.cwd(), 'public', 'media', 'media.json');
+    const fileContents = fs.readFileSync(filePath, 'utf8');
+    const data = JSON.parse(fileContents);
+    
     return (data.mediaItems as MediaItem[]).slice(0, maxResults);
   } catch (error) {
     console.error('Error loading media items:', error);
