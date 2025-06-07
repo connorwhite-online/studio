@@ -3,6 +3,7 @@ import { ThemeProvider } from 'next-themes'
 import type { Metadata } from "next";
 import "./globals.css";
 import '@radix-ui/themes/styles.css';
+import BlurEntryAnimation from './components/BlurEntryAnimation';
 
 export const metadata: Metadata = {
   title: "Connor White",
@@ -23,11 +24,11 @@ export default function RootLayout({
           enableSystem={true}
           value={{
             light: "light",
-            dark: "dark",
-            system: "system"
+            dark: "dark"
           }}
         >
           {children}
+          <BlurEntryAnimation />
         </ThemeProvider>
       </body>
       <GoogleAnalytics gaId="G-250C59M66F" />

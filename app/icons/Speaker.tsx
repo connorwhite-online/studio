@@ -1,31 +1,21 @@
-interface IconProps {
-    className?: string;
-    size?: number;
-  }
-  
-  export default function Speaker({ className = '', size = 24 }: IconProps) {
-    return (
-      <svg
-        width={size}
-        height={size}
-        viewBox="0 0 24 24"
-        fill="currentColor"
-        className={className}
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path d="M10 6C9.44772 6 9 6.44772 9 7C9 7.55228 9.44772 8 10 8V6ZM14 8C14.5523 8 15 7.55228 15 7C15 6.44772 14.5523 6 14 6V8ZM7 3V4H17V3V2H7V3ZM19 5H18V19H19H20V5H19ZM17 21V20H7V21V22H17V21ZM5 19H6V5H5H4V19H5ZM7 21V20C6.44772 20 6 19.5523 6 19H5H4C4 20.6569 5.34315 22 7 22V21ZM19 19H18C18 19.5523 17.5523 20 17 20V21V22C18.6569 22 20 20.6569 20 19H19ZM17 3V4C17.5523 4 18 4.44772 18 5H19H20C20 3.34315 18.6569 2 17 2V3ZM7 3V2C5.34315 2 4 3.34315 4 5H5H6C6 4.44772 6.44772 4 7 4V3Z" />
-        
-        {/* Sound waves with pulsing animation */}
-        <path 
-          d="M15 14H14C14 15.1046 13.1046 16 12 16V17V18C14.2091 18 16 16.2091 16 14H15ZM12 17V16C10.8954 16 10 15.1046 10 14H9H8C8 16.2091 9.79086 18 12 18V17ZM9 14H10C10 12.8954 10.8954 12 12 12V11V10C9.79086 10 8 11.7909 8 14H9ZM12 11V12C13.1046 12 14 12.8954 14 14H15H16C16 11.7909 14.2091 10 12 10V11Z" 
-          className="speaker-wave"
-          style={{ 
-            animation: 'pulseSpeaker 1s infinite ease-in-out',
-            transformOrigin: 'center'
-          }}
-        />
-        
-        <path d="M10 7V8H14V7V6H10V7Z" />
-      </svg>
-    );
-  }
+import React from 'react';
+
+interface SpeakerIconProps {
+  size?: number;
+  className?: string;
+}
+
+export default function Speaker({ size = 24, className = '' }: SpeakerIconProps) {
+  return (
+    <svg 
+      xmlns="http://www.w3.org/2000/svg" 
+      width={size} 
+      height={size} 
+      viewBox="0 0 24 24" 
+      fill="currentColor"  
+      className={className}
+    >
+      <path d="M10 6C9.44772 6 9 6.44772 9 7C9 7.55228 9.44772 8 10 8V6ZM14 8C14.5523 8 15 7.55228 15 7C15 6.44772 14.5523 6 14 6V8ZM7 3V4H17V3V2H7V3ZM19 5H18V19H19H20V5H19ZM17 21V20H7V21V22H17V21ZM5 19H6V5H5H4V19H5ZM7 21V20C6.44772 20 6 19.5523 6 19H5H4C4 20.6569 5.34315 22 7 22V21ZM19 19H18C18 19.5523 17.5523 20 17 20V21V22C18.6569 22 20 20.6569 20 19H19ZM17 3V4C17.5523 4 18 4.44772 18 5H19H20C20 3.34315 18.6569 2 17 2V3ZM7 3V2C5.34315 2 4 3.34315 4 5H5H6C6 4.44772 6.44772 4 7 4V3ZM15 14H14C14 15.1046 13.1046 16 12 16V17V18C14.2091 18 16 16.2091 16 14H15ZM12 17V16C10.8954 16 10 15.1046 10 14H9H8C8 16.2091 9.79086 18 12 18V17ZM9 14H10C10 12.8954 10.8954 12 12 12V11V10C9.79086 10 8 11.7909 8 14H9ZM12 11V12C13.1046 12 14 12.8954 14 14H15H16C16 11.7909 14.2091 10 12 10V11ZM10 7V8H14V7V6H10V7Z" />
+    </svg>
+  );
+}

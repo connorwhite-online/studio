@@ -7,18 +7,6 @@
   margin-bottom: 40px;
 }
 
-.name {
-  font-family: var(--medium);
-  font-size: 20px;
-  color: var(--gray-1000);
-}
-
-.introduction {
-  font-family: var(--regular);
-  font-size: 16px;
-  color: var(--gray-1000);
-}
-
 .inlineLink {
   color: var(--dreamBlue);
   font-family: var(--bold);

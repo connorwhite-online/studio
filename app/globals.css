@@ -15,8 +15,8 @@ body::before {
   left: 0;
   right: 0;
   height: 80px;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   z-index: 1000;
   pointer-events: none;
   mask: linear-gradient(
@@ -185,32 +185,20 @@ body::before {
   text-wrap: nowrap;
   position: absolute;
 }
-
-.introCopy, h1.loader {
-  font-family: var(--monoLight);
-  font-size: 24px;
-}
 hr {
   border: 0.5px solid var(--gray-1000);
   margin: 0;
-
 }
 h1 {
-  font-family: var(--regular);
-  font-size: 32px;
+  font-family: var(--medium);
+  font-size: 20px;
   color: var(--gray-1000);
   margin: 0;
 }
 h2 {
   font-family: var(--light);
-  font-size: 22px;
-  color: var(--gray-1000);
-  margin: 0;
-}
-h3 {
-  font-family: var(--monoRegular);
-  font-size: 12px;
-  color: var(--gray-1000);
+  font-size: 18px;
+  color: var(--gray-900);
   margin: 0;
 }
 ul {
@@ -222,27 +210,23 @@ li {
   display: block;
   padding: 0;
   margin: 0;
-  clip-path: inset(0);
 }
 a {
   text-decoration: none;
   color: var(--gray-1000);
+  position: relative;
 }
 p {
   font-family: var(--regular);
-  font-size: var(--copy);
+  font-size: 16px;
   color: var(--gray-1000);
   margin: 0;
 }
-button {
+small {
   font-family: var(--regular);
-    font-size: var(--copy);
-    text-decoration: none;
-    color: var(--gray-1000);
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    padding: 5px 10px;
+  font-size: 14px;
+  color: var(--gray-900);
+  margin: 0;
 }
 
 @keyframes fadeInBlur {
@@ -293,8 +277,5 @@ video::-webkit-media-controls {
     width: auto;
     text-wrap: nowrap;
     align-content: center;
-  }
-  h2 {
-    font-size: 24px;
   }
 }

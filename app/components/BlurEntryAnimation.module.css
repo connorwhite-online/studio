@@ -1,0 +1,40 @@
+.blurOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--alpha-100);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  z-index: 9999;
+  transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.blurOverlay.dissolve {
+  opacity: 0;
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+}
+
+/* Dark theme support */
+@media (prefers-color-scheme: dark) {
+  .blurOverlay {
+    background: rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Ensure blur works on different browsers */
+@supports (backdrop-filter: blur(40px)) {
+  .blurOverlay {
+    backdrop-filter: blur(40px);
+  }
+}
+
+@supports (-webkit-backdrop-filter: blur(40px)) {
+  .blurOverlay {
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+  }
+} 

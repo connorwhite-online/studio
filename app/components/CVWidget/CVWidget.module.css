@@ -1,0 +1,35 @@
+.cvContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon {
+  color: var(--gray-900);
+}
+
+.cvItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cvItemOrg {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.introCopy {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--fg);
+  margin: 0;
+} 

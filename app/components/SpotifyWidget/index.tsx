@@ -50,9 +50,9 @@ export default function SpotifyWidget({ className = '' }: SpotifyWidgetProps) {
   if (loading) {
     return (
       <div className={`${styles.spotifyContainer} ${className}`}>
-        <div className={styles.titleContainer}>
+        <div className={styles.header}>
           <Speaker className={styles.icon} size={20} />
-          <p className={styles.title}>Heavy in rotation:</p>
+          <h2>Heavy in rotation</h2>
         </div>
         <div className={styles.trackListContainer}>
           <div className={styles.trackList}>
@@ -74,9 +74,9 @@ export default function SpotifyWidget({ className = '' }: SpotifyWidgetProps) {
   if (error) {
     return (
       <div className={`${styles.spotifyContainer} ${className}`}>
-        <div className={styles.titleContainer}>
+        <div className={styles.header}>
           <Speaker className={styles.icon} size={20} />
-          <p className={styles.title}>Heavy in rotation:</p>
+          <h2>Heavy in rotation</h2>
         </div>
         <div className={styles.errorState}>
           {error}
@@ -88,9 +88,9 @@ export default function SpotifyWidget({ className = '' }: SpotifyWidgetProps) {
 
   return (
     <div className={`${styles.spotifyContainer} ${className}`}>
-      <div className={styles.titleContainer}>
+      <div className={styles.header}>
         <Speaker className={styles.icon} size={20} />
-        <p className={styles.title}>Heavy in rotation:</p>
+        <h2>In rotation</h2>
       </div>
       <div className={styles.trackListContainer}>
         <div className={styles.trackList}>
@@ -111,7 +111,7 @@ export default function SpotifyWidget({ className = '' }: SpotifyWidgetProps) {
               />
               <div className={styles.trackInfo}>
                 <p className={styles.trackTitle}>{track.title}</p>
-                <p className={styles.trackArtist}>{track.artist}</p>
+                <small>{track.artist}</small>
               </div>
             </a>
           ))}

@@ -4,7 +4,6 @@ import { useTheme } from "next-themes";
 import styles from "./themetoggle.module.css";
 import Sun from "@/app/icons/Sun";
 import Moon from "@/app/icons/Moon";
-import Settings from "@/app/icons/Settings";
 import gsap from "gsap";
 
 export default function ThemeToggle() {
@@ -17,21 +16,20 @@ export default function ThemeToggle() {
 
     useEffect(() => {
         setMounted(true);
-    }, []);
+        
+        // If theme is system, detect the system preference and set it explicitly
+        if (theme === 'system') {
+            const systemPreference = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            setTheme(systemPreference);
+        }
+    }, [theme, setTheme]);
 
     const handleThemeChange = () => {
         if (isAnimating.current) return;
         isAnimating.current = true;
         
-        // Cycle through: system -> light -> dark -> system
-        let newTheme: string;
-        if (theme === 'system') {
-            newTheme = 'light';
-        } else if (theme === 'light') {
-            newTheme = 'dark';
-        } else {
-            newTheme = 'system';
-        }
+        // Cycle only between light and dark
+        const newTheme = theme === 'light' ? 'dark' : 'light';
 
         // Create a timeline for synchronized animations
         const tl = gsap.timeline({
@@ -68,23 +66,16 @@ export default function ThemeToggle() {
 
     // Get display text and icon for current theme
     const getThemeDisplay = () => {
-        switch (theme) {
-            case 'light':
-                return {
-                    text: 'Light Theme',
-                    icon: <Sun size={16} />
-                };
-            case 'dark':
-                return {
-                    text: 'Dark Theme',
-                    icon: <Moon size={16} />
-                };
-            case 'system':
-            default:
-                return {
-                    text: 'System Theme',
-                    icon: <Settings size={16} />
-                };
+        if (theme === 'light') {
+            return {
+                text: 'Light Theme',
+                icon: <Sun size={16} />
+            };
+        } else {
+            return {
+                text: 'Dark Theme',
+                icon: <Moon size={16} />
+            };
         }
     };
 
