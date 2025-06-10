@@ -10,25 +10,29 @@ import styles from './scene.module.css';
 // 3D amorphous cloud/sphere component
 const AmorphousSphere = () => {
   const meshRef = useRef<THREE.Mesh>(null);
-  const [isMobile, setIsMobile] = useState(false);
+  const materialRef = useRef<any>(null);
+  const [isPressed, setIsPressed] = useState(false);
   
-  // Check if device is mobile
-  useEffect(() => {
-    const checkMobile = () => {
-      const mobile = window.matchMedia("(max-width: 768px)").matches;
-      setIsMobile(mobile);
-    };
-    
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-  
-  // Create a spring animation for the scale
-  const props = useSpring({
+  // Create a spring animation for the initial scale
+  const initialProps = useSpring({
     from: { scale: 0 },
     to: { scale: 1.5 },
     config: { mass: 4, tension: 110, friction: 22 }
+  });
+  
+  // Create a spring animation for the interaction recoil effect
+  const interactionProps = useSpring({
+    scale: isPressed ? 0.8 : 1.0, // Scale down when pressed
+    distort: isPressed ? 0.8 : 0.4, // Increase distortion when pressed
+    speed: isPressed ? 3 : 1, // Faster animation when pressed
+    colorR: isPressed ? 1.0 : 1.0, // Red component
+    colorG: isPressed ? 0.6 : 1.0, // Green component (reduce when pressed)
+    colorB: isPressed ? 0.6 : 1.0, // Blue component (reduce when pressed)
+    config: { 
+      mass: 1, 
+      tension: 300, 
+      friction: 10 
+    }
   });
   
   // Animation with useFrame hook
@@ -37,21 +41,49 @@ const AmorphousSphere = () => {
       meshRef.current.rotation.x = state.clock.getElapsedTime() * 0.05;
       meshRef.current.rotation.y = state.clock.getElapsedTime() * 0.1;
     }
+    
+    // Update material properties based on spring values
+    if (materialRef.current) {
+      materialRef.current.distort = interactionProps.distort.get();
+      materialRef.current.speed = interactionProps.speed.get();
+      materialRef.current.color.setRGB(
+        interactionProps.colorR.get(),
+        interactionProps.colorG.get(),
+        interactionProps.colorB.get()
+      );
+    }
   });
+
+  const handlePointerDown = () => {
+    setIsPressed(true);
+  };
+
+  const handlePointerUp = () => {
+    setIsPressed(false);
+  };
   
   return (
-    <a.group scale={props.scale}>
-      <Icosahedron args={[0.8, 16]} ref={meshRef}>
-        <MeshDistortMaterial
-          color="#ffffff"
-          attach="material"
-          distort={0.4} // Distortion amount
-          speed={1} // Animation speed
-          wireframe={true}
-          emissive="#4080ff"
-          emissiveIntensity={0.4}
-        />
-      </Icosahedron>
+    <a.group scale={initialProps.scale}>
+      <a.group scale={interactionProps.scale}>
+        <Icosahedron 
+          args={[0.8, 16]} 
+          ref={meshRef}
+          onPointerDown={handlePointerDown}
+          onPointerUp={handlePointerUp}
+          onPointerLeave={handlePointerUp} // Reset if pointer leaves while pressed
+        >
+          <MeshDistortMaterial
+            ref={materialRef}
+            color="#ffffff"
+            attach="material"
+            distort={0.4}
+            speed={1}
+            wireframe={true}
+            emissive="#4080ff"
+            emissiveIntensity={0.4}
+          />
+        </Icosahedron>
+      </a.group>
     </a.group>
   );
 };

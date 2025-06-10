@@ -13,7 +13,7 @@ export default function CVWidget({ className = '' }: CVWidgetProps) {
     <div className={`${styles.cvContainer} ${className}`}>
         <div className={styles.header}>
           <Pencil className={styles.icon} size={20} />
-          <h2>Past experience</h2>
+          <h2>Experience</h2>
         </div>
         <div className={styles.cvItem}>
             <div className={styles.cvItemOrg}>

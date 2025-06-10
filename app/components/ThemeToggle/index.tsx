@@ -24,6 +24,34 @@ export default function ThemeToggle() {
         }
     }, [theme, setTheme]);
 
+    // Function to force iOS Safari overscroll background update
+    const forceIOSBackgroundUpdate = () => {
+        // Check if it's iOS Safari
+        const isIOSSafari = /iPad|iPhone|iPod/.test(navigator.userAgent) && 
+                           /Safari/.test(navigator.userAgent) && 
+                           !/CriOS|FxiOS|OPiOS|mercury/.test(navigator.userAgent);
+        
+        if (isIOSSafari) {
+            // Force a repaint by briefly changing the html element's transform
+            const html = document.documentElement;
+            html.style.transform = 'translateZ(0)';
+            
+            // Use requestAnimationFrame to ensure the change takes effect
+            requestAnimationFrame(() => {
+                html.style.transform = '';
+                
+                // Additional force repaint method for iOS Safari overscroll
+                const body = document.body;
+                const originalOverflow = body.style.overflow;
+                body.style.overflow = 'hidden';
+                
+                requestAnimationFrame(() => {
+                    body.style.overflow = originalOverflow;
+                });
+            });
+        }
+    };
+
     const handleThemeChange = () => {
         if (isAnimating.current) return;
         isAnimating.current = true;
@@ -35,6 +63,8 @@ export default function ThemeToggle() {
         const tl = gsap.timeline({
             onComplete: () => {
                 isAnimating.current = false;
+                // Force iOS Safari to update overscroll background after theme change
+                setTimeout(forceIOSBackgroundUpdate, 100);
             }
         });
 
@@ -53,6 +83,8 @@ export default function ThemeToggle() {
               ease: "power4.out",
               onComplete: () => {
                 setTheme(newTheme);
+                // Also trigger the background update immediately after theme change
+                setTimeout(forceIOSBackgroundUpdate, 50);
             }
           }, 0)
           .set(textRef.current, { y: 5 })
@@ -68,12 +100,12 @@ export default function ThemeToggle() {
     const getThemeDisplay = () => {
         if (theme === 'light') {
             return {
-                text: 'Light Theme',
+                text: 'Light',
                 icon: <Sun size={16} />
             };
         } else {
             return {
-                text: 'Dark Theme',
+                text: 'Dark',
                 icon: <Moon size={16} />
             };
         }

@@ -30,6 +30,6 @@
 .textWrapper {
     display: inline-block;
     position: relative;
-    min-width: 80px;
+    /* min-width: 80px; */
     text-align: left;
 }

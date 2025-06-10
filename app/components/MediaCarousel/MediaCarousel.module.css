@@ -64,7 +64,7 @@
   color: var(--gray-600);
   text-align: center;
   padding: 20px;
-  font-family: var(--monoRegular);
+  font-family: var(--regular);
   font-size: 14px;
   width: 100%;
   height: 200px;
@@ -108,7 +108,7 @@
   padding: 8px;
   border-radius: 8px;
   border: none;
-  background: var(--gray-200);
+  background: var(--gray-200) !important;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -118,7 +118,7 @@
 }
 
 .navButton:hover {
-  background: var(--gray-400);
+  background: var(--gray-400) !important;
   transform: scale(1.01);
 }
 
@@ -129,7 +129,7 @@
 .navIcon {
   width: 8px;
   height: 8px;
-  border: 2px solid var(--gray-800);
+  border: 2px solid var(--gray-800) !important;
   border-bottom: none;
   border-right: none;
   transform: rotate(-45deg);
@@ -143,7 +143,7 @@
   display: flex;
   gap: 8px;
   padding: 12px;
-  background: var(--gray-200);
+  background: var(--gray-200) !important;
   border-radius: 8px;
 }
 
@@ -152,7 +152,7 @@
   height: 8px;
   border-radius: 8px;
   border: none;
-  background: var(--gray-500);
+  background: var(--gray-500) !important;
   cursor: pointer;
   transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
               background-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
@@ -171,12 +171,12 @@
   width: 16px;
   height: 8px;
   border-radius: 8px;
-  background: var(--dreamBlue);
+  background: var(--dreamBlue) !important;
   transform: scale(1.05);
 }
 
 .indicator:hover:not(.indicatorActive) {
-  background: var(--gray-600);
+  background: var(--gray-600) !important;
   transform: scale(1.15);
 }
 
