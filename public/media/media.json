@@ -34,6 +34,11 @@
       "id": "7",
       "videoUrl": "/media/button-interaction.mp4",
       "title": "Button Interaction"
+    },
+    {
+      "id": "8",
+      "videoUrl": "/media/theme-modal.mp4",
+      "title": "Modal"
     }
   ]
 } 
