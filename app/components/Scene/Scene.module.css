@@ -9,6 +9,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: var(--bg-main);
 }
 
 /* Add specific styling for the canvas element */

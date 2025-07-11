@@ -121,7 +121,13 @@ export default function MediaCarousel() {
                       loop
                       muted
                       playsInline
-                      preload="metadata"
+                      preload={
+                        isActive || 
+                        index === selectedIndex + 1 || 
+                        index === selectedIndex - 1 
+                          ? "metadata" 
+                          : "none"
+                      }
                       onError={(event) => handleVideoError(item, event)}
                       onLoadStart={() => console.log(`Loading video: ${item.title}`)}
                       onCanPlay={() => console.log(`Video ready: ${item.title}`)}

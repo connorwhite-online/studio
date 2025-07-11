@@ -16,6 +16,20 @@ const nextConfig = {
           },
         ],
       },
+    // Add caching headers for video files
+    async headers() {
+      return [
+        {
+          source: '/media/:path*',
+          headers: [
+            {
+              key: 'Cache-Control',
+              value: 'public, max-age=31536000, immutable', // 1 year cache
+            },
+          ],
+        },
+      ];
+    },
 };
 
 export default nextConfig;
