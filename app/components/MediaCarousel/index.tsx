@@ -2,18 +2,20 @@
 
 import React, { useCallback, useEffect, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
-import { MediaItem } from '@/lib/media';
 import styles from './MediaCarousel.module.css';
 import ArrowRight from '@/app/icons/ArrowRight';
 import ArrowLeft from '@/app/icons/ArrowLeft';
 
-interface MediaCarouselProps {
-  videos: MediaItem[];
-  onError: (id: string) => void;
-  videoErrors: Record<string, boolean>;
+// Import media data directly - this works at build time and in production
+import mediaData from '@/public/media/media.json';
+
+interface MediaItem {
+  id: string;
+  videoUrl: string;
+  title?: string;
 }
 
-export default function MediaCarousel({ videos, onError, videoErrors }: MediaCarouselProps) {
+export default function MediaCarousel() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ 
     loop: false,
     align: 'center',
@@ -25,9 +27,13 @@ export default function MediaCarousel({ videos, onError, videoErrors }: MediaCar
   
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+  const [videoErrors, setVideoErrors] = useState<Record<string, boolean>>({});
+
+  // Get videos from imported data
+  const videos: MediaItem[] = mediaData.mediaItems || [];
 
   // Sort videos by newest first
-  const sortedVideos = videos.sort((a, b) => b.id.localeCompare(a.id));
+  const sortedVideos = videos.sort((a: MediaItem, b: MediaItem) => b.id.localeCompare(a.id));
 
   const scrollPrev = useCallback(() => {
     if (!emblaApi) return;
@@ -94,7 +100,9 @@ export default function MediaCarousel({ videos, onError, videoErrors }: MediaCar
       networkState: event.target?.networkState,
       readyState: event.target?.readyState
     });
-    onError(item.id);
+    
+    // Update local video errors state to show fallback UI for this video
+    setVideoErrors(prev => ({ ...prev, [item.id]: true }));
   };
 
   return (

@@ -4,13 +4,4 @@
   height: fit-content;
   background: transparent;
   visibility: hidden;
-}
-
-.errorContainer {
-  width: 100%;
-  height: fit-content;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 200px;
 } 
