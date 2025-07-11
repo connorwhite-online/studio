@@ -7,27 +7,26 @@ import { useSpring, a } from '@react-spring/three';
 import * as THREE from 'three';
 import styles from './Scene.module.css';
 
-// 3D amorphous cloud/sphere component
 const AmorphousSphere = () => {
   const meshRef = useRef<THREE.Mesh>(null);
   const materialRef = useRef<any>(null);
   const [isPressed, setIsPressed] = useState(false);
   
-  // Create a spring animation for the initial scale
+  // Spring animation for the initial scale
   const initialProps = useSpring({
     from: { scale: 0 },
     to: { scale: 1.5 },
     config: { mass: 4, tension: 110, friction: 22 }
   });
   
-  // Create a spring animation for the interaction recoil effect
+  // Spring interaction recoil effect
   const interactionProps = useSpring({
-    scale: isPressed ? 0.8 : 1.0, // Scale down when pressed
-    distort: isPressed ? 0.8 : 0.4, // Increase distortion when pressed
-    speed: isPressed ? 3 : 1, // Faster animation when pressed
-    colorR: isPressed ? 1.0 : 1.0, // Red component
-    colorG: isPressed ? 0.6 : 1.0, // Green component (reduce when pressed)
-    colorB: isPressed ? 0.6 : 1.0, // Blue component (reduce when pressed)
+    scale: isPressed ? 0.8 : 1.0,
+    distort: isPressed ? 0.8 : 0.4,
+    speed: isPressed ? 3 : 1,
+    colorR: isPressed ? 1.0 : 1.0,
+    colorG: isPressed ? 0.6 : 1.0, // Reduce green when pressed
+    colorB: isPressed ? 0.6 : 1.0, // Reduce blue when pressed
     config: { 
       mass: 1, 
       tension: 300, 
@@ -35,7 +34,6 @@ const AmorphousSphere = () => {
     }
   });
   
-  // Animation with useFrame hook
   useFrame((state) => {
     if (meshRef.current) {
       meshRef.current.rotation.x = state.clock.getElapsedTime() * 0.05;
@@ -88,7 +86,6 @@ const AmorphousSphere = () => {
   );
 };
 
-// Main Scene component
 const Scene: React.FC = () => {
   return (
     <div className={styles.sceneContainer}>
