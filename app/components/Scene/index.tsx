@@ -51,14 +51,6 @@ const AmorphousSphere = () => {
       );
     }
   });
-
-  const handlePointerDown = () => {
-    setIsPressed(true);
-  };
-
-  const handlePointerUp = () => {
-    setIsPressed(false);
-  };
   
   return (
     <a.group scale={initialProps.scale}>
@@ -66,9 +58,9 @@ const AmorphousSphere = () => {
         <Icosahedron 
           args={[0.8, 16]} 
           ref={meshRef}
-          onPointerDown={handlePointerDown}
-          onPointerUp={handlePointerUp}
-          onPointerLeave={handlePointerUp} // Reset if pointer leaves while pressed
+          onPointerDown={() => setIsPressed(true)}
+          onPointerUp={() => setIsPressed(false)}
+          onPointerLeave={() => setIsPressed(false)} // Reset if pointer leaves while pressed
         >
           <MeshDistortMaterial
             ref={materialRef}
