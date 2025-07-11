@@ -8,7 +8,7 @@
   backdrop-filter: blur(40px);
   -webkit-backdrop-filter: blur(40px);
   z-index: 9999;
-  transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 2s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
 }
 

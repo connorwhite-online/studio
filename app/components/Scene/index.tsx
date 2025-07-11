@@ -5,7 +5,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { Icosahedron, MeshDistortMaterial } from '@react-three/drei';
 import { useSpring, a } from '@react-spring/three';
 import * as THREE from 'three';
-import styles from './scene.module.css';
+import styles from './Scene.module.css';
 
 // 3D amorphous cloud/sphere component
 const AmorphousSphere = () => {

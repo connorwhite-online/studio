@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './HorizontalVideoWrapper.module.css';
 import { MediaItem } from '@/lib/media';
-import MediaCarousel from './MediaCarousel';
+import MediaCarousel from '../MediaCarousel';
 
 // Loading indicator component
 const LoadingIndicator = () => (

@@ -10,7 +10,7 @@ export default function ErrorState({ message }: ErrorStateProps) {
     <div className={styles.errorContainer}>
       <div className={styles.errorMessage}>
         <p>Error Loading Videos</p>
-        <p>{message || 'Failed to load videos. Please try again later.'}</p>
+        <p>{message || 'Failed to load videos. Try reloading the page.'}</p>
       </div>
     </div>
   );

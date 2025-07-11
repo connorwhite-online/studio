@@ -9,16 +9,7 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const limit = parseInt(searchParams.get('limit') || '12', 10);
     
-    // Log the request for debugging
-    console.log('Media API: Fetching media items, limit:', limit);
-    
     const mediaItems = await getMediaItemsFromFile(limit);
-    
-    // Log what we're returning
-    console.log('Media API: Returning', mediaItems.length, 'items');
-    if (mediaItems.length > 0) {
-      console.log('Media API: First item:', JSON.stringify(mediaItems[0]));
-    }
     
     return NextResponse.json({ 
       mediaItems,
