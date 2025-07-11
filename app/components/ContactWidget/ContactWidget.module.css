@@ -34,7 +34,7 @@
   width: 0;
   height: 1px;
   background-color: var(--gray-1000);
-  transition: width 0.6s ease-in-out;
+  transition: width 0.3s ease-in-out;
 }
 .link:hover::after {
   width: 100%;
