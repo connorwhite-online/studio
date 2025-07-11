@@ -1,6 +1,5 @@
 'use client';
 import styles from "./page.module.css";
-import Time from './components/Time';
 import Scene from './components/Scene';
 import InteractionsSection from './components/InteractionsSection';
 import InfoSection from './components/InfoSection';
