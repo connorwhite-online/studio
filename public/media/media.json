@@ -2,43 +2,43 @@
   "mediaItems": [
     {
       "id": "1",
-      "videoUrl": "/media/manipulate.mp4",
-      "title": "Hand-Tracking"
-    },
-    {
-      "id": "2",
       "videoUrl": "/media/sqft.mp4",
       "title": "Cursor-Tracking"
     },
     {
-      "id": "3",
+      "id": "2",
       "videoUrl": "/media/webgl-gallery.mp4",
       "title": "WebGL Gallery"
     },
     {
-      "id": "4",
+      "id": "3",
       "videoUrl": "/media/tyb-sidenav.mp4",
       "title": "Side Nav"
     },
     {
-      "id": "5",
+      "id": "4",
       "videoUrl": "/media/tyb-loader.mp4",
       "title": "Loading State"
     },
     {
-      "id": "6",
+      "id": "5",
       "videoUrl": "/media/gooey-blob-menu.MP4",
       "title": "Gooey Nav"
     },
     {
-      "id": "7",
+      "id": "6",
       "videoUrl": "/media/button-interaction.mp4",
       "title": "Button Interaction"
     },
     {
-      "id": "8",
+      "id": "7",
       "videoUrl": "/media/theme-modal.mp4",
       "title": "Theme Modal"
+    },
+    {
+      "id": "8",
+      "videoUrl": "/media/manipulatev2.mp4",
+      "title": "Hand-Tracking"
     }
   ]
 } 

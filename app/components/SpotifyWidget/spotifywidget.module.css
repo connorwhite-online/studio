@@ -56,10 +56,7 @@
   color: inherit;
 }
 
-.trackItem:hover {
-  background-color: var(--alpha-100);
-  transform: translateX(5px);
-}
+
 
 .albumCover {
   width: 48px;
@@ -85,4 +82,12 @@
   font-size: 0.75rem;
   color: #999;
   margin-top: 0.5rem;
+}
+
+/* Desktop-only hover states */
+@media screen and (min-width: 768px) {
+  .trackItem:hover {
+    background-color: var(--alpha-100);
+    transform: translateX(5px);
+  }
 } 
