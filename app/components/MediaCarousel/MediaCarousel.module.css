@@ -153,14 +153,12 @@
   transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   position: relative;
   color: var(--gray-800) !important;
+  appearance: none;
   -webkit-appearance: none;
   -webkit-tap-highlight-color: transparent;
 }
 
-.navButton:hover {
-  background: var(--gray-400) !important;
-  transform: scale(1.01);
-}
+
 
 .navButton:active {
   transform: scale(0.95);
@@ -205,6 +203,7 @@
   min-width: 8px;
   min-height: 8px;
   box-sizing: border-box;
+  appearance: none;
   -webkit-appearance: none;
   -webkit-tap-highlight-color: transparent;
 }
@@ -217,10 +216,7 @@
   transform: scale(1.05);
 }
 
-.indicator:hover:not(.indicatorActive) {
-  background: var(--gray-600) !important;
-  transform: scale(1.15);
-}
+
 
 .indicator:active {
   transform: scale(0.85);
@@ -259,6 +255,17 @@
   .controls {
     margin-top: 16px;
     gap: 4px;
+  }
+  
+  /* Desktop-only hover states */
+  .navButton:hover {
+    background: var(--gray-400) !important;
+    transform: scale(1.01);
+  }
+  
+  .indicator:hover:not(.indicatorActive) {
+    background: var(--gray-600) !important;
+    transform: scale(1.15);
   }
   
 } 

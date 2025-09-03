@@ -11,6 +11,8 @@ export default function Bio() {
         I&#39;m a software designer and engineer based in Los Angeles, California.
         <br />
         Currently, I&#39;m a design engineer at <a href="https://www.tyb.xyz/" target="_blank" rel="noopener noreferrer" className={styles.inlineLink}>TYB</a> focusing on interaction design and obsessing over all the little details that make software feel enjoyable to interact with.
+        <br />
+        Clients include <a href="https://www.tyb.xyz/" target="_blank" rel="noopener noreferrer" className={styles.inlineLink}>TYB</a>, <a href="https://www.instagram.com/byseanbrown" target="_blank" rel="noopener noreferrer" className={styles.inlineLink}>Sean Brown</a>, <a href="https://www.instagram.com/claudehome" target="_blank" rel="noopener noreferrer" className={styles.inlineLink}>Claude Home</a>, <a href="https://www.nike.com/" target="_blank" rel="noopener noreferrer" className={styles.inlineLink}>Nike</a>, and more.
       </p>
     </section>
   );

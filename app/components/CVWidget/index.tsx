@@ -18,19 +18,21 @@ export default function CVWidget({ className = '' }: CVWidgetProps) {
         <div className={styles.cvItem}>
             <div className={styles.cvItemOrg}>
                 <p>Try Your Best</p>
-                <small>2024 - now</small>
+                <small>2024 - Present</small>
             </div>
             <p style={{color: 'var(--gray-900)', fontFamily: 'var(--light)'}}>
-                I currently lead design engineering on the consumer app team, focusing mostly on interaction and visual excellence. Before that, I worked on the b2b client web-app, leading a massive redesign of the platform.     
+                I currently lead design engineering across all surface areas, spending 75% of my time in Figma, and the other 25% in code. Before that, I worked on the b2b client web-app, leading a massive redesign of the platform.     
             </p>
         </div>
         <div className={styles.cvItem}>
             <div className={styles.cvItemOrg}>
-                <p>Freelance</p>
-                <small>2018 - 2024</small>
+                <p>Freelance/Contract</p>
+                <small>2018 - Present</small>
             </div>
             <p style={{color: 'var(--gray-900)', fontFamily: 'var(--light)'}}>
-                Client work across web and native, ranging from identity and full suite development to experimentation with machine learning and 3D rendering.
+                Client work across brand, web, and native, ranging from identity and full suite development to experimentation with machine learning and real-time 3D experiences on the web.
+                <br />
+                Past clients include <a href="https://www.instagram.com/byseanbrown" target="_blank" rel="noopener noreferrer" className={styles.inlineLink}>Sean Brown</a>, <a href="https://www.instagram.com/claudehome" target="_blank" rel="noopener noreferrer" className={styles.inlineLink}>Claude Home</a>, <a href="https://www.nike.com/" target="_blank" rel="noopener noreferrer" className={styles.inlineLink}>Nike</a>, and more.
             </p>
         </div>
     </div>

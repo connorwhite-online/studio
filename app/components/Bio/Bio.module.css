@@ -6,12 +6,3 @@
   text-align: left;
   margin-bottom: 40px;
 }
-
-.inlineLink {
-  color: var(--dreamBlue);
-  font-family: var(--bold);
-}
-
-@media screen and (min-width: 768px) {
-
-} 
