@@ -8,6 +8,11 @@ import BlurEntryAnimation from './components/BlurEntryAnimation';
 export const metadata: Metadata = {
   title: "Connor White",
   description: "Work from the personal studio of software designer and engineer, Connor White.",
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    viewportFit: "cover",
+  },
 };
 
 export default function RootLayout({
