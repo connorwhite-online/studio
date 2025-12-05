@@ -14,7 +14,7 @@ body::before {
   top: 0;
   left: 0;
   right: 0;
-  height: 80px;
+  height: calc(80px + env(safe-area-inset-top, 0));
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   z-index: 1000;
