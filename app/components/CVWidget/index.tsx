@@ -17,7 +17,11 @@ export default function CVWidget({ className = '' }: CVWidgetProps) {
         </div>
         <div className={styles.cvItem}>
             <div className={styles.cvItemOrg}>
-                <h3>Try Your Best</h3>
+                <h3>
+                    <a href="https://tyb.xyz" target="_blank" rel="noopener noreferrer">
+                        Try Your Best
+                    </a>
+                </h3>
                 <small>2024 - Present</small>
             </div>
             <p>
@@ -26,13 +30,53 @@ export default function CVWidget({ className = '' }: CVWidgetProps) {
         </div>
         <div className={styles.cvItem}>
             <div className={styles.cvItemOrg}>
-                <h3>Freelance/Contract</h3>
+                <h3>Freelance</h3>
                 <small>2018 - Present</small>
             </div>
+            <div className={styles.subProjectsContainer}>
+                <div className={styles.subProject}>
+                    <h4>
+                        <a href="https://blackbird.xyz" target="_blank" rel="noopener noreferrer">
+                            Blackbird
+                        </a>
+                    </h4>
+                    <p>
+                        I developed 3D assets for the Blackbird app in collaboration with product design, that acted as in-app currency.
+                    </p>
+                </div>
+                <div className={styles.subProject}>
+                    <h4>
+                        <a href="https://claudehome.com" target="_blank" rel="noopener noreferrer">
+                            Claude Home
+                        </a>
+                    </h4>
+                    <p>
+                        I designed and built an interactive gallery site for Cluade's visual art offerings. The site is built on Next.js and uses a custom 3D WebGL gallery to display product images.
+                    </p>
+                </div>
+                <div className={styles.subProject}>
+                    <h4>
+                        <a href="https://readsqft.com" target="_blank" rel="noopener noreferrer">
+                            SQFT
+                        </a>
+                    </h4>
+                    <p>
+                        I designed and built the website for interior design narrative magazine SQFT. I modeled the 3D magazine replica in Blender and built the site with React and three.js on Shopify's Hydrogen framework.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div className={styles.cvItem}>
+            <div className={styles.cvItemOrg}>
+                <h3>
+                    <a href="https://www.wk.com" target="_blank" rel="noopener noreferrer">
+                        Wieden+Kennedy
+                    </a>
+                </h3>
+                <small>2018 - 2019</small>
+            </div>
             <p>
-                Client work across brand, web, and native, ranging from identity and full suite development to experimentation with machine learning and real-time 3D experiences on the web.
-                <br />
-                Past clients include <a href="https://www.instagram.com/byseanbrown" target="_blank" rel="noopener noreferrer" className={styles.inlineLink}>Sean Brown</a>, <a href="https://www.instagram.com/claudehome" target="_blank" rel="noopener noreferrer" className={styles.inlineLink}>Claude Home</a>, <a href="https://www.nike.com/" target="_blank" rel="noopener noreferrer" className={styles.inlineLink}>Nike</a>, and more.
+                Worked as a contract designer at Wieden+Kennedy in Portland on the Nike account.
             </p>
         </div>
     </div>
