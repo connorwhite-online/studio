@@ -51,7 +51,7 @@ export default function CVWidget({ className = '' }: CVWidgetProps) {
                         </a>
                     </h4>
                     <p>
-                        I designed and built an interactive gallery site for Cluade's visual art offerings. The site is built on Next.js and uses a custom 3D WebGL gallery to display product images.
+                        I designed and built an interactive gallery site for Cluade&apos;s visual art offerings. The site is built on Next.js and uses a custom 3D WebGL gallery to display product images.
                     </p>
                 </div>
                 <div className={styles.subProject}>
@@ -61,7 +61,7 @@ export default function CVWidget({ className = '' }: CVWidgetProps) {
                         </a>
                     </h4>
                     <p>
-                        I designed and built the website for interior design narrative magazine SQFT. I modeled the 3D magazine replica in Blender and built the site with React and three.js on Shopify's Hydrogen framework.
+                        I designed and built the website for interior design narrative magazine SQFT. I modeled the 3D magazine replica in Blender and built the site with React and three.js on Shopify&apos;s Hydrogen framework.
                     </p>
                 </div>
             </div>
