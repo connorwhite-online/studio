@@ -10,32 +10,8 @@
   gap: 8px;
 }
 
-.icon {
-  color: var(--gray-900);
-}
-
 .links {
   display: flex;
   justify-content: space-between;
   gap: 12px;
-}
-
-.link {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.link::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background-color: var(--gray-1000);
-  transition: width 0.3s ease-in-out;
-}
-.link:hover::after {
-  width: 100%;
 }

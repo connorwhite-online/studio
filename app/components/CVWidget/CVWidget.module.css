@@ -11,10 +11,6 @@
   gap: 8px;
 }
 
-.icon {
-  color: var(--gray-900);
-}
-
 .cvItem {
   display: flex;
   flex-direction: column;
@@ -25,13 +21,6 @@
   display: flex;
   align-items: baseline;
   gap: 8px;
-}
-
-.introCopy {
-  font-size: 14px;
-  line-height: 1.6;
-  color: var(--fg);
-  margin: 0;
 }
 
 .subProjectsContainer {
@@ -49,7 +38,7 @@
   top: 0;
   bottom: 0;
   width: 1px;
-  background-color: var(--gray-500);
+  background-color: var(--neutral-500);
   border-radius: 1px;
 }
 
@@ -59,17 +48,3 @@
   gap: 4px;
   padding-left: 16px;
 }
-
-.subProject h4 {
-  font-family: var(--medium);
-  font-size: 15px;
-  color: var(--gray-1000);
-  margin: 0;
-}
-
-.subProject p {
-  font-family: var(--regular);
-  font-size: 16px;
-  color: var(--gray-900);
-  margin: 0;
-} 

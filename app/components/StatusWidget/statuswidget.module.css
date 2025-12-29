@@ -10,8 +10,4 @@
   display: flex;
   align-items: center;
   gap: 8px;
-}
-
-.satellite {
-  color: var(--gray-900);
 } 

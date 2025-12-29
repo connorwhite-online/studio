@@ -65,37 +65,36 @@ body::before {
   --monoLight: 'Mono-Light';
   --dreamBlueLight: #3A5CCC;
   --dreamBlueDark: #5373E7;
-  --copy: 16px;
+  --copy: 15px;
 
-  /* Background */
-  --bg-100-light: hsl(0, 0%, 100%);
-  --bg-200-light: hsl(0, 0%, 98%);
+  /* Neutral */
+  --neutral-0-light: hsl(0, 0%, 100%);
+  --neutral-50-light: hsl(0, 0%, 98%);
+  --neutral-100-light: hsl(0, 0%, 96%);
+  --neutral-200-light: hsl(0, 0%, 90%);
+  --neutral-300-light: hsl(0, 0%, 83%);
+  --neutral-400-light: hsl(0, 0%, 64%);
+  --neutral-500-light: hsl(0, 0%, 45%);
+  --neutral-600-light: hsl(0, 0%, 32%);
+  --neutral-700-light: hsl(0, 0%, 25%);
+  --neutral-800-light: hsl(0, 0%, 15%);
+  --neutral-900-light: hsl(0, 0%, 9%);
+  --neutral-950-light: hsl(0, 0%, 4%);
+  --neutral-1000-light: hsl(0, 0%, 0%);
 
-  --bg-100-dark: hsl(0, 0%, 0%);
-  --bg-200-dark: hsl(0, 0%, 4%);
-
-  /* Gray */
-  --gray-100-light: hsl(0, 0%, 95%);
-  --gray-200-light: hsl(0, 0%, 93%);
-  --gray-300-light: hsl(0, 0%, 90%);
-  --gray-400-light: hsl(0, 0%, 84%);
-  --gray-500-light: hsl(0, 0%, 79%);
-  --gray-600-light: hsl(0, 0%, 66%);
-  --gray-700-light: hsl(0, 0%, 56%);
-  --gray-800-light: hsl(0, 0%, 49%);
-  --gray-900-light: hsl(0, 0%, 40%);
-  --gray-1000-light: hsl(0, 0%, 9%);
-
-  --gray-100-dark: hsl(0, 0%, 10%);
-  --gray-200-dark: hsl(0, 0%, 12%);
-  --gray-300-dark: hsl(0, 0%, 16%);
-  --gray-400-dark: hsl(0, 0%, 18%);
-  --gray-500-dark: hsl(0, 0%, 27%);
-  --gray-600-dark: hsl(0, 0%, 53%);
-  --gray-700-dark: hsl(0, 0%, 56%);
-  --gray-800-dark: hsl(0, 0%, 49%);
-  --gray-900-dark: hsl(0, 0%, 63%);
-  --gray-1000-dark: hsl(0, 0%, 93%);
+  --neutral-0-dark: hsl(0, 0%, 0%);
+  --neutral-50-dark: hsl(0, 0%, 4%);
+  --neutral-100-dark: hsl(0, 0%, 9%);
+  --neutral-200-dark: hsl(0, 0%, 15%);
+  --neutral-300-dark: hsl(0, 0%, 25%);
+  --neutral-400-dark: hsl(0, 0%, 32%);
+  --neutral-500-dark: hsl(0, 0%, 45%);
+  --neutral-600-dark: hsl(0, 0%, 64%);
+  --neutral-700-dark: hsl(0, 0%, 83%);
+  --neutral-800-dark: hsl(0, 0%, 90%);
+  --neutral-900-dark: hsl(0, 0%, 96%);
+  --neutral-950-dark: hsl(0, 0%, 98%);
+  --neutral-1000-dark: hsl(0, 0%, 100%);
 
   /* Alpha */
   --alpha-100-light: hsla(0, 0%, 0%, 0.05);
@@ -122,18 +121,27 @@ body::before {
 }
 
 [data-theme="dark"] {
-  --color-main: var(--gray-1000-dark);
-  --bg-main: var(--bg-100-dark);
-  --gray-100: var(--gray-100-dark);
-  --gray-200: var(--gray-200-dark);
-  --gray-300: var(--gray-300-dark);
-  --gray-400: var(--gray-400-dark);
-  --gray-500: var(--gray-500-dark);
-  --gray-600: var(--gray-600-dark);
-  --gray-700: var(--gray-700-dark);
-  --gray-800: var(--gray-800-dark);
-  --gray-900: var(--gray-900-dark);
-  --gray-1000: var(--gray-1000-dark);
+
+  --primary: var(--neutral-950-dark);
+  --secondary: var(--neutral-700-dark);
+  --border: var(--neutral-300-dark);
+
+  --neutral-0: var(--neutral-0-dark);
+  --neutral-50: var(--neutral-50-dark);
+  --neutral-100: var(--neutral-100-dark);
+  --neutral-200: var(--neutral-200-dark);
+  --neutral-300: var(--neutral-300-dark);
+  --neutral-400: var(--neutral-400-dark);
+  --neutral-500: var(--neutral-500-dark);
+  --neutral-600: var(--neutral-600-dark);
+  --neutral-700: var(--neutral-700-dark);
+  --neutral-800: var(--neutral-800-dark);
+  --neutral-900: var(--neutral-900-dark);
+  --neutral-950: var(--neutral-950-dark);
+  --neutral-1000: var(--neutral-1000-dark);
+
+  --color-main: var(--neutral-950-dark);
+  --bg-main: var(--neutral-50-dark);
 
   --alpha-100: var(--alpha-100-dark);
   --alpha-200: var(--alpha-200-dark);
@@ -150,18 +158,27 @@ body::before {
 }
 
 [data-theme="light"] {
-  --color-main: var(--gray-1000-light);
-  --bg-main: var(--bg-100-light);
-  --gray-100: var(--gray-100-light);
-  --gray-200: var(--gray-200-light);
-  --gray-300: var(--gray-300-light);
-  --gray-400: var(--gray-400-light);
-  --gray-500: var(--gray-500-light);
-  --gray-600: var(--gray-600-light);
-  --gray-700: var(--gray-700-light);
-  --gray-800: var(--gray-800-light);
-  --gray-900: var(--gray-900-light);
-  --gray-1000: var(--gray-1000-light);
+
+  --primary: var(--neutral-950-light);
+  --secondary: var(--neutral-700-light);
+  --border: var(--neutral-300-light);
+
+  --neutral-0: var(--neutral-0-light);
+  --neutral-50: var(--neutral-50-light);
+  --neutral-100: var(--neutral-100-light);
+  --neutral-200: var(--neutral-200-light);
+  --neutral-300: var(--neutral-300-light);
+  --neutral-400: var(--neutral-400-light);
+  --neutral-500: var(--neutral-500-light);
+  --neutral-600: var(--neutral-600-light);
+  --neutral-700: var(--neutral-700-light);
+  --neutral-800: var(--neutral-800-light);
+  --neutral-900: var(--neutral-900-light);
+  --neutral-950: var(--neutral-950-light);
+  --neutral-1000: var(--neutral-1000-light);
+
+  --color-main: var(--neutral-950-light);
+  --bg-main: var(--neutral-50-light);
 
   --alpha-100: var(--alpha-100-light);
   --alpha-200: var(--alpha-200-light);
@@ -186,25 +203,31 @@ body::before {
   position: absolute;
 }
 hr {
-  border: 0.5px solid var(--gray-1000);
+  border: 0.5px solid var(--neutral-800);
   margin: 0;
 }
 h1 {
-  font-family: var(--medium);
-  font-size: 20px;
-  color: var(--gray-1000);
+  font-family: var(--bold);
+  font-size: 28px;
+  color: var(--neutral-950);
   margin: 0;
 }
 h2 {
-  font-family: var(--light);
-  font-size: 18px;
-  color: var(--gray-900);
+  font-family: var(--bold);
+  font-size: 22px;
+  color: var(--neutral-950);
   margin: 0;
 }
 h3 {
   font-family: var(--medium);
-  font-size: 16px;
-  color: var(--gray-1000);
+  font-size: 19px;
+  color: var(--neutral-950);
+  margin: 0;
+}
+h4 {
+  font-family: var(--medium);
+  font-size: 17px;
+  color: var(--neutral-950);
   margin: 0;
 }
 ul {
@@ -219,19 +242,41 @@ li {
 }
 a {
   text-decoration: none;
-  color: var(--gray-1000);
+  color: var(--neutral-950);
   position: relative;
+}
+
+@media screen and (min-width: 768px) {
+  a::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: var(--neutral-500);
+    transition: width 0.3s ease-in-out;
+  }
+  a:hover::after {
+    width: 100%;
+  }
 }
 p {
   font-family: var(--regular);
-  font-size: 16px;
-  color: var(--gray-900);
+  font-size: 15px;
+  color: var(--neutral-950);
+  margin: 0;
+}
+b {
+  font-family: var(--bold);
+  font-size: 15px;
+  color: var(--neutral-950);
   margin: 0;
 }
 small {
   font-family: var(--regular);
-  font-size: 14px;
-  color: var(--gray-900);
+  font-size: 13px;
+  color: var(--neutral-950);
   margin: 0;
 }
 

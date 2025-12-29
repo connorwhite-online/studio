@@ -4,9 +4,10 @@ interface ArrowLeftIconProps {
   size?: number;
   className?: string;
   color?: string;
+  style?: React.CSSProperties;
 }
 
-export default function ArrowLeft({ size = 16, className = '' }: ArrowLeftIconProps) {
+export default function ArrowLeft({ size = 16, className = '', style }: ArrowLeftIconProps) {
   return (
     <svg 
       xmlns="http://www.w3.org/2000/svg" 
@@ -19,6 +20,7 @@ export default function ArrowLeft({ size = 16, className = '' }: ArrowLeftIconPr
       strokeLinecap="round"
       strokeLinejoin="round"
       className={className}
+      style={style}
     >
       <path d="M6.66666 4L2.66666 7.99999L6.66666 12M3.33332 7.99999H13.3333" />
     </svg>

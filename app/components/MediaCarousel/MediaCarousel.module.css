@@ -70,8 +70,8 @@
   height: auto;
   border-radius: 12px;
   overflow: hidden;
-  background: var(--gray-200);
-  border: 1px solid var(--gray-300);
+  background: var(--neutral-200);
+  border: 1px solid var(--neutral-300);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -98,7 +98,7 @@
 }
 
 .videoError {
-  color: var(--gray-600);
+  color: var(--neutral-600);
   text-align: center;
   padding: 20px;
   font-family: var(--regular);
@@ -125,7 +125,7 @@
   background: var(--alpha-600);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  color: var(--gray-100);
+  color: var(--neutral-100);
   padding: 8px 8px;
   font-family: var(--regular);
   font-size: 12px;
@@ -145,14 +145,14 @@
   padding: 8px;
   border-radius: 8px;
   border: none;
-  background: var(--gray-200) !important;
+  background: var(--neutral-200) !important;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   position: relative;
-  color: var(--gray-800) !important;
+  color: var(--neutral-800) !important;
   appearance: none;
   -webkit-appearance: none;
   -webkit-tap-highlight-color: transparent;
@@ -167,7 +167,7 @@
 .navIcon {
   width: 8px;
   height: 8px;
-  border: 2px solid var(--gray-800) !important;
+  border: 2px solid var(--secondary) !important;
   border-bottom: none;
   border-right: none;
   transform: rotate(-45deg);
@@ -181,7 +181,7 @@
   display: flex;
   gap: 8px;
   padding: 12px;
-  background: var(--gray-200) !important;
+  background: var(--neutral-200) !important;
   border-radius: 8px;
 }
 
@@ -190,7 +190,7 @@
   height: 8px;
   border-radius: 8px;
   border: none;
-  background: var(--gray-500) !important;
+  background: var(--neutral-400) !important;
   cursor: pointer;
   transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
               background-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
@@ -212,7 +212,7 @@
   width: 16px;
   height: 8px;
   border-radius: 8px;
-  background: var(--dreamBlue) !important;
+  background: var(--primary) !important;
   transform: scale(1.05);
 }
 
@@ -259,12 +259,12 @@
   
   /* Desktop-only hover states */
   .navButton:hover {
-    background: var(--gray-400) !important;
+    background: var(--neutral-300) !important;
     transform: scale(1.01);
   }
   
   .indicator:hover:not(.indicatorActive) {
-    background: var(--gray-600) !important;
+    background: var(--neutral-600) !important;
     transform: scale(1.15);
   }
   

@@ -11,10 +11,6 @@
   gap: 8px;
 }
 
-.icon {
-  color: var(--gray-900);
-}
-
 .trackListContainer {
   max-height: 220px;
   overflow-y: auto;
@@ -54,6 +50,10 @@
   transition: all 0.2s ease;
   text-decoration: none;
   color: inherit;
+}
+
+.trackItem::after {
+  display: none;
 }
 
 

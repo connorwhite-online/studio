@@ -63,10 +63,10 @@ export default function StatusWidget({ className = '' }: StatusWidgetProps) {
   return (
     <div className={`${styles.statusContainer} ${className}`}>
       <div className={styles.header}>
-        <Satellite className={styles.satellite} size={20} />
-        <h2 className={styles.timeText}>
+        <Satellite style={{ color: 'var(--secondary)' }} size={20} />
+        <h3 style={{ color: 'var(--secondary)' }}>
           Los Angeles ({time})
-        </h2>
+        </h3>
       </div>
       <p className={styles.statusText}>
         {status}
