@@ -3,9 +3,10 @@ import React from 'react';
 interface ArrowRightIconProps {
   size?: number;
   className?: string;
+  style?: React.CSSProperties;
 }
 
-export default function ArrowRight({ size = 16, className = '' }: ArrowRightIconProps) {
+export default function ArrowRight({ size = 16, className = '', style }: ArrowRightIconProps) {
   return (
     <svg 
       xmlns="http://www.w3.org/2000/svg" 
@@ -18,6 +19,7 @@ export default function ArrowRight({ size = 16, className = '' }: ArrowRightIcon
       strokeLinecap="round"
       strokeLinejoin="round"
       className={className}
+      style={style}
     >
       <path d="M9.33335 4L13.3334 7.99999L9.33335 12M12.6667 7.99999H2.66669" />
     </svg>

@@ -11,8 +11,8 @@ export default function ContactWidget({ className = '' }: ContactWidgetProps) {
   return (
     <div className={`${styles.contactContainer} ${className}`}>
       <div className={styles.header}>
-        <Chat className={styles.icon} size={20} />
-        <h2>Get in touch</h2>
+        <Chat style={{ color: 'var(--secondary)' }} size={20} />
+        <h3 style={{ color: 'var(--secondary)' }}>Get in touch</h3>
       </div>
       <div className={styles.links}>
       <a 
@@ -20,34 +20,26 @@ export default function ContactWidget({ className = '' }: ContactWidgetProps) {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <div className={styles.link}>
-          <p>Twitter ↗</p>
-        </div>
+        <p>Twitter ↗</p>
       </a>
       <a 
         href="mailto:connorwhite.studio@gmail.com"
       >
-        <div className={styles.link}>
-          <p>Email ↗</p>
-        </div>
+        <p>Email ↗</p>
       </a>
       <a 
         href="https://github.com/connorwhite-online"
         target="_blank"
         rel="noopener noreferrer"
       >
-        <div className={styles.link}>
-          <p>Github ↗</p>
-        </div>
+        <p>Github ↗</p>
       </a>
       <a 
         href="https://www.linkedin.com/in/connorwhite-online/"
         target="_blank"
         rel="noopener noreferrer"
       >
-        <div className={styles.link}>
-          <p>LinkedIn ↗</p>
-        </div>
+        <p>LinkedIn ↗</p>
       </a>
       </div>
     </div>

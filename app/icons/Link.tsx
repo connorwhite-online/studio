@@ -1,9 +1,10 @@
 interface IconProps {
     className?: string;
     size?: number;
+    style?: React.CSSProperties;
   }
   
-  export default function Link({ className = '', size = 24 }: IconProps) {
+  export default function Link({ className = '', size = 24, style }: IconProps) {
     return (
       <svg
         width={size}
@@ -12,6 +13,7 @@ interface IconProps {
         stroke="currentColor"
         fill="none"
         className={className}
+        style={style}
         xmlns="http://www.w3.org/2000/svg"
       >
         <path d="M9.99988 19L9.82831 19.1716C8.26622 20.7337 5.73355 20.7337 4.17146 19.1716L3.82831 18.8284C2.26622 17.2663 2.26621 14.7337 3.82831 13.1716L7.17146 9.82843C8.73356 8.26634 11.2662 8.26634 12.8283 9.82843L13.1715 10.1716C13.8251 10.8252 14.2052 11.6487 14.3118 12.5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>

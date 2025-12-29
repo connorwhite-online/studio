@@ -1,7 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import Spotify from '@/app/icons/Spotify';
 import styles from './spotifywidget.module.css';
 import Speaker from '@/app/icons/Speaker';
 import { Skeleton } from '@radix-ui/themes';
@@ -51,8 +50,8 @@ export default function SpotifyWidget({ className = '' }: SpotifyWidgetProps) {
     return (
       <div className={`${styles.spotifyContainer} ${className}`}>
         <div className={styles.header}>
-          <Speaker className={styles.icon} size={20} />
-          <h2>Heavy in rotation</h2>
+          <Speaker style={{ color: 'var(--secondary)' }} size={20} />
+          <h3 style={{ color: 'var(--secondary)' }}>On rotation</h3>
         </div>
         <div className={styles.trackListContainer}>
           <div className={styles.trackList}>
@@ -75,8 +74,8 @@ export default function SpotifyWidget({ className = '' }: SpotifyWidgetProps) {
     return (
       <div className={`${styles.spotifyContainer} ${className}`}>
         <div className={styles.header}>
-          <Speaker className={styles.icon} size={20} />
-          <h2>Heavy in rotation</h2>
+          <Speaker style={{ color: 'var(--secondary)' }} size={20} />
+          <h3 style={{ color: 'var(--secondary)' }}>On rotation</h3>
         </div>
         <div className={styles.errorState}>
           {error}
@@ -89,8 +88,8 @@ export default function SpotifyWidget({ className = '' }: SpotifyWidgetProps) {
   return (
     <div className={`${styles.spotifyContainer} ${className}`}>
       <div className={styles.header}>
-        <Speaker className={styles.icon} size={20} />
-        <h2>On rotation</h2>
+        <Speaker style={{ color: 'var(--secondary)' }} size={20} />
+        <h3 style={{ color: 'var(--secondary)' }}>On rotation</h3>
       </div>
       <div className={styles.trackListContainer}>
         <div className={styles.trackList}>

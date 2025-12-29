@@ -3,9 +3,10 @@ import React from 'react';
 interface PencilIconProps {
   size?: number;
   className?: string;
+  style?: React.CSSProperties;
 }
 
-export default function Pencil({ size = 24, className = '' }: PencilIconProps) {
+export default function Pencil({ size = 24, className = '', style }: PencilIconProps) {
   return (
     <svg 
       xmlns="http://www.w3.org/2000/svg" 
@@ -14,6 +15,7 @@ export default function Pencil({ size = 24, className = '' }: PencilIconProps) {
       viewBox="0 0 24 24" 
       fill="none"
       className={className}
+      style={style}
     >
         <path d="M17.9142 4.91391L19.0858 6.08548C19.8668 6.86653 19.8668 8.13286 19.0858 8.91391L8.58579 19.4139C8.21071 19.789 7.70201 19.9997 7.17157 19.9997H4V16.8281C4 16.2977 4.21071 15.789 4.58579 15.4139L15.0858 4.91391C15.8668 4.13286 17.1332 4.13286 17.9142 4.91391Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         <path d="M4.75518 5.15769C4.65005 4.94744 4.35001 4.94744 4.24488 5.15769L3.59168 6.4641C3.56407 6.51931 3.51931 6.56407 3.4641 6.59168L2.15769 7.24488C1.94744 7.35001 1.94744 7.65005 2.15769 7.75518L3.4641 8.40839C3.51931 8.43599 3.56407 8.48075 3.59168 8.53596L4.24488 9.84237C4.35001 10.0526 4.65005 10.0526 4.75518 9.84237L5.40839 8.53596C5.43599 8.48075 5.48075 8.43599 5.53596 8.40839L6.84237 7.75518C7.05262 7.65005 7.05262 7.35001 6.84237 7.24488L5.53596 6.59168C5.48075 6.56407 5.43599 6.51931 5.40839 6.4641L4.75518 5.15769Z" fill="currentColor"/>

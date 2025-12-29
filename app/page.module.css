@@ -57,14 +57,14 @@
 .timeText {
   font-family: 'Mono-Regular';
   letter-spacing: -0.06em;
-  color: var(--gray-900);
+  color: var(--neutral-900);
   margin: 0;
   font-size: 0.9rem;
   text-wrap: nowrap;
 }
 
 .satellite {
-  color: var(--gray-900);
+  color: var(--neutral-900);
 }
 
 @media screen and (min-width: 768px) {
