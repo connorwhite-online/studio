@@ -1,0 +1,63 @@
+.projectContent {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+  align-items: center;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.section h3 {
+  font-family: var(--medium);
+  font-size: 19px;
+  color: var(--neutral-950);
+  margin: 0;
+}
+
+.section p {
+  font-family: var(--regular);
+  font-size: 15px;
+  color: var(--neutral-700);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.imagePlaceholder {
+  width: 100%;
+  height: 300px;
+  border-radius: 16px;
+  background: linear-gradient(
+    90deg,
+    var(--neutral-200) 0%,
+    var(--neutral-300) 50%,
+    var(--neutral-200) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--neutral-300);
+}
+
+.imagePlaceholder p {
+  font-family: var(--regular);
+  font-size: 15px;
+  color: var(--neutral-500);
+  margin: 0;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+

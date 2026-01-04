@@ -1,14 +1,15 @@
 'use client';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import styles from './InteractionsSection.module.css';
 
 // Import components
-import MediaCarousel from '../MediaCarousel';
+import ProjectCarousel from '../ProjectCarousel';
 
 export default function InteractionsSection() {
   const interactionsRef = useRef<HTMLDivElement>(null);
+  const [currentCarouselIndex, setCurrentCarouselIndex] = useState(0);
 
   // Set content visible
   useGSAP(() => {
@@ -21,7 +22,10 @@ export default function InteractionsSection() {
 
   return (
     <div ref={interactionsRef} className={styles.interactions}>      
-      <MediaCarousel />
+      <ProjectCarousel 
+        currentIndex={currentCarouselIndex}
+        onIndexChange={setCurrentCarouselIndex}
+      />
     </div>
   );
 } 

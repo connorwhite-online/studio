@@ -1,10 +1,8 @@
 'use client';
 
-import React, { useCallback, useEffect, useState } from 'react';
-import useEmblaCarousel from 'embla-carousel-react';
+import React, { useState } from 'react';
 import styles from './MediaCarousel.module.css';
-import ArrowRight from '@/app/icons/ArrowRight';
-import ArrowLeft from '@/app/icons/ArrowLeft';
+import Carousel from '../Carousel';
 
 // Import media data directly - this works at build time and in production
 import mediaData from '@/public/media/media.json';
@@ -16,17 +14,6 @@ interface MediaItem {
 }
 
 export default function MediaCarousel() {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ 
-    loop: false,
-    align: 'center',
-    containScroll: 'trimSnaps',
-    dragFree: false,
-    skipSnaps: false,
-    slidesToScroll: 1
-  });
-  
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
   const [videoErrors, setVideoErrors] = useState<Record<string, boolean>>({});
 
   // Get videos from imported data
@@ -34,54 +21,6 @@ export default function MediaCarousel() {
 
   // Sort videos by newest first
   const sortedVideos = videos.sort((a: MediaItem, b: MediaItem) => b.id.localeCompare(a.id));
-
-  const scrollPrev = useCallback(() => {
-    if (!emblaApi) return;
-    
-    const currentIndex = emblaApi.selectedScrollSnap();
-    if (currentIndex === 0) {
-      // At first slide, wrap to last slide with visual transition from left
-      const lastIndex = sortedVideos.length - 1;
-      emblaApi.scrollTo(lastIndex);
-    } else {
-      emblaApi.scrollPrev();
-    }
-  }, [emblaApi, sortedVideos.length]);
-
-  const scrollNext = useCallback(() => {
-    if (!emblaApi) return;
-    
-    const currentIndex = emblaApi.selectedScrollSnap();
-    const lastIndex = sortedVideos.length - 1;
-    
-    if (currentIndex === lastIndex) {
-      // At last slide, wrap to first slide with visual transition from right
-      emblaApi.scrollTo(0);
-    } else {
-      emblaApi.scrollNext();
-    }
-  }, [emblaApi, sortedVideos.length]);
-
-  const scrollTo = useCallback((index: number) => {
-    if (emblaApi) emblaApi.scrollTo(index);
-  }, [emblaApi]);
-
-  const onInit = useCallback((emblaApi: any) => {
-    setScrollSnaps(emblaApi.scrollSnapList());
-  }, []);
-
-  const onSelect = useCallback((emblaApi: any) => {
-    setSelectedIndex(emblaApi.selectedScrollSnap());
-  }, []);
-
-  useEffect(() => {
-    if (!emblaApi) return;
-
-    onInit(emblaApi);
-    onSelect(emblaApi);
-    emblaApi.on('reInit', onInit);
-    emblaApi.on('select', onSelect);
-  }, [emblaApi, onInit, onSelect]);
 
   // Function to get MIME type based on file extension
   const getVideoType = (url: string): string => {
@@ -106,84 +45,39 @@ export default function MediaCarousel() {
   };
 
   return (
-    <div className={styles.carousel}>
-      <div className={styles.embla} ref={emblaRef}>
-        <div className={styles.emblaContainer}>
-          {sortedVideos.map((item, index) => {
-            const videoType = getVideoType(item.videoUrl);
-            const isActive = index === selectedIndex;
-            return (
-              <div key={item.id} className={styles.emblaSlide}>
-                <div className={`${styles.videoCard} ${isActive ? styles.videoCardActive : ''}`}>
-                  {!videoErrors[item.id] ? (
-                    <video
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      preload={
-                        isActive || 
-                        index === selectedIndex + 1 || 
-                        index === selectedIndex - 1 
-                          ? "metadata" 
-                          : "none"
-                      }
-                      onError={(event) => handleVideoError(item, event)}
-                      onLoadStart={() => console.log(`Loading video: ${item.title}`)}
-                      onCanPlay={() => console.log(`Video ready: ${item.title}`)}
-                    >
-                      <source src={item.videoUrl} type={videoType} />
-                      Your browser does not support the video tag.
-                    </video>
-                  ) : (
-                    <div className={styles.videoError}>
-                      <p>Video could not be loaded</p>
-                      <p className={styles.videoErrorPath}>{item.videoUrl}</p>
-                    </div>
-                  )}
-                  {item.title && (
-                    <div className={styles.videoTitle}>
-                      {item.title}
-                    </div>
-                  )}
-                </div>
+    <Carousel className={styles.mediaCarousel}>
+      {sortedVideos.map((item) => {
+        const videoType = getVideoType(item.videoUrl);
+        return (
+          <div key={item.id} className={styles.videoCard}>
+            {!videoErrors[item.id] ? (
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="metadata"
+                onError={(event) => handleVideoError(item, event)}
+                onLoadStart={() => console.log(`Loading video: ${item.title}`)}
+                onCanPlay={() => console.log(`Video ready: ${item.title}`)}
+              >
+                <source src={item.videoUrl} type={videoType} />
+                Your browser does not support the video tag.
+              </video>
+            ) : (
+              <div className={styles.videoError}>
+                <p>Video could not be loaded</p>
+                <p className={styles.videoErrorPath}>{item.videoUrl}</p>
               </div>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Indicators and Navigation */}
-      <div className={styles.controls}>
-        <button
-          className={styles.navButton}
-          onClick={scrollPrev}
-          aria-label="Previous slide"
-        >
-          <ArrowLeft />
-        </button>
-
-        <div className={styles.indicators}>
-          {scrollSnaps.map((_, index) => (
-            <button
-              key={index}
-              className={`${styles.indicator} ${
-                index === selectedIndex ? styles.indicatorActive : ''
-              }`}
-              onClick={() => scrollTo(index)}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
-        </div>
-
-        <button
-          className={styles.navButton}
-          onClick={scrollNext}
-          aria-label="Next slide"
-        >
-            <ArrowRight />
-        </button>
-      </div>
-    </div>
+            )}
+            {item.title && (
+              <div className={styles.videoTitle}>
+                {item.title}
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </Carousel>
   );
-} 
+}

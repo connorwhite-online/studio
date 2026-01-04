@@ -1,0 +1,19 @@
+{
+  "logos": [
+    "/media/projects/logos/tyb-logo.png"
+  ],
+  "tyb-integrations": [
+    "/media/projects/tyb-integrations/tyb-integrations-01.png",
+    "/media/projects/tyb-integrations/tyb-integrations-02.png",
+    "/media/projects/tyb-integrations/tyb-integrations-03.png",
+    "/media/projects/tyb-integrations/tyb-integrations-04.png",
+    "/media/projects/tyb-integrations/tyb-integrations-05.png"
+  ],
+  "tyb-onboarding": [
+    "/media/projects/tyb-onboarding/tyb-onboarding-01.png",
+    "/media/projects/tyb-onboarding/tyb-onboarding-02.png",
+    "/media/projects/tyb-onboarding/tyb-onboarding-03.png",
+    "/media/projects/tyb-onboarding/tyb-onboarding-04.png",
+    "/media/projects/tyb-onboarding/tyb-onboarding-05.png"
+  ]
+}

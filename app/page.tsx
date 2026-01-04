@@ -1,4 +1,5 @@
 'use client';
+import { useEffect, useState } from 'react';
 import styles from "./page.module.css";
 import Scene from './components/Scene';
 import InteractionsSection from './components/InteractionsSection';
@@ -7,8 +8,21 @@ import Bio from './components/Bio';
 import ThemeToggle from './components/ThemeToggle';
 
 export default function Home() {
+  const [shouldAnimate, setShouldAnimate] = useState(false);
+
+  useEffect(() => {
+    // Restore scroll position if returning from a project page
+    const savedScrollPosition = sessionStorage.getItem('homeScrollPosition');
+    if (savedScrollPosition) {
+      window.scrollTo(0, parseInt(savedScrollPosition, 10));
+      sessionStorage.removeItem('homeScrollPosition');
+      // Trigger animation when returning
+      setShouldAnimate(true);
+    }
+  }, []);
+
   return (
-    <main className={styles.main}>
+    <main className={`${styles.main} ${shouldAnimate ? styles.fadeIn : ''}`}>
       <div className={styles.container}>
         {/* Scene Section */}
         <section className={styles.sceneSection}>

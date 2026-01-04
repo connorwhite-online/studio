@@ -1,0 +1,80 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100dvh;
+  background: var(--neutral-50);
+  z-index: 9999;
+  padding: 24px 16px;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.overlayClosing {
+  animation: fadeOutBlur 0.4s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOutBlur {
+  from {
+    opacity: 1;
+    filter: blur(0px);
+  }
+  to {
+    opacity: 0;
+    filter: blur(8px);
+  }
+}
+
+.galleryContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.carousel {
+  width: 100%;
+  max-width: 90vw;
+  flex-shrink: 1;
+}
+
+.imageWrapper {
+  width: 100%;
+  max-height: calc(100dvh - 200px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.galleryImage {
+  width: auto;
+  height: auto;
+  max-width: 90vw;
+  max-height: calc(100dvh - 200px);
+  object-fit: contain;
+  border-radius: 12px;
+  display: block;
+}
+
+/* Controls wrapper to keep them together at bottom */
+.controlsWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
