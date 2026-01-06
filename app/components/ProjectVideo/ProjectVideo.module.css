@@ -1,0 +1,28 @@
+.videoContainer {
+  width: 100%;
+  max-width: 500px;
+  cursor: pointer;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--neutral-300);
+  background: var(--neutral-100);
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              border-color 0.3s ease;
+}
+
+.videoContainer:hover {
+  transform: scale(1.01);
+  border-color: var(--neutral-400);
+}
+
+.videoContainer:active {
+  transform: scale(0.99);
+}
+
+.video {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+

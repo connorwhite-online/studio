@@ -171,17 +171,13 @@ export default function ProjectPage({ params }: ProjectPageProps) {
 
 // Helper function to get project content component
 function getProjectContent(projectId: string) {
-  // Import project content components
-  const TybOnboarding = require('@/app/components/projects/tyb-onboarding').default;
-  const TybIntegrations = require('@/app/components/projects/tyb-integrations').default;
-  const WebglGallery = require('@/app/components/projects/webgl-gallery').default;
-
-  const projectComponents: Record<string, React.ComponentType> = {
-    'tyb-onboarding': TybOnboarding,
-    'tyb-integrations': TybIntegrations,
-    'webgl-gallery': WebglGallery,
-  };
-
-  return projectComponents[projectId] || null;
+  try {
+    // Dynamically import project content component based on projectId
+    const ProjectComponent = require(`@/app/components/projects/${projectId}`).default;
+    return ProjectComponent;
+  } catch (error) {
+    // If no component exists for this project, return null
+    return null;
+  }
 }
 
