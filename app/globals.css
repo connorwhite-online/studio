@@ -7,14 +7,22 @@ html, body {
   color: var(--color-main);
 }
 
+/* Force Safari to respect safe-area by referencing it on body */
+/* This ensures Safari calculates safe-area-inset values correctly */
+body {
+  padding: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0) env(safe-area-inset-bottom, 0) env(safe-area-inset-left, 0);
+  background-position: center;
+  box-sizing: border-box;
+}
+
 /* Progressive linear blur at the top of the screen */
 body::before {
   content: '';
   position: fixed;
-  top: calc(-1 * env(safe-area-inset-top, 0));
+  top: calc(-1 * env(safe-area-inset-top, 0px));
   left: 0;
   right: 0;
-  height: calc(80px + env(safe-area-inset-top, 0));
+  height: calc(80px + env(safe-area-inset-top, 0px));
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   z-index: 1000;
