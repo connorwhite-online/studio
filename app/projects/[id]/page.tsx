@@ -90,40 +90,46 @@ export default function ProjectPage({ params }: ProjectPageProps) {
           {/* Project Header */}
           <h1 className={styles.title}>{currentProject.title}</h1>
           
-          {/* Client info with logo - conditionally rendered */}
-          {currentProject.client && (
+          {/* Client info - conditionally rendered per field */}
+          {(currentProject.client || currentProject.logo || currentProject.clientLink || currentProject.clientDescription) && (
             <div className={styles.clientSection}>
-              {currentProject.clientLink ? (
-                <a 
-                  href={currentProject.clientLink} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className={styles.clientInfo}
-                >
-                  {currentProject.logo && (
-                    <Image 
-                      src={currentProject.logo} 
-                      alt={`${currentProject.client} logo`}
-                      width={30}
-                      height={30}
-                      className={styles.clientLogo}
-                    />
-                  )}
-                  <span className={styles.clientName}><b>{currentProject.client}</b></span>
-                </a>
-              ) : (
-                <div className={styles.clientInfo}>
-                  {currentProject.logo && (
-                    <Image 
-                      src={currentProject.logo} 
-                      alt={`${currentProject.client} logo`}
-                      width={30}
-                      height={30}
-                      className={styles.clientLogo}
-                    />
-                  )}
-                  <span className={styles.clientName}><b>{currentProject.client}</b></span>
-                </div>
+              {(currentProject.client || currentProject.logo) && (
+                currentProject.clientLink ? (
+                  <a 
+                    href={currentProject.clientLink} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className={styles.clientInfo}
+                  >
+                    {currentProject.logo && (
+                      <Image 
+                        src={currentProject.logo} 
+                        alt={currentProject.client ? `${currentProject.client} logo` : 'Client logo'}
+                        width={30}
+                        height={30}
+                        className={styles.clientLogo}
+                      />
+                    )}
+                    {currentProject.client && (
+                      <span className={styles.clientName}><b>{currentProject.client}</b></span>
+                    )}
+                  </a>
+                ) : (
+                  <div className={styles.clientInfo}>
+                    {currentProject.logo && (
+                      <Image 
+                        src={currentProject.logo} 
+                        alt={currentProject.client ? `${currentProject.client} logo` : 'Client logo'}
+                        width={30}
+                        height={30}
+                        className={styles.clientLogo}
+                      />
+                    )}
+                    {currentProject.client && (
+                      <span className={styles.clientName}><b>{currentProject.client}</b></span>
+                    )}
+                  </div>
+                )
               )}
               {currentProject.clientDescription && (
                 <p className={styles.clientDescription}>{currentProject.clientDescription}</p>
@@ -137,17 +143,19 @@ export default function ProjectPage({ params }: ProjectPageProps) {
             <p className={styles.overview}>{currentProject.overview}</p>
           </div>
 
-          {/* Team section */}
-          <div className={styles.teamSection}>
-            <h4 style={{ color: 'var(--secondary)' }}>Team</h4>
-            <ul className={styles.teamList}>
-              {currentProject.team.map((member, index) => (
-                <li key={index}>
-                  <p>{member}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* Team section - conditionally rendered */}
+          {currentProject.team && currentProject.team.length > 0 && (
+            <div className={styles.teamSection}>
+              <h4 style={{ color: 'var(--secondary)' }}>Team</h4>
+              <ul className={styles.teamList}>
+                {currentProject.team.map((member, index) => (
+                  <li key={index}>
+                    <p>{member}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           {/* Project-specific content */}
           {ProjectContent && <ProjectContent />}
