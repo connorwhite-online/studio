@@ -25,7 +25,7 @@ export default function CVWidget({ className = '' }: CVWidgetProps) {
                 <small style={{ color: 'var(--secondary)' }}>2024 - Present</small>
             </div>
             <p>
-                I currently lead design engineering across all surface areas, spending 75% of my time in Figma, and the other 25% in code. Before that, I worked on the b2b client web-app, leading a massive redesign of the platform.     
+                Currently designing the future of brand loyalty, primarily on the brand admin platform. In the time I've been at TYB we've scaled from 1k MAU to around 100k.     
             </p>
         </div>
         <div className={styles.cvItem}>
