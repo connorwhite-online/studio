@@ -2,13 +2,16 @@
 
 import React, { useState } from 'react';
 import styles from './ProjectVideo.module.css';
-import ProjectImageGallery from '../ProjectImageGallery';
+import ProjectImageGallery, { MediaItem } from '../ProjectImageGallery';
+
+// Import project images manifest
+import projectImagesData from '@/public/media/projects/images.json';
 
 interface ProjectVideoProps {
   src: string;
   alt: string;
-  projectId?: string; // Optional: for future integration with media manifest
-  galleryMedia?: Array<{type: 'image' | 'video', src: string}>; // Optional: manually specify gallery media
+  projectId?: string; // Optional: auto-load all media for this project
+  galleryMedia?: MediaItem[]; // Optional: manually specify gallery media
   priority?: boolean;
 }
 
@@ -23,11 +26,19 @@ export default function ProjectVideo({
   const [initialIndex, setInitialIndex] = useState(0);
 
   // Determine which media to use for the gallery
-  let media: Array<{type: 'image' | 'video', src: string}> = [];
+  let media: MediaItem[] = [];
   
   if (galleryMedia && galleryMedia.length > 0) {
     // Use manually specified gallery media
     media = galleryMedia;
+  } else if (projectId && projectImagesData[projectId as keyof typeof projectImagesData]) {
+    // Auto-load media from manifest for this project
+    const images = projectImagesData[projectId as keyof typeof projectImagesData];
+    media = images.map(img => {
+      // Detect video files by extension
+      const isVideo = /\.(mov|mp4|webm|ogg|avi|wmv|flv|mkv)$/i.test(img);
+      return { type: isVideo ? 'video' : 'image', src: img } as MediaItem;
+    });
   } else {
     // Fallback to single video
     media = [{type: 'video', src}];

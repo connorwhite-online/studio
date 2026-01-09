@@ -37,7 +37,7 @@ export default function Sqft() {
 
       <ProjectVideo
         src="/media/projects/sqft/sqft-desktop.mov"
-        alt="Full site animations and 3D model interactions"
+        alt="3D model interactions on desktop"
         projectId="sqft"
         galleryMedia={galleryMedia}
       />
@@ -54,14 +54,14 @@ export default function Sqft() {
 
       <ProjectImage
         src="/media/projects/sqft/sqft-03.png"
-        alt="Sq Ft Storefront"
+        alt="Magazine 3D model raw"
         projectId="sqft"
         galleryMedia={galleryMedia}
       />
     <div className={styles.section}>
       <ProjectImage
         src="/media/projects/sqft/sqft-06.PNG"
-        alt="Magazine 3D Modeling Process"
+        alt="Magazine 3D modeling process"
         projectId="sqft"
         galleryMedia={galleryMedia}
       />

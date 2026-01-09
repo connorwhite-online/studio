@@ -60,6 +60,10 @@ export default function ProjectPage({ params }: ProjectPageProps) {
   }
 
   const handleHome = () => {
+    // Store the current project index so carousel can restore it
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('carouselIndex', currentIndex.toString());
+    }
     router.push('/');
   };
 

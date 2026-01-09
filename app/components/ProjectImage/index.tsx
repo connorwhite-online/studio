@@ -40,7 +40,11 @@ export default function ProjectImage({
   } else if (projectId && projectImagesData[projectId as keyof typeof projectImagesData]) {
     // Auto-load images from manifest for this project
     const images = projectImagesData[projectId as keyof typeof projectImagesData];
-    media = images.map(img => ({ type: 'image', src: img }));
+    media = images.map(img => {
+      // Detect video files by extension
+      const isVideo = /\.(mov|mp4|webm|ogg|avi|wmv|flv|mkv)$/i.test(img);
+      return { type: isVideo ? 'video' : 'image', src: img } as MediaItem;
+    });
   } else {
     // Fallback to single image
     media = [{ type: 'image', src }];

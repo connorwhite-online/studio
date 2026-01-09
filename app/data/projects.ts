@@ -41,18 +41,18 @@ export const projects: Project[] = [
     clientLink: `https://tyb.xyz`,
     logo: `/media/projects/logos/tyb-logo.png`,
     coverImage: `/media/projects/tyb-forms/tyb-forms-cover.png`,
-    overview: `Here's a little sample copy. I'll write something soon.`,
+    overview: `Forms on TYB's admin app contain loads of complexity, and previously lacked any real organization, hierarchy, or preview of what they were outputting. Starting with the challenge form (the app's core engagement loop), we overhauled forms across the board to nest related settings, segment out required and optional fields, and ouput the exact UI that would appear in the consumer app to users`,
     team: [`Connor White - Product Designer, Engineer`, `Kirill Gorin - Engineer`, `Mady Dewey - Product Manager`]
   },
   {
     id: `blackbird`,
     title: `Restaurant loyalty rewards`,
     client: `Blackbird`,
-    clientDescription: `Try Your Best (TYB) is building the future of brand loyalty. Fans connect with the brands they love, shop products, and earn rewards.`,
+    clientDescription: `Blackbird is the loyalty company that rewards people who love restaurants. Featured in The New York Times, Fast Company, and Time for its innovative design and transformative payments experience.`,
     clientLink: `https://blackbird.xyz`,
-    logo: `/media/projects/logos/blackbird-logo.png`,
+    logo: `/media/projects/logos/logo-blackbird.png`,
     coverImage: `/media/projects/blackbird/blackbird-cover.png`,
-    overview: `Here's a little sample copy. I'll write something soon.`,
+    overview: `In collaboration with a friend and lead product designer, Andrew Braswell, I built custom 3D assets for the Blackbird app. From SVGs that Andrew designed, I modeled the tokens and optimized them for real-time rendering using three.js on React Native.`,
     team: [`Connor White - 3D Designer, Engineer`, `Andrew Braswell - Product Designer`]
   },
   {
@@ -61,7 +61,7 @@ export const projects: Project[] = [
     client: `Sq Ft`,
     clientDescription: `Sq Ft is a magazine shining a light on artists and how they shape and are shaped by the spaces they occupy.`,
     clientLink: `https://readsqft.com`,
-    logo: `/media/projects/logos/sqft-logo.png`,
+    logo: `/media/projects/logos/logo-sqft.png`,
     coverImage: `/media/projects/sqft/sqft-cover.png`,
     overview: `I designed and built a site for Sq Ft that features an interactive 3D model of the magazine. The movement of the site’s elements mirrors the horizontal page turning of the physical magazine. The site is fully Shopify integrated, with an integrated checkout experience. I modeled the magazine in Blender and handled the interaction with three.js. `,
     team: [`Connor White - Product Designer, Engineer, 3D-Designer`, `Sean Brown - Creative Director`, `Desiree Deleau - Graphic Designer`]
@@ -72,7 +72,7 @@ export const projects: Project[] = [
     client: `Manipulate`,
     clientLink: `https://manipulate-beige.vercel.app/`,
     logo: `/media/projects/logos/manipulate-logo.png`,
-    coverImage: `/media/projects/tyb-forms/tyb-forms-cover.png`,
+    coverImage: `/media/projects/manipulate/manipulate-cover.png`,
     overview: `“Manipulate” is a foray into a possible future of human-computer interaction. Utilizing a machine-learning model, users manipulate a 3D model by rotating their hand within the camera’s view. Beyond the obvious theatrics, this interaction pattern has a few advantages. Primarily, the user interacts with a 3D model using a 3D input, their hand. This eliminates cognitive translation, when the model reacts, exactly as their hand does, to physical movement. Additionally, the lack of fine motor precision needed here opens up a new world of accessibility to users that struggle with cursor navigation.`,
   }
 ];

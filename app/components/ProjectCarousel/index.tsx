@@ -90,9 +90,10 @@ export default function ProjectCarousel({
   }, [emblaApi, onInit, onSelect]);
 
   const handleProjectClick = (projectId: string) => {
-    // Store current scroll position before navigating
+    // Store current scroll position and carousel index before navigating
     if (typeof window !== 'undefined') {
       sessionStorage.setItem('homeScrollPosition', window.scrollY.toString());
+      sessionStorage.setItem('carouselIndex', selectedIndex.toString());
     }
     router.push(`/projects/${projectId}`);
   };

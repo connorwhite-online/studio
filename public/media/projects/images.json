@@ -1,6 +1,9 @@
 {
   "logos": [
-    "/media/projects/logos/tyb-logo.png"
+    "/media/projects/logos/tyb-logo.png",
+    "/media/projects/logos/logo-blackbird.png",
+    "/media/projects/logos/logo-sqft.png",
+    "/media/projects/logos/manipulate-logo.png"
   ],
   "tyb-integrations": [
     "/media/projects/tyb-integrations/tyb-integrations-01.png",
@@ -14,12 +17,34 @@
     "/media/projects/tyb-onboarding/tyb-onboarding-02.png",
     "/media/projects/tyb-onboarding/tyb-onboarding-03.png",
     "/media/projects/tyb-onboarding/tyb-onboarding-04.png",
-    "/media/projects/tyb-onboarding/tyb-onboarding-05.png"
+    "/media/projects/tyb-onboarding/tyb-onboarding-challenges.png",
+    "/media/projects/tyb-onboarding/tyb-onboarding-05.png",
+    "/media/projects/tyb-onboarding/tyb-onboarding-checklist-web.mp4"
+  ],
+  "tyb-forms": [
+    "/media/projects/tyb-forms/tyb-forms-challenge.png",
+    "/media/projects/tyb-forms/tyb-forms-02.png",
+    "/media/projects/tyb-forms/tyb-forms-03.png",
+    "/media/projects/tyb-forms/tyb-forms-04.png",
+    "/media/projects/tyb-forms/tyb-forms-previous.png",
+    "/media/projects/tyb-forms/tyb-forms-interaction.mp4"
   ],
   "sqft": [
     "/media/projects/sqft/sqft-01.png",
     "/media/projects/sqft/sqft-02.png",
     "/media/projects/sqft/sqft-03.png",
-    "/media/projects/sqft/sqft-06.PNG"
+    "/media/projects/sqft/sqft-06.PNG",
+    "/media/projects/sqft/sqft-cover.png",
+    "/media/projects/sqft/sqft-desktop.mov",
+    "/media/projects/sqft/sqft-05.MP4"
+  ],
+  "blackbird": [
+    "/media/projects/blackbird/blackbird-01.png",
+    "/media/projects/blackbird/blackbird-screen-capture.mov",
+    "/media/projects/blackbird/blackbird-02.png",
+    "/media/projects/blackbird/blackbird-blender-file.PNG"
+  ],
+  "manipulate": [
+    "/media/projects/manipulate/manipulatev2.mp4"
   ]
 }
