@@ -9,7 +9,7 @@ export default function Sqft() {
   const galleryMedia: MediaItem[] = [
     { type: 'image', src: '/media/projects/sqft/sqft-01.png' },
     { type: 'image', src: '/media/projects/sqft/sqft-02.png' },
-    { type: 'video', src: '/media/projects/sqft/sqft-04.mov' },
+    { type: 'video', src: '/media/projects/sqft/sqft-desktop.mov' },
     { type: 'video', src: '/media/projects/sqft/sqft-05.MP4' },
     { type: 'image', src: '/media/projects/sqft/sqft-03.png' },
     { type: 'image', src: '/media/projects/sqft/sqft-06.PNG' },
@@ -36,7 +36,7 @@ export default function Sqft() {
       </div>
 
       <ProjectVideo
-        src="/media/projects/sqft/sqft-04.mov"
+        src="/media/projects/sqft/sqft-desktop.mov"
         alt="Full site animations and 3D model interactions"
         projectId="sqft"
         galleryMedia={galleryMedia}
