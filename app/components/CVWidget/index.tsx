@@ -25,7 +25,7 @@ export default function CVWidget({ className = '' }: CVWidgetProps) {
                 <small style={{ color: 'var(--secondary)' }}>2024 - Present</small>
             </div>
             <p>
-                Currently designing the future of brand loyalty, primarily on the brand admin platform. In the time I've been at TYB we've scaled from 1k MAU to around 100k.     
+                Currently designing the future of brand loyalty, primarily on the brand admin platform. In the time I&apos;ve been at TYB we&apos;ve scaled from 1k MAU to around 100k.     
             </p>
         </div>
         <div className={styles.cvItem}>
