@@ -11,7 +11,7 @@ html, body {
 body::before {
   content: '';
   position: fixed;
-  top: 0;
+  top: calc(-1 * env(safe-area-inset-top, 0));
   left: 0;
   right: 0;
   height: calc(80px + env(safe-area-inset-top, 0));
@@ -320,6 +320,34 @@ small {
 
 video::-webkit-media-controls {
   display: none;
+}
+
+/* Unified button styles for Home, Next, Previous, Close buttons */
+.navButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--secondary);
+  padding: 0;
+  transition: color 0.2s ease, transform 0.1s ease;
+  appearance: none;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.navButton p {
+  color: inherit;
+}
+
+.navButton:hover {
+  color: var(--primary);
+}
+
+.navButton:active {
+  transform: scale(0.97);
 }
 
 @media screen and (min-width: 768px) {

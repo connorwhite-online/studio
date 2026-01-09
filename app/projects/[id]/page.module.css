@@ -1,0 +1,161 @@
+.page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--bg-main);
+  display: flex;
+  flex-direction: column;
+}
+
+.fadeIn {
+  animation: fadeInBlur 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeInBlur {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+.homeButtonWrapper {
+  margin-bottom: 24px;
+  margin-top: 12px;
+}
+
+.scrollContainer {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.content {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.title {
+  font-family: var(--bold);
+  font-size: 28px;
+  color: var(--neutral-950);
+  margin: 0;
+}
+
+.clientSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.clientInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+  width: fit-content;
+  position: relative;
+}
+
+a.clientInfo {
+  color: inherit;
+  cursor: pointer;
+}
+
+/* Disable the global link underline animation for clientInfo */
+a.clientInfo::after {
+  display: none !important;
+}
+
+a.clientInfo:hover {
+  opacity: 0.7;
+}
+
+.clientLogo {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  object-fit: contain;
+  flex-shrink: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background: var(--neutral-100);
+  border: 1px solid var(--neutral-300);
+}
+
+.logoSkeleton {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: linear-gradient(
+    90deg,
+    var(--neutral-200) 0%,
+    var(--neutral-300) 50%,
+    var(--neutral-200) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+  flex-shrink: 0;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.overviewSection {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.teamSection {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 24px;
+}
+
+.teamList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.teamList li {
+  display: block;
+  padding: 0;
+  margin: 0;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--neutral-300);
+}
+
+.pageNavButton {
+  gap: 8px;
+}
+

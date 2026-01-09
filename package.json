@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate-images": "node scripts/generate-project-images.js"
   },
   "dependencies": {
     "@gsap/react": "^2.1.0",
