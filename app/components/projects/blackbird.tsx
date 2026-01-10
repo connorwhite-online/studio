@@ -27,7 +27,7 @@ export default function Blackbird() {
       />
 
       <ProjectImage
-        src="/media/projects/blackbird/blackbird-blender-file.png"
+        src="/media/projects/blackbird/blackbird-blender-file.PNG"
         alt="Screenshot of Blender file working on tokens"
         projectId="blackbird"
       />
