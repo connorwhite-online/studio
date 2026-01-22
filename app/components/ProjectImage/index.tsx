@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import styles from './ProjectImage.module.css';
 import ProjectImageGallery, { MediaItem } from '../ProjectImageGallery';
+import MediaSkeleton from '../MediaSkeleton';
 
 // Import project images manifest
 import projectImagesData from '@/public/media/projects/images.json';
@@ -27,6 +28,24 @@ export default function ProjectImage({
 }: ProjectImageProps) {
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [initialIndex, setInitialIndex] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Check if image is already loaded (cached)
+  useEffect(() => {
+    const img = new window.Image();
+    img.onload = () => {
+      setIsLoading(false);
+    };
+    img.onerror = () => {
+      setIsLoading(false);
+    };
+    img.src = src;
+    
+    // Check if image is already cached
+    if (img.complete) {
+      setIsLoading(false);
+    }
+  }, [src]);
 
   // Determine which media to use for the gallery
   let media: MediaItem[] = [];
@@ -64,6 +83,11 @@ export default function ProjectImage({
   return (
     <>
       <div className={styles.imageContainer} onClick={handleImageClick}>
+        {isLoading && (
+          <div className={styles.skeletonWrapper}>
+            <MediaSkeleton />
+          </div>
+        )}
         <Image
           src={src}
           alt={alt}
@@ -71,6 +95,10 @@ export default function ProjectImage({
           height={800}
           className={styles.image}
           priority={priority}
+          onLoadingComplete={() => setIsLoading(false)}
+          onLoad={() => setIsLoading(false)}
+          onError={() => setIsLoading(false)}
+          style={{ display: isLoading ? 'none' : 'block' }}
         />
       </div>
 

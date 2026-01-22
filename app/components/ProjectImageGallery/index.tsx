@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useEffect, useCallback, useState } from 'react';
+import React, { useEffect, useCallback, useState, useMemo } from 'react';
 import Image from 'next/image';
 import styles from './ProjectImageGallery.module.css';
 import Carousel from '../Carousel';
 import Close from '@/app/icons/Close';
+import MediaSkeleton from '../MediaSkeleton';
 
 export type MediaItem = {
   type: 'image' | 'video';
@@ -25,9 +26,48 @@ export default function ProjectImageGallery({
   onClose 
 }: ProjectImageGalleryProps) {
   const [isClosing, setIsClosing] = useState(false);
+  const [loadedMedia, setLoadedMedia] = useState<Set<number>>(new Set());
   
   // Convert images array to media format for backward compatibility
-  const mediaItems: MediaItem[] = media || (images?.map(src => ({ type: 'image' as const, src })) ?? []);
+  const mediaItems: MediaItem[] = useMemo(() => 
+    media || (images?.map(src => ({ type: 'image' as const, src })) ?? []),
+    [media, images]
+  );
+
+  // Check if initial media is already loaded (cached)
+  useEffect(() => {
+    mediaItems.forEach((item, index) => {
+      if (item.type === 'image') {
+        const img = new window.Image();
+        img.onload = () => {
+          setLoadedMedia(prev => new Set(prev).add(index));
+        };
+        img.onerror = () => {
+          setLoadedMedia(prev => new Set(prev).add(index));
+        };
+        img.src = item.src;
+        
+        if (img.complete) {
+          setLoadedMedia(prev => new Set(prev).add(index));
+        }
+      } else {
+        // For videos, check if they're already loaded
+        const video = document.createElement('video');
+        video.onloadeddata = () => {
+          setLoadedMedia(prev => new Set(prev).add(index));
+        };
+        video.onerror = () => {
+          setLoadedMedia(prev => new Set(prev).add(index));
+        };
+        video.src = item.src;
+        video.preload = 'metadata';
+        
+        if (video.readyState >= 2) {
+          setLoadedMedia(prev => new Set(prev).add(index));
+        }
+      }
+    });
+  }, [mediaItems]);
   
   // Handle the close animation
   const handleClose = useCallback(() => {
@@ -78,6 +118,11 @@ export default function ProjectImageGallery({
         >
           {mediaItems.map((item, index) => (
             <div key={index} className={styles.imageWrapper}>
+              {!loadedMedia.has(index) && (
+                <div className={styles.skeletonWrapper}>
+                  <MediaSkeleton />
+                </div>
+              )}
               {item.type === 'image' ? (
                 <Image
                   src={item.src}
@@ -86,6 +131,10 @@ export default function ProjectImageGallery({
                   height={1080}
                   className={styles.galleryImage}
                   priority={index === initialIndex}
+                  onLoadingComplete={() => setLoadedMedia(prev => new Set(prev).add(index))}
+                  onLoad={() => setLoadedMedia(prev => new Set(prev).add(index))}
+                  onError={() => setLoadedMedia(prev => new Set(prev).add(index))}
+                  style={{ display: loadedMedia.has(index) ? 'block' : 'none' }}
                 />
               ) : (
                 <video
@@ -96,6 +145,10 @@ export default function ProjectImageGallery({
                   muted
                   playsInline
                   preload={index === initialIndex ? "auto" : "metadata"}
+                  onLoadedData={() => setLoadedMedia(prev => new Set(prev).add(index))}
+                  onCanPlay={() => setLoadedMedia(prev => new Set(prev).add(index))}
+                  onError={() => setLoadedMedia(prev => new Set(prev).add(index))}
+                  style={{ display: loadedMedia.has(index) ? 'block' : 'none' }}
                 >
                   Your browser does not support the video tag.
                 </video>

@@ -23,6 +23,17 @@ export const projects: Project[] = [
     team: [`Connor White - Product Designer, Interaction Engineer`, `Kirill Gorin - Tech Lead, Engineer`, `Victor Oliveira - Engineer`, `Thiago Lemos - Backend Engineer`, `Julia Ama - Product Manager`]
   },
   {
+    id: `tyb-leaderboard`,
+    title: `Gameifying user engagement`,
+    client: `Try Your Best`,
+    clientDescription: `Try Your Best (TYB) is building the future of brand loyalty. Fans connect with the brands they love, shop products, and earn rewards.`,
+    clientLink: `https://tyb.xyz`,
+    logo: `/media/projects/logos/tyb-logo.png`,
+    coverImage: `/media/projects/tyb-leaderboard/tyb-leaderboard-cover.png`,
+    overview: `In order to incentivize engagement in TYB's core loops like challenges and product reviews, we introduced leaderboards at a global and brand level. On the global leaderboard, users earn real products, leading to dramatically higher day-1 engagement because of the lack of education needed to understand earned value conversion on the app.`,
+    team: [`Connor White - Product Designer, Interaction Engineer`, `Iris Ivanyi - Product Designer`, `George Carvalho - Backend Engineer`, `Thiago Lemos - Backend Engineer`, `Mady Dewey - Product Manager`]
+  },
+  {
     id: `tyb-integrations`,
     title: `Effortless integrations`,
     client: `Try Your Best`,

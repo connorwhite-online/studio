@@ -10,6 +10,15 @@
   background: var(--neutral-100);
   transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
               border-color 0.3s ease;
+  position: relative;
+}
+
+.skeletonWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 
 .imageContainer:hover {

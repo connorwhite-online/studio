@@ -7,6 +7,7 @@ import styles from './ProjectCarousel.module.css';
 import ArrowRight from '@/app/icons/ArrowRight';
 import ArrowLeft from '@/app/icons/ArrowLeft';
 import { projects, Project } from '@/app/data/projects';
+import MediaSkeleton from '../MediaSkeleton';
 
 interface ProjectCarouselProps {
   currentIndex?: number;
@@ -30,6 +31,27 @@ export default function ProjectCarousel({
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
   const [titleKey, setTitleKey] = useState(0); // Key to force title re-render for animation
+  const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
+
+  // Check if images are already loaded (cached)
+  useEffect(() => {
+    projects.forEach((project, index) => {
+      const img = new window.Image();
+      img.onload = () => {
+        setLoadedImages(prev => new Set(prev).add(index));
+      };
+      img.onerror = () => {
+        // If image fails to load, still mark as "loaded" to hide skeleton
+        setLoadedImages(prev => new Set(prev).add(index));
+      };
+      img.src = project.coverImage;
+      
+      // Check if image is already cached
+      if (img.complete) {
+        setLoadedImages(prev => new Set(prev).add(index));
+      }
+    });
+  }, []);
 
   // Sync with external index if provided
   useEffect(() => {
@@ -112,10 +134,18 @@ export default function ProjectCarousel({
                   style={{ cursor: isActive ? 'pointer' : 'default' }}
                 >
                   <div className={styles.coverImage}>
+                    {!loadedImages.has(index) && (
+                      <div className={styles.skeletonWrapper}>
+                        <MediaSkeleton className={styles.fullSizeSkeleton} />
+                      </div>
+                    )}
                     <img 
                       src={project.coverImage} 
                       alt={project.title}
                       className={styles.coverImageImg}
+                      style={{ display: loadedImages.has(index) ? 'block' : 'none', position: 'relative', zIndex: 2 }}
+                      onLoad={() => setLoadedImages(prev => new Set(prev).add(index))}
+                      onError={() => setLoadedImages(prev => new Set(prev).add(index))}
                     />
                   </div>
                 </div>
