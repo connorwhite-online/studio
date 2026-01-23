@@ -3,12 +3,14 @@
 import React, { useCallback, useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { createPortal } from 'react-dom';
 import useEmblaCarousel from 'embla-carousel-react';
 import styles from './ProjectCarousel.module.css';
 import ArrowRight from '@/app/icons/ArrowRight';
 import ArrowLeft from '@/app/icons/ArrowLeft';
 import { projects, Project } from '@/app/data/projects';
 import MediaSkeleton from '../MediaSkeleton';
+import Loader from '../Loader';
 
 interface ProjectCarouselProps {
   currentIndex?: number;
@@ -33,8 +35,15 @@ export default function ProjectCarousel({
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
   const [titleKey, setTitleKey] = useState(0); // Key to force title re-render for animation
   const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
+  const [isNavigating, setIsNavigating] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const isInternalUpdateRef = useRef(false); // Track if update is from internal carousel interaction
   const hasInitializedRef = useRef(false); // Track if we've done initial setup
+
+  // Track mounted state for portal
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Check if images are already loaded (cached)
   useEffect(() => {
@@ -136,12 +145,20 @@ export default function ProjectCarousel({
       sessionStorage.setItem('homeScrollPosition', window.scrollY.toString());
       sessionStorage.setItem('carouselIndex', selectedIndex.toString());
     }
+    setIsNavigating(true);
     router.push(`/projects/${projectId}`);
   };
 
   return (
-    <div className={styles.carousel}>
-      <div className={styles.embla} ref={emblaRef}>
+    <>
+      {isMounted && isNavigating && createPortal(
+        <div className={styles.loadingOverlay}>
+          <Loader size={50} />
+        </div>,
+        document.body
+      )}
+      <div className={styles.carousel}>
+        <div className={styles.embla} ref={emblaRef}>
         <div className={styles.emblaContainer}>
           {projects.map((project, index) => {
             const isActive = index === selectedIndex;
@@ -218,7 +235,8 @@ export default function ProjectCarousel({
           <ArrowRight />
         </button>
       </div>
-    </div>
+      </div>
+    </>
   );
 }
 

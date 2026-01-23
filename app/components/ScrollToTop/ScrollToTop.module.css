@@ -1,0 +1,65 @@
+.scrollToTop {
+  position: fixed;
+  left: calc(50% + 266px); /* 16px to the right of the 500px centered content (250px + 16px) */
+  top: 80px;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  border: 1px solid var(--neutral-300);
+  background: color-mix(in srgb, var(--bg-main) 70%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--neutral-950);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px) scale(0.95);
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.2s ease,
+              box-shadow 0.2s ease;
+  z-index: 100;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.scrollToTop:hover {
+  background: color-mix(in srgb, var(--bg-main) 85%, transparent);
+  transform: translateY(-2px) scale(1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.scrollToTop:active {
+  transform: translateY(0) scale(1);
+}
+
+.scrollToTop.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .scrollToTop {
+    left: auto;
+    right: 8px;
+    top: auto;
+    bottom: 8px;
+    width: 40px;
+    height: 40px;
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                visibility 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                background 0.2s ease,
+                box-shadow 0.2s ease,
+                bottom 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  .scrollToTop.atBottom {
+    bottom: 60px;
+  }
+}

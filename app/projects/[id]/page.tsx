@@ -3,11 +3,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { createPortal } from 'react-dom';
 import styles from './page.module.css';
 import ArrowLeft from '@/app/icons/ArrowLeft';
 import ArrowRight from '@/app/icons/ArrowRight';
 import { projects, Project } from '@/app/data/projects';
 import Return from '@/app/icons/Return';
+import Loader from '@/app/components/Loader';
+import ScrollToTop from '@/app/components/ScrollToTop';
 
 interface ProjectPageProps {
   params: {
@@ -19,12 +22,19 @@ export default function ProjectPage({ params }: ProjectPageProps) {
   const router = useRouter();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [isAnimating, setIsAnimating] = useState(true);
+  const [isNavigating, setIsNavigating] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const projectId = params.id;
   const currentProject = projects.find(p => p.id === projectId);
   const currentIndex = projects.findIndex(p => p.id === projectId);
   
   const prevProject = currentIndex > 0 ? projects[currentIndex - 1] : projects[projects.length - 1];
   const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex + 1] : projects[0];
+
+  // Track mounted state for portal
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Trigger animation and scroll to top when project changes
   useEffect(() => {
@@ -64,14 +74,17 @@ export default function ProjectPage({ params }: ProjectPageProps) {
     if (typeof window !== 'undefined') {
       sessionStorage.setItem('carouselIndex', currentIndex.toString());
     }
+    setIsNavigating(true);
     router.push('/');
   };
 
   const handlePrevious = () => {
+    setIsNavigating(true);
     router.push(`/projects/${prevProject.id}`);
   };
 
   const handleNext = () => {
+    setIsNavigating(true);
     router.push(`/projects/${nextProject.id}`);
   };
 
@@ -79,7 +92,17 @@ export default function ProjectPage({ params }: ProjectPageProps) {
   const ProjectContent = getProjectContent(projectId);
 
   return (
-    <div className={`${styles.page} ${isAnimating ? styles.fadeIn : ''}`} key={projectId}>
+    <>
+      {isMounted && isNavigating && createPortal(
+        <div className={styles.loadingOverlay}>
+          <Loader size={50} />
+        </div>,
+        document.body
+      )}
+      <div className={`${styles.page} ${isAnimating ? styles.fadeIn : ''}`} key={projectId}>
+      {/* Scroll to top button */}
+      <ScrollToTop scrollContainerRef={scrollContainerRef} />
+      
       {/* Scrollable content */}
       <div className={styles.scrollContainer} ref={scrollContainerRef}>
         <div className={styles.content}>
@@ -177,7 +200,8 @@ export default function ProjectPage({ params }: ProjectPageProps) {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 }
 
