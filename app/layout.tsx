@@ -7,7 +7,7 @@ import BlurEntryAnimation from './components/BlurEntryAnimation';
 
 export const metadata: Metadata = {
   title: {
-    default: "Connor White — Software Designer & Engineer",
+    default: "Connor White | Software Designer & Engineer",
     template: "%s | Connor White",
   },
   description: "Work from the personal studio of software designer and engineer, Connor White.",
@@ -22,22 +22,22 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "/",
-    title: "Connor White — Software Designer & Engineer",
-    description: "Work from the personal studio of software designer and engineer, Connor White.",
+    title: "Connor White | Software Designer & Engineer",
+    description: "A catalog of my product and interaction design work.",
     siteName: "Connor White",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Connor White — Software Designer & Engineer",
+        alt: "Connor White | Software Designer & Engineer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Connor White — Software Designer & Engineer",
-    description: "Work from the personal studio of software designer and engineer, Connor White.",
+    title: "Connor White | Software Designer & Engineer",
+    description: "A catalog of my product and interaction design work.",
     creator: "@connor_online",
     images: ["/og-image.png"],
   },
