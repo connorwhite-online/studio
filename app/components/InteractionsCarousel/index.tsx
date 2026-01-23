@@ -43,27 +43,7 @@ export default function InteractionsCarousel({
   const [galleryInitialIndex, setGalleryInitialIndex] = useState(0);
   const [galleryCurrentIndex, setGalleryCurrentIndex] = useState(0);
   const lastNotifiedIndexRef = useRef<number | null>(null); // Track last index we notified parent about
-
-  // Check if videos are already loaded (cached)
-  useEffect(() => {
-    mediaItems.forEach((item, index) => {
-      const video = document.createElement('video');
-      video.oncanplaythrough = () => {
-        setLoadedVideos(prev => new Set(prev).add(index));
-      };
-      video.onerror = () => {
-        // If video fails to load, still mark as "loaded" to hide skeleton
-        setLoadedVideos(prev => new Set(prev).add(index));
-      };
-      video.src = item.videoUrl;
-      video.preload = 'metadata';
-      
-      // Check if video is already cached
-      if (video.readyState >= 2) {
-        setLoadedVideos(prev => new Set(prev).add(index));
-      }
-    });
-  }, [mediaItems]);
+  const loadTimeoutsRef = useRef<Record<number, NodeJS.Timeout>>({});
 
   // Sync with external index if provided
   // Only sync if external index is different from both selectedIndex AND what we last notified
@@ -132,20 +112,65 @@ export default function InteractionsCarousel({
     }
   }, [onIndexChange]);
 
-  // Play active video and pause others
+  // Play active video, pause others, and trigger loading for nearby videos
   useEffect(() => {
     const playActiveVideo = async () => {
       videoRefs.current.forEach((video, index) => {
         if (video) {
           if (index === selectedIndex) {
-            // Only try to play if video is ready
-            if (video.readyState >= 2) {
+            // Check if already loaded (cached)
+            if (video.readyState >= 2 && !loadedVideos.has(index)) {
+              setLoadedVideos(prev => new Set(prev).add(index));
+            }
+            
+            // Trigger load if not already loading/loaded
+            if (video.readyState === 0) {
+              video.load();
+            }
+            
+            // Set a fallback timeout to hide skeleton after 1 second
+            // This prevents endless skeleton if video metadata takes too long
+            if (!loadedVideos.has(index)) {
+              if (loadTimeoutsRef.current[index]) {
+                clearTimeout(loadTimeoutsRef.current[index]);
+              }
+              loadTimeoutsRef.current[index] = setTimeout(() => {
+                setLoadedVideos(prev => new Set(prev).add(index));
+              }, 1000);
+            }
+            
+            // Try to play if video is loaded and ready
+            if (loadedVideos.has(index) && video.readyState >= 2) {
               video.play().catch(() => {
                 // Autoplay might be blocked by browser policy
               });
             }
+          } else if (Math.abs(index - selectedIndex) <= 1) {
+            // Check if already loaded (cached)
+            if (video.readyState >= 2 && !loadedVideos.has(index)) {
+              setLoadedVideos(prev => new Set(prev).add(index));
+            }
+            
+            // Preload adjacent videos with timeout
+            if (video.readyState === 0) {
+              video.load();
+            }
+            if (!loadedVideos.has(index)) {
+              if (loadTimeoutsRef.current[index]) {
+                clearTimeout(loadTimeoutsRef.current[index]);
+              }
+              loadTimeoutsRef.current[index] = setTimeout(() => {
+                setLoadedVideos(prev => new Set(prev).add(index));
+              }, 2000);
+            }
+            video.pause();
           } else {
             video.pause();
+            // Clear timeout for videos that are no longer nearby
+            if (loadTimeoutsRef.current[index]) {
+              clearTimeout(loadTimeoutsRef.current[index]);
+              delete loadTimeoutsRef.current[index];
+            }
           }
         }
       });
@@ -153,8 +178,10 @@ export default function InteractionsCarousel({
 
     // Small delay to ensure DOM is updated
     const timeoutId = setTimeout(playActiveVideo, 100);
-    return () => clearTimeout(timeoutId);
-  }, [selectedIndex]);
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [selectedIndex, loadedVideos]);
 
   useEffect(() => {
     if (!emblaApi) return;
@@ -169,6 +196,24 @@ export default function InteractionsCarousel({
       emblaApi.off('select', onSelect);
     };
   }, [emblaApi, onInit, onSelect]);
+
+  // Play video when it becomes loaded
+  useEffect(() => {
+    const video = videoRefs.current[selectedIndex];
+    if (video && loadedVideos.has(selectedIndex) && video.readyState >= 2) {
+      video.play().catch(() => {
+        // Autoplay might be blocked
+      });
+    }
+  }, [loadedVideos, selectedIndex]);
+
+  // Cleanup timeouts on unmount
+  useEffect(() => {
+    const timeouts = loadTimeoutsRef.current;
+    return () => {
+      Object.values(timeouts).forEach(clearTimeout);
+    };
+  }, []);
 
   // Convert mediaItems to gallery format
   const galleryMedia: GalleryMediaItem[] = mediaItems.map(item => ({
@@ -223,38 +268,76 @@ export default function InteractionsCarousel({
                     style={{ cursor: isActive ? 'pointer' : 'default' }}
                   >
                     <div className={styles.videoContainer}>
-                      {!loadedVideos.has(index) && (
-                        <div className={styles.skeletonWrapper}>
-                          <MediaSkeleton className={styles.fullSizeSkeleton} />
-                        </div>
-                      )}
                       <video 
                         ref={(el) => {
                           videoRefs.current[index] = el;
+                          // Check readyState immediately for cached videos
+                          // Only update if not already marked as loaded (prevent infinite loop)
+                          if (el && el.readyState >= 2 && !loadedVideos.has(index)) {
+                            setLoadedVideos(prev => new Set(prev).add(index));
+                          }
                         }}
                         src={item.videoUrl}
                         className={styles.video}
-                        autoPlay={isActive}
+                        autoPlay={isActive && loadedVideos.has(index)}
                         loop
                         muted
                         playsInline
-                        preload={isActive ? "auto" : "metadata"}
-                        style={{ display: loadedVideos.has(index) ? 'block' : 'none', position: 'relative', zIndex: 2 }}
+                        preload={
+                          isActive 
+                            ? "auto" 
+                            : Math.abs(index - selectedIndex) <= 1 
+                              ? "metadata" 
+                              : "none"
+                        }
+                        onLoadedMetadata={() => {
+                          // Clear timeout since video loaded successfully
+                          if (loadTimeoutsRef.current[index]) {
+                            clearTimeout(loadTimeoutsRef.current[index]);
+                            delete loadTimeoutsRef.current[index];
+                          }
+                          // Hide skeleton as soon as metadata is loaded (more reliable on mobile)
+                          setLoadedVideos(prev => new Set(prev).add(index));
+                        }}
+                        onLoadedData={() => {
+                          // Clear timeout since video loaded successfully
+                          if (loadTimeoutsRef.current[index]) {
+                            clearTimeout(loadTimeoutsRef.current[index]);
+                            delete loadTimeoutsRef.current[index];
+                          }
+                          // Ensure skeleton is hidden and try to play if active
+                          setLoadedVideos(prev => new Set(prev).add(index));
+                          if (index === selectedIndex && videoRefs.current[index]) {
+                            videoRefs.current[index]?.play().catch(() => {});
+                          }
+                        }}
                         onCanPlayThrough={() => {
+                          // Clear timeout since video loaded successfully
+                          if (loadTimeoutsRef.current[index]) {
+                            clearTimeout(loadTimeoutsRef.current[index]);
+                            delete loadTimeoutsRef.current[index];
+                          }
+                          // Double-check skeleton is hidden
                           setLoadedVideos(prev => new Set(prev).add(index));
                           // Try to play if this is the active video
                           if (index === selectedIndex && videoRefs.current[index]) {
                             videoRefs.current[index]?.play().catch(() => {});
                           }
                         }}
-                        onLoadedData={() => {
-                          // Also try to play when data is loaded
-                          if (index === selectedIndex && videoRefs.current[index]) {
-                            videoRefs.current[index]?.play().catch(() => {});
+                        onError={() => {
+                          // Clear timeout on error
+                          if (loadTimeoutsRef.current[index]) {
+                            clearTimeout(loadTimeoutsRef.current[index]);
+                            delete loadTimeoutsRef.current[index];
                           }
+                          setLoadedVideos(prev => new Set(prev).add(index));
                         }}
-                        onError={() => setLoadedVideos(prev => new Set(prev).add(index))}
                       />
+                      {!loadedVideos.has(index) && (
+                        <div className={styles.skeletonWrapper}>
+                          <MediaSkeleton className={styles.fullSizeSkeleton} />
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>

@@ -164,6 +164,7 @@ export default function ProjectCarousel({
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className={styles.coverImageImg}
+                      priority={index === 0}
                       style={{ display: loadedImages.has(index) ? 'block' : 'none', zIndex: 2 }}
                       onLoad={() => setLoadedImages(prev => new Set(prev).add(index))}
                       onError={() => setLoadedImages(prev => new Set(prev).add(index))}
