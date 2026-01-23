@@ -11,13 +11,19 @@ export default function Home() {
   const [shouldAnimate, setShouldAnimate] = useState(false);
 
   useEffect(() => {
-    // Restore scroll position if returning from a project page
-    const savedScrollPosition = sessionStorage.getItem('homeScrollPosition');
-    if (savedScrollPosition) {
-      window.scrollTo(0, parseInt(savedScrollPosition, 10));
-      sessionStorage.removeItem('homeScrollPosition');
-      // Trigger animation when returning
+    // Check if we're returning from a project page
+    const returningFromProject = sessionStorage.getItem('homeScrollPosition');
+    
+    if (returningFromProject) {
+      // Trigger fade-in animation when returning from project
       setShouldAnimate(true);
+      
+      // Restore scroll position instantly
+      const savedPosition = parseInt(returningFromProject, 10);
+      window.scrollTo(0, savedPosition);
+      
+      // Clean up
+      sessionStorage.removeItem('homeScrollPosition');
     }
   }, []);
 

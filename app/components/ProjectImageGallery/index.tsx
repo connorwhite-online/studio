@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useCallback, useState, useMemo } from 'react';
+import { createPortal } from 'react-dom';
 import Image from 'next/image';
 import styles from './ProjectImageGallery.module.css';
 import Carousel from '../Carousel';
@@ -16,17 +17,29 @@ interface ProjectImageGalleryProps {
   images?: string[]; // Legacy support
   media?: MediaItem[]; // New format supporting both images and videos
   initialIndex?: number;
-  onClose: () => void;
+  onClose: (finalIndex?: number) => void;
+  onIndexChange?: (index: number) => void;
 }
 
 export default function ProjectImageGallery({ 
   images, 
   media,
   initialIndex = 0,
-  onClose 
+  onClose,
+  onIndexChange
 }: ProjectImageGalleryProps) {
   const [isClosing, setIsClosing] = useState(false);
   const [loadedMedia, setLoadedMedia] = useState<Set<number>>(new Set());
+  const [currentIndex, setCurrentIndex] = useState(initialIndex);
+  const [mounted, setMounted] = useState(false);
+  
+  // Memoize the carousel index change handler to prevent unnecessary re-renders
+  const handleCarouselIndexChange = useCallback((index: number) => {
+    setCurrentIndex(index);
+    if (onIndexChange) {
+      onIndexChange(index);
+    }
+  }, [onIndexChange]);
   
   // Convert images array to media format for backward compatibility
   const mediaItems: MediaItem[] = useMemo(() => 
@@ -74,9 +87,14 @@ export default function ProjectImageGallery({
     setIsClosing(true);
     // Wait for animation to complete before actually closing
     setTimeout(() => {
-      onClose();
+      // Call onIndexChange with current index before closing
+      if (onIndexChange) {
+        onIndexChange(currentIndex);
+      }
+      // Pass the final index to onClose callback
+      onClose(currentIndex);
     }, 400); // Match the animation duration
-  }, [onClose]);
+  }, [onClose, onIndexChange, currentIndex]);
   
   // Handle escape key to close gallery
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
@@ -86,6 +104,12 @@ export default function ProjectImageGallery({
   }, [handleClose]);
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+    
     // Prevent body scroll when gallery is open
     document.body.style.overflow = 'hidden';
     
@@ -96,7 +120,7 @@ export default function ProjectImageGallery({
       document.body.style.overflow = '';
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [handleKeyDown]);
+  }, [handleKeyDown, mounted]);
 
   // Handle backdrop click
   const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -105,7 +129,7 @@ export default function ProjectImageGallery({
     }
   };
 
-  return (
+  const galleryContent = (
     <div 
       className={`${styles.overlay} ${isClosing ? styles.overlayClosing : ''}`} 
       onClick={handleBackdropClick}
@@ -115,6 +139,7 @@ export default function ProjectImageGallery({
           className={styles.carousel}
           maxHeight="calc(100vh - 200px)"
           initialIndex={initialIndex}
+          onIndexChange={handleCarouselIndexChange}
         >
           {mediaItems.map((item, index) => (
             <div key={index} className={styles.imageWrapper}>
@@ -168,5 +193,9 @@ export default function ProjectImageGallery({
       </div>
     </div>
   );
+
+  if (!mounted) return null;
+
+  return createPortal(galleryContent, document.body);
 }
 

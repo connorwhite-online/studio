@@ -4,11 +4,16 @@
   left: 0;
   right: 0;
   bottom: 0;
+  width: 100vw;
+  height: 100vh;
   height: 100dvh;
   background: var(--neutral-50);
   z-index: 9999;
   padding: 24px 16px;
+  box-sizing: border-box;
   animation: fadeIn 0.3s ease-out;
+  margin: 0;
+  transform: none;
 }
 
 .overlayClosing {
@@ -47,12 +52,11 @@
 
 .carousel {
   width: 100%;
-  max-width: 90vw;
   flex-shrink: 1;
 }
 
 .imageWrapper {
-  width: 100%;
+  max-width: 100%;
   max-height: calc(100dvh - 200px);
   display: flex;
   align-items: center;
@@ -72,7 +76,7 @@
 .galleryImage {
   width: auto;
   height: auto;
-  max-width: 90vw;
+  max-width: 100%;
   max-height: calc(100dvh - 200px);
   object-fit: contain;
   border-radius: 12px;

@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import useEmblaCarousel from 'embla-carousel-react';
 import styles from './ProjectCarousel.module.css';
 import ArrowRight from '@/app/icons/ArrowRight';
@@ -32,6 +33,8 @@ export default function ProjectCarousel({
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
   const [titleKey, setTitleKey] = useState(0); // Key to force title re-render for animation
   const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
+  const isInternalUpdateRef = useRef(false); // Track if update is from internal carousel interaction
+  const hasInitializedRef = useRef(false); // Track if we've done initial setup
 
   // Check if images are already loaded (cached)
   useEffect(() => {
@@ -53,11 +56,24 @@ export default function ProjectCarousel({
     });
   }, []);
 
-  // Sync with external index if provided
+  // Initialize carousel to external index on mount (instant, no animation)
   useEffect(() => {
-    if (externalIndex !== undefined && emblaApi && externalIndex !== selectedIndex) {
-      emblaApi.scrollTo(externalIndex);
+    if (externalIndex !== undefined && emblaApi && !hasInitializedRef.current && externalIndex !== 0) {
+      // Use jumpTo for instant scroll without animation
+      emblaApi.scrollTo(externalIndex, true); // true = instant, no animation
+      hasInitializedRef.current = true;
     }
+  }, [externalIndex, emblaApi]);
+
+  // Sync with external index changes after initialization (only if not from internal update)
+  useEffect(() => {
+    if (externalIndex !== undefined && emblaApi && hasInitializedRef.current && !isInternalUpdateRef.current) {
+      if (externalIndex !== selectedIndex) {
+        emblaApi.scrollTo(externalIndex);
+      }
+    }
+    // Reset the internal update flag
+    isInternalUpdateRef.current = false;
   }, [externalIndex, emblaApi, selectedIndex]);
 
   const scrollPrev = useCallback(() => {
@@ -97,7 +113,10 @@ export default function ProjectCarousel({
     const newIndex = emblaApi.selectedScrollSnap();
     setSelectedIndex(newIndex);
     setTitleKey(prev => prev + 1); // Trigger title animation
+    
     if (onIndexChange) {
+      // Mark this as an internal update so we don't respond to the resulting prop change
+      isInternalUpdateRef.current = true;
       onIndexChange(newIndex);
     }
   }, [onIndexChange]);
@@ -139,11 +158,13 @@ export default function ProjectCarousel({
                         <MediaSkeleton className={styles.fullSizeSkeleton} />
                       </div>
                     )}
-                    <img 
+                    <Image 
                       src={project.coverImage} 
                       alt={project.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className={styles.coverImageImg}
-                      style={{ display: loadedImages.has(index) ? 'block' : 'none', position: 'relative', zIndex: 2 }}
+                      style={{ display: loadedImages.has(index) ? 'block' : 'none', zIndex: 2 }}
                       onLoad={() => setLoadedImages(prev => new Set(prev).add(index))}
                       onError={() => setLoadedImages(prev => new Set(prev).add(index))}
                     />

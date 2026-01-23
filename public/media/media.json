@@ -2,43 +2,43 @@
   "mediaItems": [
     {
       "id": "1",
-      "videoUrl": "/media/sqft.mp4",
-      "title": "Cursor-Tracking"
+      "videoUrl": "/media/interactions/sqft.mp4",
+      "title": "Cursor-Tracking 3D Rotation"
     },
     {
       "id": "2",
-      "videoUrl": "/media/webgl-gallery.mp4",
-      "title": "WebGL Gallery"
+      "videoUrl": "/media/interactions/webgl-gallery.mp4",
+      "title": "Custom WebGL Shader Gallery"
     },
     {
       "id": "3",
-      "videoUrl": "/media/tyb-sidenav.mp4",
-      "title": "Side Nav"
+      "videoUrl": "/media/interactions/tyb-sidenav.mp4",
+      "title": "SpringySide Nav"
     },
     {
       "id": "4",
-      "videoUrl": "/media/tyb-loader.mp4",
-      "title": "Loading State"
+      "videoUrl": "/media/interactions/tyb-loader.mp4",
+      "title": "Wavy Gradient Loader"
     },
     {
       "id": "5",
-      "videoUrl": "/media/gooey-blob-menu.MP4",
-      "title": "Gooey Nav"
+      "videoUrl": "/media/interactions/gooey-blob-menu.MP4",
+      "title": "Gooey Menu (w/ Slo-mo)"
     },
     {
       "id": "6",
-      "videoUrl": "/media/button-interaction.mp4",
-      "title": "Button Interaction"
+      "videoUrl": "/media/interactions/button-interaction.mp4",
+      "title": "Submit Button Interaction"
     },
     {
       "id": "7",
-      "videoUrl": "/media/theme-modal.mp4",
+      "videoUrl": "/media/interactions/theme-modal.mp4",
       "title": "Theme Modal"
     },
     {
       "id": "8",
-      "videoUrl": "/media/manipulatev2.mp4",
-      "title": "Hand-Tracking"
+      "videoUrl": "/media/interactions/manipulatev2.mp4",
+      "title": "ML Hand-Tracking"
     }
   ]
 } 

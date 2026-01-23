@@ -1,0 +1,93 @@
+.tabbedCarousel {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tabs {
+  display: inline-flex;
+  position: relative;
+  margin: 0 auto 16px;
+  border-radius: 12px;
+  background: var(--neutral-200);
+  padding: 2px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.slidingBackground {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 120px;
+  height: calc(100% - 4px);
+  background: var(--neutral-50);
+  border-radius: 10px;
+  transition: transform 0.4s cubic-bezier(0.34, 1.25, 0.64, 1);
+  z-index: 0;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.tab {
+  width: 120px;
+  padding: 8px 16px;
+  border: none;
+  background: transparent;
+  font-family: var(--medium);
+  font-size: 15px;
+  color: var(--neutral-500);
+  cursor: pointer;
+  transition: color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  z-index: 1;
+  appearance: none;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  text-align: center;
+}
+
+.tabActive {
+  color: var(--neutral-950);
+}
+
+.tab:active {
+  transform: scale(0.98);
+}
+
+.carouselContainer {
+  width: 100%;
+  position: relative;
+}
+
+.carouselWrapper {
+  width: 100%;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: absolute;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+}
+
+.carouselVisible {
+  opacity: 1;
+  pointer-events: auto;
+  position: relative;
+  visibility: visible;
+}
+
+.carouselHidden {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+/* Responsive */
+@media screen and (min-width: 768px) {
+  .tab:hover:not(.tabActive) {
+    color: var(--neutral-800);
+  }
+}

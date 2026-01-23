@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, useRef } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import styles from './Carousel.module.css';
 import ArrowRight from '@/app/icons/ArrowRight';
@@ -13,6 +13,7 @@ interface CarouselProps {
   controlsClassName?: string;
   maxHeight?: string;
   initialIndex?: number;
+  onIndexChange?: (index: number) => void;
 }
 
 export default function Carousel({ 
@@ -21,7 +22,8 @@ export default function Carousel({
   slideClassName = '',
   controlsClassName = '',
   maxHeight = '500px',
-  initialIndex = 0
+  initialIndex = 0,
+  onIndexChange
 }: CarouselProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ 
     loop: false,
@@ -73,16 +75,33 @@ export default function Carousel({
   }, []);
 
   const onSelect = useCallback((emblaApi: any) => {
-    setSelectedIndex(emblaApi.selectedScrollSnap());
+    const newIndex = emblaApi.selectedScrollSnap();
+    setSelectedIndex(newIndex);
   }, []);
+
+  // Use a ref to store the latest onIndexChange callback to avoid re-registering listeners
+  const onIndexChangeRef = useRef(onIndexChange);
+  
+  useEffect(() => {
+    onIndexChangeRef.current = onIndexChange;
+  }, [onIndexChange]);
 
   useEffect(() => {
     if (!emblaApi) return;
 
     onInit(emblaApi);
     onSelect(emblaApi);
+    
+    const handleSelect = (emblaApi: any) => {
+      const newIndex = emblaApi.selectedScrollSnap();
+      setSelectedIndex(newIndex);
+      if (onIndexChangeRef.current) {
+        onIndexChangeRef.current(newIndex);
+      }
+    };
+    
     emblaApi.on('reInit', onInit);
-    emblaApi.on('select', onSelect);
+    emblaApi.on('select', handleSelect);
     
     // Jump to initial index immediately without animation
     if (initialIndex > 0) {
@@ -93,6 +112,11 @@ export default function Carousel({
     setTimeout(() => {
       setIsReady(true);
     }, 50);
+    
+    return () => {
+      emblaApi.off('reInit', onInit);
+      emblaApi.off('select', handleSelect);
+    };
   }, [emblaApi, onInit, onSelect, initialIndex]);
 
   return (

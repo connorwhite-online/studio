@@ -271,7 +271,7 @@ p {
   margin: 0;
 }
 b {
-  font-family: var(--bold);
+  font-family: var(--medium);
   font-size: 15px;
   color: var(--neutral-950);
   margin: 0;
