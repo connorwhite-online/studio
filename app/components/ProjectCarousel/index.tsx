@@ -28,7 +28,8 @@ export default function ProjectCarousel({
     containScroll: 'trimSnaps',
     dragFree: false,
     skipSnaps: false,
-    slidesToScroll: 1
+    slidesToScroll: 1,
+    duration: 25
   });
   
   const [selectedIndex, setSelectedIndex] = useState(0);
