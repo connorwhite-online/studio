@@ -148,37 +148,39 @@ export default function Carousel({
         </div>
       </div>
 
-      {/* Indicators and Navigation */}
-      <div className={`${styles.controls} ${controlsClassName}`}>
-        <button
-          className={styles.navButton}
-          onClick={scrollPrev}
-          aria-label="Previous slide"
-        >
-          <ArrowLeft />
-        </button>
+      {/* Indicators and Navigation - hidden for single items */}
+      {children.length > 1 && (
+        <div className={`${styles.controls} ${controlsClassName}`}>
+          <button
+            className={styles.navButton}
+            onClick={scrollPrev}
+            aria-label="Previous slide"
+          >
+            <ArrowLeft />
+          </button>
 
-        <div className={styles.indicators}>
-          {scrollSnaps.map((_, index) => (
-            <button
-              key={index}
-              className={`${styles.indicator} ${
-                index === selectedIndex ? styles.indicatorActive : ''
-              }`}
-              onClick={() => scrollTo(index)}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
+          <div className={styles.indicators}>
+            {scrollSnaps.map((_, index) => (
+              <button
+                key={index}
+                className={`${styles.indicator} ${
+                  index === selectedIndex ? styles.indicatorActive : ''
+                }`}
+                onClick={() => scrollTo(index)}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
+
+          <button
+            className={styles.navButton}
+            onClick={scrollNext}
+            aria-label="Next slide"
+          >
+            <ArrowRight />
+          </button>
         </div>
-
-        <button
-          className={styles.navButton}
-          onClick={scrollNext}
-          aria-label="Next slide"
-        >
-          <ArrowRight />
-        </button>
-      </div>
+      )}
     </div>
   );
 }

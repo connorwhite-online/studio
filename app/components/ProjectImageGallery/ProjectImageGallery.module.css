@@ -62,6 +62,9 @@
   align-items: center;
   justify-content: center;
   position: relative;
+  border: 1px solid var(--neutral-300);
+  border-radius: 12px;
+  overflow: hidden;
 }
 
 .skeletonWrapper {

@@ -12,6 +12,16 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: `iterate`,
+    title: `Design in your browser`,
+    client: `Iterate`,
+    clientLink: `https://iterate-ui.com`,
+    logo: `/media/projects/logos/iterate-logo.png`,
+    coverImage: `/media/projects/iterate/iterate-cover.png`,
+    overview: `An in-browser toolbar overlay that allows you to iterate on multiple versions of your web app simultaneously. Point at elements and annotate them or move DOM elements around and your agent will start working on changes when you say /go.`,
+    team: [`Connor White - Designer, Engineer`]
+  },
+  {
     id: `tyb-onboarding`,
     title: `Onboarding brands, in record time`,
     client: `Try Your Best`,
