@@ -11,7 +11,7 @@
 
 .fadeIn {
   animation: fadeInBlur 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  opacity: 1; /* Ensure content is visible during animation */
+  opacity: 1;
 }
 
 @keyframes fadeInBlur {

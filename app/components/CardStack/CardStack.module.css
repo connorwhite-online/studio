@@ -47,21 +47,23 @@
   opacity: 0;
 }
 
-/* Stack hover spread */
-.stack:hover .stackCard {
-  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.14)) drop-shadow(0 3px 8px rgba(0, 0, 0, 0.08));
-}
+/* Stack hover spread — desktop only */
+@media (hover: hover) {
+  .stack:hover .stackCard {
+    filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.14)) drop-shadow(0 3px 8px rgba(0, 0, 0, 0.08));
+  }
 
-.stack:hover .stackLeft {
-  transform: rotate(-10deg) translateX(-25%) translateY(6px);
-}
+  .stack:hover .stackLeft {
+    transform: rotate(-10deg) translateX(-25%) translateY(6px);
+  }
 
-.stack:hover .stackCenter {
-  transform: rotate(0deg) translateY(-4px);
-}
+  .stack:hover .stackCenter {
+    transform: rotate(0deg) translateY(-4px);
+  }
 
-.stack:hover .stackRight {
-  transform: rotate(10deg) translateX(25%) translateY(6px);
+  .stack:hover .stackRight {
+    transform: rotate(10deg) translateX(25%) translateY(6px);
+  }
 }
 
 /* ── Overlay (portal) ── */
@@ -110,8 +112,10 @@
   transform: scale(1);
 }
 
-.gridCard:hover {
-  transform: scale(1.03);
+@media (hover: hover) {
+  .gridCard:hover {
+    transform: scale(1.03);
+  }
 }
 
 .gridCardClicked {

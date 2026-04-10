@@ -4,7 +4,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import '@radix-ui/themes/styles.css';
 import BlurEntryAnimation from './components/BlurEntryAnimation';
-import { Agentation } from 'agentation';
+
 
 export const metadata: Metadata = {
   title: {
@@ -79,7 +79,6 @@ export default function RootLayout({
           }}
         >
           {children}
-          <Agentation />
           <BlurEntryAnimation />
         </ThemeProvider>
       </body>

@@ -9,19 +9,11 @@ export default function BlurEntryAnimation() {
   const hasShownRef = useRef(false);
 
   useEffect(() => {
-    // Only show blur animation on true initial page load (not client-side navigation)
-    // Check if this is the first render and sessionStorage doesn't have navigation flag
+    // Show blur animation on every full page load (initial or reload),
+    // but not on client-side navigations (which don't remount the layout)
     if (typeof window !== 'undefined' && !hasShownRef.current) {
-      const hasNavigated = sessionStorage.getItem('hasNavigated');
-      
-      if (!hasNavigated) {
-        // This is a true initial page load, show the blur animation
-        setShouldRender(true);
-        hasShownRef.current = true;
-        
-        // Set flag so subsequent client-side navigations don't trigger it
-        sessionStorage.setItem('hasNavigated', 'true');
-      }
+      setShouldRender(true);
+      hasShownRef.current = true;
     }
   }, []);
 
