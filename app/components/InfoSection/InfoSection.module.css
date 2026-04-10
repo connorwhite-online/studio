@@ -10,7 +10,7 @@
     overflow: hidden;
     border-radius: 16px;
     border: 1px solid var(--border);
-    background-color: var(--neutral-100);
+    background: linear-gradient(to bottom, var(--neutral-50), var(--neutral-100));
     padding: 24px;
     box-shadow: 0 4px 12px var(--alpha-200);
 }
