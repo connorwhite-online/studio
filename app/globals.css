@@ -332,20 +332,23 @@ video::-webkit-media-controls {
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   color: var(--secondary);
-  padding: 0;
-  transition: color 0.2s ease, transform 0.1s ease;
+  padding: 10px 18px;
+  border-radius: 999px;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.1s ease;
   appearance: none;
   -webkit-appearance: none;
   -webkit-tap-highlight-color: transparent;
 }
 
 .navButton p {
+  margin: 0;
   color: inherit;
 }
 
 .navButton:hover {
+  background: var(--neutral-200);
   color: var(--primary);
 }
 

@@ -2,13 +2,13 @@
   "mediaItems": [
     {
       "id": "1",
-      "videoUrl": "/media/interactions/sqft.mp4",
-      "title": "Cursor-Tracking 3D Rotation"
+      "videoUrl": "/media/interactions/webgl-gallery.mp4",
+      "title": "Custom WebGL Shader Gallery"
     },
     {
       "id": "2",
-      "videoUrl": "/media/interactions/webgl-gallery.mp4",
-      "title": "Custom WebGL Shader Gallery"
+      "videoUrl": "/media/interactions/sqft.mp4",
+      "title": "Cursor-Tracking 3D Rotation"
     },
     {
       "id": "3",
