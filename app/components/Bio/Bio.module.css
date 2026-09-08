@@ -15,23 +15,23 @@
 .bioLine {
   display: block;
   opacity: 0;
-  filter: blur(8px);
+  filter: blur(12px);
   clip-path: inset(0 0 100% 0);
-  transform: translateY(8px);
-  animation: revealLine 1.15s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transform: translateY(12px);
+  animation: revealLine 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   will-change: opacity, filter, clip-path, transform;
 }
 
 .bioSection > .bioLine {
-  animation-delay: 50ms;
+  animation-delay: 40ms;
 }
 
 .bioCopy .bioLine:first-child {
-  animation-delay: 190ms;
+  animation-delay: 220ms;
 }
 
 .bioCopy .bioLine:last-child {
-  animation-delay: 330ms;
+  animation-delay: 400ms;
 }
 
 @keyframes revealLine {

@@ -75,7 +75,7 @@ const vertexShader = `
       sin(progress * 3.14159265) *
       0.16;
     vec3 point = mix(vortexPoint, targetPoint, easedProgress) + magneticArc;
-    vIntroAlpha = smoothstep(0.0, 0.18, progress);
+    vIntroAlpha = smoothstep(0.0, 0.12, progress);
 
     float touchDistance = length(targetPoint.xy - uTouch);
     float touchInfluence = 1.0 - smoothstep(0.15, 1.15, touchDistance);
@@ -156,7 +156,7 @@ const AmorphousPointCloud = () => {
   );
   
   const introSpring = useSpring({
-    from: { progress: 0.03 },
+    from: { progress: 0.065 },
     to: { progress: 1 },
     config: {
       duration: 4600
