@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { Canvas, ThreeEvent, useFrame } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
 import { useSpring } from '@react-spring/three';
 import * as THREE from 'three';
 import styles from './Scene.module.css';
@@ -127,6 +127,7 @@ const AmorphousPointCloud = () => {
   const speedRef = useRef(0.6);
   const amplitudeRef = useRef(0.18);
   const attractionRef = useRef(0);
+  const attractionStrengthRef = useRef(1);
   const [isPressed, setIsPressed] = useState(false);
 
   const geometry = useMemo(() => {
@@ -183,53 +184,72 @@ const AmorphousPointCloud = () => {
   });
 
   useEffect(() => {
-    if (!isPressed) return;
+    let pointerIsDown = false;
+
+    const updateTouchPoint = (clientX: number, clientY: number) => {
+      const points = pointsRef.current;
+      if (!points || !materialRef.current) return;
+
+      const screenX = (clientX / window.innerWidth) * 2 - 1;
+      const screenY = 1 - (clientY / window.innerHeight) * 2;
+      const aspect = window.innerWidth / window.innerHeight;
+      const worldDirection = new THREE.Vector3(
+        screenX * aspect,
+        screenY,
+        1.35
+      ).normalize();
+      const worldRotation = points.getWorldQuaternion(new THREE.Quaternion());
+      const localDirection = worldDirection.applyQuaternion(
+        worldRotation.invert()
+      );
+
+      materialRef.current.uniforms.uTouch.value
+        .copy(localDirection)
+        .multiplyScalar(1.15);
+
+      const distanceFromCenter = Math.min(
+        1,
+        Math.hypot(screenX, screenY) / Math.SQRT2
+      );
+      attractionStrengthRef.current = THREE.MathUtils.lerp(
+        1,
+        0.38,
+        distanceFromCenter
+      );
+    };
+
+    const handlePointerDown = (event: PointerEvent) => {
+      if (event.button !== 0) return;
+      pointerIsDown = true;
+      updateTouchPoint(event.clientX, event.clientY);
+      attractionRef.current = Math.max(
+        attractionRef.current,
+        attractionStrengthRef.current * 0.12
+      );
+      setIsPressed(true);
+    };
+
+    const handlePointerMove = (event: PointerEvent) => {
+      if (pointerIsDown) updateTouchPoint(event.clientX, event.clientY);
+    };
 
     const releaseInteraction = () => {
+      pointerIsDown = false;
       setIsPressed(false);
     };
 
+    window.addEventListener('pointerdown', handlePointerDown);
+    window.addEventListener('pointermove', handlePointerMove);
     window.addEventListener('pointerup', releaseInteraction);
     window.addEventListener('pointercancel', releaseInteraction);
 
     return () => {
+      window.removeEventListener('pointerdown', handlePointerDown);
+      window.removeEventListener('pointermove', handlePointerMove);
       window.removeEventListener('pointerup', releaseInteraction);
       window.removeEventListener('pointercancel', releaseInteraction);
     };
-  }, [isPressed]);
-
-  const updateTouchPoint = (event: ThreeEvent<PointerEvent>) => {
-    const points = pointsRef.current;
-    if (!points || !materialRef.current) return;
-
-    points.updateWorldMatrix(true, false);
-    const localRay = event.ray.clone().applyMatrix4(
-      points.matrixWorld.clone().invert()
-    );
-    const localTouch = localRay.intersectSphere(
-      new THREE.Sphere(new THREE.Vector3(), 1.15),
-      new THREE.Vector3()
-    );
-
-    if (localTouch) {
-      materialRef.current.uniforms.uTouch.value.copy(localTouch);
-    }
-  };
-
-  const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
-    event.stopPropagation();
-    updateTouchPoint(event);
-    setIsPressed(true);
-  };
-
-  const handlePointerMove = (event: ThreeEvent<PointerEvent>) => {
-    if (isPressed) updateTouchPoint(event);
-  };
-
-  const handlePointerUp = (event: ThreeEvent<PointerEvent>) => {
-    event.stopPropagation();
-    setIsPressed(false);
-  };
+  }, []);
 
   useFrame((state, delta) => {
     const introProgress = introSpring.progress.get();
@@ -243,7 +263,7 @@ const AmorphousPointCloud = () => {
     amplitudeRef.current +=
       ((active ? 0.32 : 0.18) - amplitudeRef.current) * smoothing;
     attractionRef.current +=
-      ((isPressed ? 1 : 0) - attractionRef.current)
+      ((isPressed ? attractionStrengthRef.current : 0) - attractionRef.current)
       * Math.min(1, delta * (isPressed ? 3.5 : 2.2));
     shaderTimeRef.current += delta * speedRef.current;
 
@@ -265,12 +285,7 @@ const AmorphousPointCloud = () => {
   });
   
   return (
-    <group
-      scale={1.5}
-      onPointerDown={handlePointerDown}
-      onPointerMove={handlePointerMove}
-      onPointerUp={handlePointerUp}
-    >
+    <group scale={1.5}>
       <points ref={pointsRef} geometry={geometry}>
         <shaderMaterial
           ref={materialRef}
@@ -282,10 +297,6 @@ const AmorphousPointCloud = () => {
           blending={THREE.NormalBlending}
         />
       </points>
-      <mesh position={[0, 0, -0.65]}>
-        <planeGeometry args={[3, 3]} />
-        <meshBasicMaterial transparent opacity={0} depthWrite={false} />
-      </mesh>
     </group>
   );
 };
