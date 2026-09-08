@@ -12,7 +12,7 @@ export default function Bio() {
           I&#39;m a software designer and engineer based in Los Angeles, California.
         </span>
         <span className={styles.bioLine}>
-          Currently, I&#39;m at <a href="https://vizcom.com/" target="_blank" rel="noopener noreferrer"><b>Vizcom</b></a> creating tools for industrial designers and beyond.
+          Currently I&#39;m at <a href="https://vizcom.com/" target="_blank" rel="noopener noreferrer"><b>Vizcom</b></a> creating generative visual tools.
         </span>
       </p>
     </section>
