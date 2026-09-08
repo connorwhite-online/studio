@@ -66,7 +66,7 @@ const vertexShader = `
       (1.05 + aSeed * 0.55);
 
     float progress = clamp((uIntroProgress - aSeed * 0.28) / 0.72, 0.0, 1.0);
-    float easedProgress = 1.0 - pow(1.0 - progress, 3.0);
+    float easedProgress = progress * progress * (3.0 - 2.0 * progress);
     float vortexAngle = progress * (9.0 + aSeed * 5.0);
     vec3 vortexPoint = rotateAroundZ(startPoint, vortexAngle);
     vortexPoint = rotateAroundY(vortexPoint, vortexAngle * 0.28);
@@ -160,16 +160,15 @@ const AmorphousPointCloud = () => {
     to: { progress: 1 },
     delay: 150,
     config: {
-      duration: 4300,
-      easing: (value: number) => value * value * (3 - 2 * value)
+      duration: 5200
     }
   });
 
   const rotationBoostSpring = useSpring({
-    from: { boost: 1 },
-    to: { boost: 0 },
-    delay: 4450,
-    config: { mass: 0.7, tension: 160, friction: 11 }
+    from: { boost: 1, settlingTilt: 0 },
+    to: { boost: 0, settlingTilt: 0.1 },
+    delay: 5350,
+    config: { mass: 0.8, tension: 140, friction: 9 }
   });
 
   const scatterSpring = useSpring({
@@ -243,6 +242,7 @@ const AmorphousPointCloud = () => {
       rotationRef.current.y += delta * (0.1 + rotationBoost * 2.15);
       pointsRef.current.rotation.x = rotationRef.current.x;
       pointsRef.current.rotation.y = rotationRef.current.y;
+      pointsRef.current.rotation.z = rotationBoostSpring.settlingTilt.get();
     }
 
     if (materialRef.current) {
