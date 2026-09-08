@@ -91,9 +91,7 @@ const vertexShader = `
     vec3 surfaceDirection = normalize(uTouch + 0.00001);
     float axisPosition = dot(targetPoint, surfaceDirection);
     float directionalPosition = clamp((axisPosition + 1.15) / 2.3, 0.0, 1.0);
-    float stretchProfile = directionalPosition
-      * directionalPosition
-      * (3.0 - 2.0 * directionalPosition);
+    float stretchProfile = smoothstep(0.38, 1.0, directionalPosition);
     point += surfaceDirection
       * stretchProfile
       * uAttraction
@@ -238,7 +236,7 @@ const AmorphousPointCloud = () => {
     const rotationProgress =
       introProgress * introProgress * (3 - 2 * introProgress);
     const rotationBoost = 1 - rotationProgress;
-    const active = introProgress < 0.999 || isPressed;
+    const active = introProgress < 0.999;
     const smoothing = Math.min(1, delta * 2.5);
 
     speedRef.current += ((active ? 1.7 : 0.6) - speedRef.current) * smoothing;
