@@ -10,6 +10,7 @@
 .bioCopy {
   display: flex;
   flex-direction: column;
+  text-wrap: balance;
 }
 
 .bioSection h4 {
