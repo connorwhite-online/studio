@@ -95,7 +95,7 @@ const vertexShader = `
     point += surfaceDirection
       * stretchProfile
       * uAttraction
-      * 0.38
+      * 0.64
       * easedProgress;
 
     vec4 viewPosition = modelViewMatrix * vec4(point, 1.0);
