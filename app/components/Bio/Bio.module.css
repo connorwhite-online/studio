@@ -12,6 +12,11 @@
   flex-direction: column;
 }
 
+.bioSection h4 {
+  font-family: var(--regular);
+  font-weight: 400;
+}
+
 .bioLine {
   display: block;
   opacity: 0;
