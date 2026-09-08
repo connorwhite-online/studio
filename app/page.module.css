@@ -105,7 +105,7 @@
   .bioBlock {
     left: 0;
     right: auto;
-    width: min(420px, calc(100% - 96px));
+    width: min(560px, calc(100% - 96px));
     padding: 0 0 calc(48px + env(safe-area-inset-bottom, 0px)) 48px;
   }
   
