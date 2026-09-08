@@ -91,12 +91,16 @@ const vertexShader = `
     vec3 surfaceDirection = normalize(uTouch + 0.00001);
     float axisPosition = dot(targetPoint, surfaceDirection);
     float directionalPosition = clamp((axisPosition + 1.15) / 2.3, 0.0, 1.0);
-    float stretchProfile = smoothstep(0.38, 1.0, directionalPosition);
+    float stretchProfile = smoothstep(0.22, 1.0, directionalPosition);
+    float interactionStrength = uAttraction * easedProgress;
     point += surfaceDirection
       * stretchProfile
-      * uAttraction
-      * 0.7
-      * easedProgress;
+      * interactionStrength
+      * 1.0;
+    point += scatterDirection
+      * stretchProfile
+      * interactionStrength
+      * (0.035 + hash(aSeed * 191.3) * 0.065);
 
     vec4 viewPosition = modelViewMatrix * vec4(point, 1.0);
     gl_Position = projectionMatrix * viewPosition;
@@ -224,7 +228,7 @@ const AmorphousPointCloud = () => {
       updateTouchPoint(event.clientX, event.clientY);
       attractionRef.current = Math.max(
         attractionRef.current,
-        attractionStrengthRef.current * 0.35
+        attractionStrengthRef.current * 0.58
       );
       setIsPressed(true);
     };
@@ -264,7 +268,7 @@ const AmorphousPointCloud = () => {
       ((active ? 0.32 : 0.18) - amplitudeRef.current) * smoothing;
     attractionRef.current +=
       ((isPressed ? attractionStrengthRef.current : 0) - attractionRef.current)
-      * Math.min(1, delta * (isPressed ? 12 : 4));
+      * Math.min(1, delta * (isPressed ? 18 : 3.5));
     shaderTimeRef.current += delta * speedRef.current;
 
     if (pointsRef.current) {
