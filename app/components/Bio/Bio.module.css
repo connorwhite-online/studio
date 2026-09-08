@@ -22,7 +22,7 @@
   display: block;
   opacity: 0;
   filter: blur(12px);
-  clip-path: inset(0 0 100% 0);
+  clip-path: inset(0 100% 0 0);
   transform: translateY(12px);
   animation: revealLine 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   will-change: opacity, filter, clip-path, transform;
