@@ -8,6 +8,14 @@ import styles from './Scene.module.css';
 
 const POINT_COUNT = 16000;
 
+const getParticleSeed = (index: number) => {
+  let value = index + 1;
+  value = Math.imul(value ^ (value >>> 16), 0x45d9f3b);
+  value = Math.imul(value ^ (value >>> 16), 0x45d9f3b);
+  value ^= value >>> 16;
+  return (value >>> 0) / 4294967295;
+};
+
 const vertexShader = `
   uniform float uTime;
   uniform float uPixelRatio;
@@ -132,7 +140,7 @@ const AmorphousPointCloud = () => {
       positions[index * 3] = Math.cos(angle) * radiusAtY * radius;
       positions[index * 3 + 1] = y * radius;
       positions[index * 3 + 2] = Math.sin(angle) * radiusAtY * radius;
-      seeds[index] = (index * 0.61803398875) % 1;
+      seeds[index] = getParticleSeed(index);
     }
 
     const bufferGeometry = new THREE.BufferGeometry();
