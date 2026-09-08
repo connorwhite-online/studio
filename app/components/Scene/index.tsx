@@ -160,14 +160,14 @@ const AmorphousPointCloud = () => {
     to: { progress: 1 },
     delay: 150,
     config: {
-      duration: 5200
+      duration: 4600
     }
   });
 
   const rotationBoostSpring = useSpring({
     from: { boost: 1, settlingTilt: 0 },
     to: { boost: 0, settlingTilt: 0.1 },
-    delay: 5350,
+    delay: 4750,
     config: { mass: 0.8, tension: 140, friction: 9 }
   });
 
@@ -238,8 +238,8 @@ const AmorphousPointCloud = () => {
     const rotationBoost = Math.max(-0.025, rotationBoostSpring.boost.get());
 
     if (pointsRef.current) {
-      rotationRef.current.x += delta * (0.05 + rotationBoost * 0.42);
-      rotationRef.current.y += delta * (0.1 + rotationBoost * 2.15);
+      rotationRef.current.x += delta * (0.07 + rotationBoost * 0.42);
+      rotationRef.current.y += delta * (0.15 + rotationBoost * 2.15);
       pointsRef.current.rotation.x = rotationRef.current.x;
       pointsRef.current.rotation.y = rotationRef.current.y;
       pointsRef.current.rotation.z = rotationBoostSpring.settlingTilt.get();
@@ -284,7 +284,7 @@ const Scene: React.FC = () => {
   return (
     <div className={styles.sceneContainer}>
       <Canvas
-        camera={{ position: [0, 0, 4], fov: 45 }}
+        camera={{ position: [0, 0, 6.5], fov: 45 }}
         dpr={[1, 2]}
         gl={{ antialias: false, powerPreference: 'high-performance' }}
       >
