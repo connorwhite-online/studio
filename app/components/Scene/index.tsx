@@ -154,6 +154,24 @@ const AmorphousPointCloud = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (!isPressed) return;
+
+    const releaseInteraction = () => {
+      setIsPressed(false);
+      setIsGathering(false);
+      if (gatherTimeoutRef.current) clearTimeout(gatherTimeoutRef.current);
+    };
+
+    window.addEventListener('pointerup', releaseInteraction);
+    window.addEventListener('pointercancel', releaseInteraction);
+
+    return () => {
+      window.removeEventListener('pointerup', releaseInteraction);
+      window.removeEventListener('pointercancel', releaseInteraction);
+    };
+  }, [isPressed]);
+
   const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
     event.stopPropagation();
     setIsPressed(true);
@@ -205,7 +223,6 @@ const AmorphousPointCloud = () => {
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
-      onPointerLeave={handlePointerUp}
     >
       <points ref={pointsRef} geometry={geometry}>
         <shaderMaterial
