@@ -23,7 +23,7 @@ const vertexShader = `
   uniform float uPixelRatio;
   uniform float uPointSize;
   uniform float uIntroProgress;
-  uniform float uScatter;
+  uniform float uAttraction;
   uniform vec3 uTouch;
 
   attribute float aSeed;
@@ -89,18 +89,17 @@ const vertexShader = `
     vIntroAlpha = smoothstep(0.0, 0.12, progress);
 
     float touchDistance = distance(targetPoint, uTouch);
-    float touchInfluence = 1.0 - smoothstep(0.12, 0.72, touchDistance);
     vec3 surfaceDirection = normalize(uTouch + 0.00001);
-    vec3 touchScatterDirection = normalize(
-      (targetPoint - uTouch) * 0.72
-      + surfaceDirection * 0.42
-      + vec3(
-        hash(aSeed * 193.3) - 0.5,
-        hash(aSeed * 269.5 + 3.0) - 0.5,
-        hash(aSeed * 417.7 + 9.0) - 0.5
-      ) * 0.16
-    );
-    point += touchScatterDirection * uScatter * touchInfluence;
+    float hemisphereAlignment = dot(normalize(targetPoint), surfaceDirection);
+    float hemisphereInfluence = smoothstep(-0.4, 0.95, hemisphereAlignment);
+    float localInfluence = 1.0 - smoothstep(0.15, 1.25, touchDistance);
+    float morphInfluence = max(hemisphereInfluence * 0.55, localInfluence);
+    vec3 pullTowardTouch = (uTouch - targetPoint) * 0.34;
+    vec3 surfaceBulge = surfaceDirection * 0.16 * localInfluence;
+    point += (pullTowardTouch + surfaceBulge)
+      * morphInfluence
+      * uAttraction
+      * easedProgress;
 
     vec4 viewPosition = modelViewMatrix * vec4(point, 1.0);
     gl_Position = projectionMatrix * viewPosition;
@@ -130,7 +129,7 @@ const AmorphousPointCloud = () => {
   const shaderTimeRef = useRef(0);
   const speedRef = useRef(0.6);
   const amplitudeRef = useRef(0.18);
-  const scatterRef = useRef(0);
+  const attractionRef = useRef(0);
   const [isPressed, setIsPressed] = useState(false);
 
   const geometry = useMemo(() => {
@@ -164,7 +163,7 @@ const AmorphousPointCloud = () => {
       uPixelRatio: { value: 1 },
       uPointSize: { value: 9 },
       uIntroProgress: { value: 0 },
-      uScatter: { value: 0 },
+      uAttraction: { value: 0 },
       uTouch: { value: new THREE.Vector3(0, 0, 0.8) },
       uColor: { value: new THREE.Color('#8aa0e8') },
     }),
@@ -246,9 +245,9 @@ const AmorphousPointCloud = () => {
     speedRef.current += ((active ? 1.7 : 0.6) - speedRef.current) * smoothing;
     amplitudeRef.current +=
       ((active ? 0.32 : 0.18) - amplitudeRef.current) * smoothing;
-    scatterRef.current +=
-      ((isPressed ? 0.24 : 0) - scatterRef.current)
-      * Math.min(1, delta * 5);
+    attractionRef.current +=
+      ((isPressed ? 1 : 0) - attractionRef.current)
+      * Math.min(1, delta * (isPressed ? 3.5 : 2.2));
     shaderTimeRef.current += delta * speedRef.current;
 
     if (pointsRef.current) {
@@ -262,7 +261,7 @@ const AmorphousPointCloud = () => {
     if (materialRef.current) {
       materialRef.current.uniforms.uTime.value = shaderTimeRef.current;
       materialRef.current.uniforms.uAmp.value = amplitudeRef.current;
-      materialRef.current.uniforms.uScatter.value = scatterRef.current;
+      materialRef.current.uniforms.uAttraction.value = attractionRef.current;
       materialRef.current.uniforms.uPixelRatio.value = state.gl.getPixelRatio();
       materialRef.current.uniforms.uIntroProgress.value = introProgress;
     }
