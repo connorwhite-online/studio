@@ -308,6 +308,15 @@ const Scene: React.FC = () => {
         camera={{ position: [0, 0, 6.5], fov: 45 }}
         dpr={[1, 2]}
         gl={{ antialias: false, powerPreference: 'high-performance' }}
+        onCreated={({ gl }) => {
+          const canvas = gl.domElement;
+          const preventSelection = (event: Event) => event.preventDefault();
+
+          canvas.draggable = false;
+          canvas.addEventListener('contextmenu', preventSelection);
+          canvas.addEventListener('selectstart', preventSelection);
+          canvas.addEventListener('dragstart', preventSelection);
+        }}
       >
         <AmorphousPointCloud />
       </Canvas>
