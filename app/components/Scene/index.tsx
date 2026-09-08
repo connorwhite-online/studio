@@ -75,7 +75,7 @@ const vertexShader = `
       sin(progress * 3.14159265) *
       0.16;
     vec3 point = mix(vortexPoint, targetPoint, easedProgress) + magneticArc;
-    vIntroAlpha = smoothstep(0.0, 0.42, progress);
+    vIntroAlpha = smoothstep(0.0, 0.18, progress);
 
     float touchDistance = length(targetPoint.xy - uTouch);
     float touchInfluence = 1.0 - smoothstep(0.15, 1.15, touchDistance);
@@ -156,18 +156,17 @@ const AmorphousPointCloud = () => {
   );
   
   const introSpring = useSpring({
-    from: { progress: 0 },
+    from: { progress: 0.03 },
     to: { progress: 1 },
-    delay: 150,
     config: {
       duration: 4600
     }
   });
 
-  const rotationBoostSpring = useSpring({
-    from: { boost: 1, settlingTilt: 0 },
-    to: { boost: 0, settlingTilt: 0.1 },
-    delay: 4750,
+  const settlingSpring = useSpring({
+    from: { settlingTilt: 0 },
+    to: { settlingTilt: 0.1 },
+    delay: 4250,
     config: { mass: 0.8, tension: 140, friction: 9 }
   });
 
@@ -235,20 +234,23 @@ const AmorphousPointCloud = () => {
 
   useFrame((state, delta) => {
     const elapsedTime = state.clock.getElapsedTime();
-    const rotationBoost = Math.max(-0.025, rotationBoostSpring.boost.get());
+    const introProgress = introSpring.progress.get();
+    const rotationProgress =
+      introProgress * introProgress * (3 - 2 * introProgress);
+    const rotationBoost = 1 - rotationProgress;
 
     if (pointsRef.current) {
       rotationRef.current.x += delta * (0.07 + rotationBoost * 0.42);
       rotationRef.current.y += delta * (0.15 + rotationBoost * 2.15);
       pointsRef.current.rotation.x = rotationRef.current.x;
       pointsRef.current.rotation.y = rotationRef.current.y;
-      pointsRef.current.rotation.z = rotationBoostSpring.settlingTilt.get();
+      pointsRef.current.rotation.z = settlingSpring.settlingTilt.get();
     }
 
     if (materialRef.current) {
       materialRef.current.uniforms.uTime.value = elapsedTime;
       materialRef.current.uniforms.uPixelRatio.value = state.gl.getPixelRatio();
-      materialRef.current.uniforms.uIntroProgress.value = introSpring.progress.get();
+      materialRef.current.uniforms.uIntroProgress.value = introProgress;
       materialRef.current.uniforms.uScatter.value = scatterSpring.scatter.get();
       materialRef.current.uniforms.uGather.value = gatherSpring.gather.get();
     }

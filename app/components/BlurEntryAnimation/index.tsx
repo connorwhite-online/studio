@@ -1,9 +1,13 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import { usePathname } from 'next/navigation';
 import styles from './BlurEntryAnimation.module.css';
 
 export default function BlurEntryAnimation() {
+  const pathname = usePathname();
+  const initialPathnameRef = useRef(pathname);
+  const skipInitialOverlay = initialPathnameRef.current === '/';
   const [shouldRender, setShouldRender] = useState(false);
   const overlayRef = useRef<HTMLDivElement>(null);
   const hasShownRef = useRef(false);
@@ -11,11 +15,11 @@ export default function BlurEntryAnimation() {
   useEffect(() => {
     // Show blur animation on every full page load (initial or reload),
     // but not on client-side navigations (which don't remount the layout)
-    if (typeof window !== 'undefined' && !hasShownRef.current) {
+    if (!skipInitialOverlay && typeof window !== 'undefined' && !hasShownRef.current) {
       setShouldRender(true);
       hasShownRef.current = true;
     }
-  }, []);
+  }, [skipInitialOverlay]);
 
   useEffect(() => {
     if (!shouldRender) return;
@@ -40,7 +44,7 @@ export default function BlurEntryAnimation() {
     };
   }, [shouldRender]);
 
-  if (!shouldRender) return null;
+  if (skipInitialOverlay || !shouldRender) return null;
 
   return (
     <div 
