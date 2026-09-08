@@ -88,17 +88,16 @@ const vertexShader = `
     vec3 point = mix(vortexPoint, targetPoint, easedProgress) + magneticArc;
     vIntroAlpha = smoothstep(0.0, 0.12, progress);
 
-    float touchDistance = distance(targetPoint, uTouch);
     vec3 surfaceDirection = normalize(uTouch + 0.00001);
-    float hemisphereAlignment = dot(normalize(targetPoint), surfaceDirection);
-    float hemisphereInfluence = smoothstep(-0.4, 0.95, hemisphereAlignment);
-    float localInfluence = 1.0 - smoothstep(0.15, 1.25, touchDistance);
-    float morphInfluence = max(hemisphereInfluence * 0.55, localInfluence);
-    vec3 pullTowardTouch = (uTouch - targetPoint) * 0.34;
-    vec3 surfaceBulge = surfaceDirection * 0.16 * localInfluence;
-    point += (pullTowardTouch + surfaceBulge)
-      * morphInfluence
+    float axisPosition = dot(targetPoint, surfaceDirection);
+    float directionalPosition = clamp((axisPosition + 1.15) / 2.3, 0.0, 1.0);
+    float stretchProfile = directionalPosition
+      * directionalPosition
+      * (3.0 - 2.0 * directionalPosition);
+    point += surfaceDirection
+      * stretchProfile
       * uAttraction
+      * 0.38
       * easedProgress;
 
     vec4 viewPosition = modelViewMatrix * vec4(point, 1.0);
