@@ -24,6 +24,26 @@ const vertexShader = `
     return fract(sin(value) * 43758.5453123);
   }
 
+  vec3 rotateAroundZ(vec3 point, float angle) {
+    float sine = sin(angle);
+    float cosine = cos(angle);
+    return vec3(
+      point.x * cosine - point.y * sine,
+      point.x * sine + point.y * cosine,
+      point.z
+    );
+  }
+
+  vec3 rotateAroundY(vec3 point, float angle) {
+    float sine = sin(angle);
+    float cosine = cos(angle);
+    return vec3(
+      point.x * cosine + point.z * sine,
+      point.y,
+      -point.x * sine + point.z * cosine
+    );
+  }
+
   void main() {
     vec3 targetPoint = position;
     float time = uTime * 0.35;
@@ -47,11 +67,14 @@ const vertexShader = `
 
     float progress = clamp((uIntroProgress - aSeed * 0.28) / 0.72, 0.0, 1.0);
     float easedProgress = 1.0 - pow(1.0 - progress, 3.0);
+    float vortexAngle = progress * (9.0 + aSeed * 5.0);
+    vec3 vortexPoint = rotateAroundZ(startPoint, vortexAngle);
+    vortexPoint = rotateAroundY(vortexPoint, vortexAngle * 0.28);
     vec3 magneticArc =
-      cross(normalize(startPoint), normalize(targetPoint)) *
+      cross(normalize(vortexPoint), normalize(targetPoint)) *
       sin(progress * 3.14159265) *
-      0.22;
-    vec3 point = mix(startPoint, targetPoint, easedProgress) + magneticArc;
+      0.16;
+    vec3 point = mix(vortexPoint, targetPoint, easedProgress) + magneticArc;
     vIntroAlpha = smoothstep(0.0, 0.42, progress);
 
     float touchDistance = length(targetPoint.xy - uTouch);
@@ -90,6 +113,7 @@ const fragmentShader = `
 const AmorphousPointCloud = () => {
   const pointsRef = useRef<THREE.Points>(null);
   const materialRef = useRef<THREE.ShaderMaterial>(null);
+  const rotationRef = useRef({ x: 0, y: 0 });
   const gatherTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [isPressed, setIsPressed] = useState(false);
   const [isGathering, setIsGathering] = useState(false);
@@ -135,7 +159,17 @@ const AmorphousPointCloud = () => {
     from: { progress: 0 },
     to: { progress: 1 },
     delay: 150,
-    config: { mass: 3, tension: 80, friction: 20 }
+    config: {
+      duration: 4300,
+      easing: (value: number) => value * value * (3 - 2 * value)
+    }
+  });
+
+  const rotationBoostSpring = useSpring({
+    from: { boost: 1 },
+    to: { boost: 0 },
+    delay: 4450,
+    config: { mass: 0.7, tension: 160, friction: 11 }
   });
 
   const scatterSpring = useSpring({
@@ -200,12 +234,15 @@ const AmorphousPointCloud = () => {
     if (gatherTimeoutRef.current) clearTimeout(gatherTimeoutRef.current);
   };
 
-  useFrame((state) => {
+  useFrame((state, delta) => {
     const elapsedTime = state.clock.getElapsedTime();
+    const rotationBoost = Math.max(-0.025, rotationBoostSpring.boost.get());
 
     if (pointsRef.current) {
-      pointsRef.current.rotation.x = elapsedTime * 0.05;
-      pointsRef.current.rotation.y = elapsedTime * 0.1;
+      rotationRef.current.x += delta * (0.05 + rotationBoost * 0.42);
+      rotationRef.current.y += delta * (0.1 + rotationBoost * 2.15);
+      pointsRef.current.rotation.x = rotationRef.current.x;
+      pointsRef.current.rotation.y = rotationRef.current.y;
     }
 
     if (materialRef.current) {
