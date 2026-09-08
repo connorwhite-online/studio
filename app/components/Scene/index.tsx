@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useMemo, useRef } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { Canvas, ThreeEvent, useFrame } from '@react-three/fiber';
 import { useSpring } from '@react-spring/three';
 import * as THREE from 'three';
 import styles from './Scene.module.css';
@@ -13,6 +13,9 @@ const vertexShader = `
   uniform float uPixelRatio;
   uniform float uPointSize;
   uniform float uIntroProgress;
+  uniform float uScatter;
+  uniform float uGather;
+  uniform vec2 uTouch;
 
   attribute float aSeed;
   varying float vIntroAlpha;
@@ -51,6 +54,20 @@ const vertexShader = `
     vec3 point = mix(startPoint, targetPoint, easedProgress) + magneticArc;
     vIntroAlpha = smoothstep(0.0, 0.42, progress);
 
+    float touchDistance = length(targetPoint.xy - uTouch);
+    float touchInfluence = 1.0 - smoothstep(0.15, 1.15, touchDistance);
+    vec3 awayFromTouch = normalize(vec3(
+      targetPoint.xy - uTouch,
+      0.55 + hash(aSeed * 193.3) * 0.35
+    ));
+    point += awayFromTouch * uScatter * touchInfluence * (0.45 + aSeed * 0.25);
+
+    vec3 gatheredPoint = vec3(
+      mix(targetPoint.xy, uTouch, 0.62),
+      targetPoint.z + 0.48
+    );
+    point = mix(point, gatheredPoint, uGather * touchInfluence * 0.78);
+
     vec4 viewPosition = modelViewMatrix * vec4(point, 1.0);
     gl_Position = projectionMatrix * viewPosition;
     gl_PointSize = uPointSize * uPixelRatio * (5.0 / -viewPosition.z);
@@ -73,6 +90,9 @@ const fragmentShader = `
 const AmorphousPointCloud = () => {
   const pointsRef = useRef<THREE.Points>(null);
   const materialRef = useRef<THREE.ShaderMaterial>(null);
+  const gatherTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [isPressed, setIsPressed] = useState(false);
+  const [isGathering, setIsGathering] = useState(false);
 
   const geometry = useMemo(() => {
     const positions = new Float32Array(POINT_COUNT * 3);
@@ -103,6 +123,9 @@ const AmorphousPointCloud = () => {
       uPixelRatio: { value: 1 },
       uPointSize: { value: 1.35 },
       uIntroProgress: { value: 0 },
+      uScatter: { value: 0 },
+      uGather: { value: 0 },
+      uTouch: { value: new THREE.Vector2() },
       uColor: { value: new THREE.Color('#5278ff') },
     }),
     []
@@ -114,6 +137,50 @@ const AmorphousPointCloud = () => {
     delay: 150,
     config: { mass: 3, tension: 80, friction: 20 }
   });
+
+  const scatterSpring = useSpring({
+    scatter: isPressed && !isGathering ? 1 : 0,
+    config: { mass: 0.35, tension: 500, friction: 18 }
+  });
+
+  const gatherSpring = useSpring({
+    gather: isPressed && isGathering ? 1 : 0,
+    config: { mass: 0.5, tension: 280, friction: 22 }
+  });
+
+  useEffect(() => {
+    return () => {
+      if (gatherTimeoutRef.current) clearTimeout(gatherTimeoutRef.current);
+    };
+  }, []);
+
+  const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
+    event.stopPropagation();
+    setIsPressed(true);
+    setIsGathering(false);
+    materialRef.current?.uniforms.uTouch.value.set(
+      event.point.x / 1.5,
+      event.point.y / 1.5
+    );
+
+    if (gatherTimeoutRef.current) clearTimeout(gatherTimeoutRef.current);
+    gatherTimeoutRef.current = setTimeout(() => setIsGathering(true), 190);
+  };
+
+  const handlePointerMove = (event: ThreeEvent<PointerEvent>) => {
+    if (!isPressed) return;
+    materialRef.current?.uniforms.uTouch.value.set(
+      event.point.x / 1.5,
+      event.point.y / 1.5
+    );
+  };
+
+  const handlePointerUp = (event: ThreeEvent<PointerEvent>) => {
+    event.stopPropagation();
+    setIsPressed(false);
+    setIsGathering(false);
+    if (gatherTimeoutRef.current) clearTimeout(gatherTimeoutRef.current);
+  };
 
   useFrame((state) => {
     const elapsedTime = state.clock.getElapsedTime();
@@ -127,11 +194,19 @@ const AmorphousPointCloud = () => {
       materialRef.current.uniforms.uTime.value = elapsedTime;
       materialRef.current.uniforms.uPixelRatio.value = state.gl.getPixelRatio();
       materialRef.current.uniforms.uIntroProgress.value = introSpring.progress.get();
+      materialRef.current.uniforms.uScatter.value = scatterSpring.scatter.get();
+      materialRef.current.uniforms.uGather.value = gatherSpring.gather.get();
     }
   });
   
   return (
-    <group scale={1.5}>
+    <group
+      scale={1.5}
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={handlePointerUp}
+      onPointerLeave={handlePointerUp}
+    >
       <points ref={pointsRef} geometry={geometry}>
         <shaderMaterial
           ref={materialRef}
@@ -143,6 +218,10 @@ const AmorphousPointCloud = () => {
           blending={THREE.NormalBlending}
         />
       </points>
+      <mesh position={[0, 0, -0.65]}>
+        <planeGeometry args={[3, 3]} />
+        <meshBasicMaterial transparent opacity={0} depthWrite={false} />
+      </mesh>
     </group>
   );
 };
