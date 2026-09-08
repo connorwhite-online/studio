@@ -95,7 +95,7 @@ const vertexShader = `
     point += surfaceDirection
       * stretchProfile
       * uAttraction
-      * 0.64
+      * 0.7
       * easedProgress;
 
     vec4 viewPosition = modelViewMatrix * vec4(point, 1.0);
@@ -213,7 +213,7 @@ const AmorphousPointCloud = () => {
       );
       attractionStrengthRef.current = THREE.MathUtils.lerp(
         1,
-        0.38,
+        0.5,
         distanceFromCenter
       );
     };
@@ -224,7 +224,7 @@ const AmorphousPointCloud = () => {
       updateTouchPoint(event.clientX, event.clientY);
       attractionRef.current = Math.max(
         attractionRef.current,
-        attractionStrengthRef.current * 0.12
+        attractionStrengthRef.current * 0.35
       );
       setIsPressed(true);
     };
@@ -264,7 +264,7 @@ const AmorphousPointCloud = () => {
       ((active ? 0.32 : 0.18) - amplitudeRef.current) * smoothing;
     attractionRef.current +=
       ((isPressed ? attractionStrengthRef.current : 0) - attractionRef.current)
-      * Math.min(1, delta * (isPressed ? 3.5 : 2.2));
+      * Math.min(1, delta * (isPressed ? 12 : 4));
     shaderTimeRef.current += delta * speedRef.current;
 
     if (pointsRef.current) {
