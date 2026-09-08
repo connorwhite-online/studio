@@ -6,7 +6,7 @@ import { useSpring } from '@react-spring/three';
 import * as THREE from 'three';
 import styles from './Scene.module.css';
 
-const POINT_COUNT = 16000;
+const POINT_COUNT = 20000;
 
 const getParticleSeed = (index: number) => {
   let value = index + 1;
@@ -18,15 +18,15 @@ const getParticleSeed = (index: number) => {
 
 const vertexShader = `
   uniform float uTime;
+  uniform float uAmp;
+  uniform float uFreq;
   uniform float uPixelRatio;
   uniform float uPointSize;
   uniform float uIntroProgress;
-  uniform float uScatter;
-  uniform float uGather;
-  uniform vec2 uTouch;
 
   attribute float aSeed;
   varying float vIntroAlpha;
+  varying float vDeformation;
 
   float hash(float value) {
     return fract(sin(value) * 43758.5453123);
@@ -52,17 +52,18 @@ const vertexShader = `
     );
   }
 
+  // Cheap layered-sine pseudo-noise from Materialize's CAD loading cloud.
+  float noise(vec3 point) {
+    return sin(point.x * 2.0 + uTime)
+      * sin(point.y * 2.0 + uTime * 1.2)
+      * sin(point.z * 2.0 + uTime * 0.8);
+  }
+
   void main() {
-    vec3 targetPoint = position;
-    float time = uTime * 0.35;
-
-    float deformation =
-      sin(targetPoint.x * 4.1 + time) *
-      sin(targetPoint.y * 3.7 - time * 0.8) *
-      sin(targetPoint.z * 4.3 + time * 0.6);
-    deformation += sin((targetPoint.x + targetPoint.y + targetPoint.z) * 5.2 - time) * 0.35;
-
-    targetPoint *= 1.0 + deformation * 0.13 + (aSeed - 0.5) * 0.025;
+    float deformation = noise(position * uFreq + uTime * 0.15);
+    vDeformation = deformation;
+    vec3 direction = normalize(position + 0.00001);
+    vec3 targetPoint = position + direction * deformation * uAmp;
 
     vec3 scatterDirection = normalize(vec3(
       hash(aSeed * 127.1) - 0.5,
@@ -85,36 +86,24 @@ const vertexShader = `
     vec3 point = mix(vortexPoint, targetPoint, easedProgress) + magneticArc;
     vIntroAlpha = smoothstep(0.0, 0.12, progress);
 
-    float touchDistance = length(targetPoint.xy - uTouch);
-    float touchInfluence = 1.0 - smoothstep(0.15, 1.15, touchDistance);
-    vec3 awayFromTouch = normalize(vec3(
-      targetPoint.xy - uTouch,
-      0.55 + hash(aSeed * 193.3) * 0.35
-    ));
-    point += awayFromTouch * uScatter * touchInfluence * (0.45 + aSeed * 0.25);
-
-    vec3 gatheredPoint = vec3(
-      mix(targetPoint.xy, uTouch, 0.62),
-      targetPoint.z + 0.48
-    );
-    point = mix(point, gatheredPoint, uGather * touchInfluence * 0.78);
-
     vec4 viewPosition = modelViewMatrix * vec4(point, 1.0);
     gl_Position = projectionMatrix * viewPosition;
-    gl_PointSize = uPointSize * uPixelRatio * (5.0 / -viewPosition.z);
+    gl_PointSize = uPointSize * uPixelRatio * (1.0 / max(0.1, -viewPosition.z));
   }
 `;
 
 const fragmentShader = `
   uniform vec3 uColor;
   varying float vIntroAlpha;
+  varying float vDeformation;
 
   void main() {
-    float distanceFromCenter = distance(gl_PointCoord, vec2(0.5));
-    float alpha = 1.0 - smoothstep(0.32, 0.5, distanceFromCenter);
-
-    if (distanceFromCenter > 0.5) discard;
-    gl_FragColor = vec4(uColor, alpha * 0.78 * vIntroAlpha);
+    vec2 center = gl_PointCoord - 0.5;
+    float radiusSquared = dot(center, center);
+    if (radiusSquared > 0.25) discard;
+    float alpha = smoothstep(0.25, 0.02, radiusSquared)
+      * clamp(0.6 + 0.35 * vDeformation, 0.3, 0.95);
+    gl_FragColor = vec4(uColor, alpha * vIntroAlpha);
   }
 `;
 
@@ -122,9 +111,10 @@ const AmorphousPointCloud = () => {
   const pointsRef = useRef<THREE.Points>(null);
   const materialRef = useRef<THREE.ShaderMaterial>(null);
   const rotationRef = useRef({ x: 0, y: 0 });
-  const gatherTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const shaderTimeRef = useRef(0);
+  const speedRef = useRef(0.6);
+  const amplitudeRef = useRef(0.18);
   const [isPressed, setIsPressed] = useState(false);
-  const [isGathering, setIsGathering] = useState(false);
 
   const geometry = useMemo(() => {
     const positions = new Float32Array(POINT_COUNT * 3);
@@ -152,13 +142,12 @@ const AmorphousPointCloud = () => {
   const uniforms = useMemo(
     () => ({
       uTime: { value: 0 },
+      uAmp: { value: 0.18 },
+      uFreq: { value: 2.1 },
       uPixelRatio: { value: 1 },
-      uPointSize: { value: 1.35 },
+      uPointSize: { value: 9 },
       uIntroProgress: { value: 0 },
-      uScatter: { value: 0 },
-      uGather: { value: 0 },
-      uTouch: { value: new THREE.Vector2() },
-      uColor: { value: new THREE.Color('#5278ff') },
+      uColor: { value: new THREE.Color('#8aa0e8') },
     }),
     []
   );
@@ -178,29 +167,11 @@ const AmorphousPointCloud = () => {
     config: { mass: 0.8, tension: 140, friction: 9 }
   });
 
-  const scatterSpring = useSpring({
-    scatter: isPressed && !isGathering ? 1 : 0,
-    config: { mass: 0.35, tension: 500, friction: 18 }
-  });
-
-  const gatherSpring = useSpring({
-    gather: isPressed && isGathering ? 1 : 0,
-    config: { mass: 0.5, tension: 280, friction: 22 }
-  });
-
-  useEffect(() => {
-    return () => {
-      if (gatherTimeoutRef.current) clearTimeout(gatherTimeoutRef.current);
-    };
-  }, []);
-
   useEffect(() => {
     if (!isPressed) return;
 
     const releaseInteraction = () => {
       setIsPressed(false);
-      setIsGathering(false);
-      if (gatherTimeoutRef.current) clearTimeout(gatherTimeoutRef.current);
     };
 
     window.addEventListener('pointerup', releaseInteraction);
@@ -215,37 +186,25 @@ const AmorphousPointCloud = () => {
   const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
     event.stopPropagation();
     setIsPressed(true);
-    setIsGathering(false);
-    materialRef.current?.uniforms.uTouch.value.set(
-      event.point.x / 1.5,
-      event.point.y / 1.5
-    );
-
-    if (gatherTimeoutRef.current) clearTimeout(gatherTimeoutRef.current);
-    gatherTimeoutRef.current = setTimeout(() => setIsGathering(true), 190);
-  };
-
-  const handlePointerMove = (event: ThreeEvent<PointerEvent>) => {
-    if (!isPressed) return;
-    materialRef.current?.uniforms.uTouch.value.set(
-      event.point.x / 1.5,
-      event.point.y / 1.5
-    );
   };
 
   const handlePointerUp = (event: ThreeEvent<PointerEvent>) => {
     event.stopPropagation();
     setIsPressed(false);
-    setIsGathering(false);
-    if (gatherTimeoutRef.current) clearTimeout(gatherTimeoutRef.current);
   };
 
   useFrame((state, delta) => {
-    const elapsedTime = state.clock.getElapsedTime();
     const introProgress = introSpring.progress.get();
     const rotationProgress =
       introProgress * introProgress * (3 - 2 * introProgress);
     const rotationBoost = 1 - rotationProgress;
+    const active = introProgress < 0.999 || isPressed;
+    const smoothing = Math.min(1, delta * 2.5);
+
+    speedRef.current += ((active ? 1.7 : 0.6) - speedRef.current) * smoothing;
+    amplitudeRef.current +=
+      ((active ? 0.32 : 0.18) - amplitudeRef.current) * smoothing;
+    shaderTimeRef.current += delta * speedRef.current;
 
     if (pointsRef.current) {
       rotationRef.current.x += delta * (0.07 + rotationBoost * 0.42);
@@ -256,11 +215,10 @@ const AmorphousPointCloud = () => {
     }
 
     if (materialRef.current) {
-      materialRef.current.uniforms.uTime.value = elapsedTime;
+      materialRef.current.uniforms.uTime.value = shaderTimeRef.current;
+      materialRef.current.uniforms.uAmp.value = amplitudeRef.current;
       materialRef.current.uniforms.uPixelRatio.value = state.gl.getPixelRatio();
       materialRef.current.uniforms.uIntroProgress.value = introProgress;
-      materialRef.current.uniforms.uScatter.value = scatterSpring.scatter.get();
-      materialRef.current.uniforms.uGather.value = gatherSpring.gather.get();
     }
   });
   
@@ -268,7 +226,6 @@ const AmorphousPointCloud = () => {
     <group
       scale={1.5}
       onPointerDown={handlePointerDown}
-      onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
     >
       <points ref={pointsRef} geometry={geometry}>
