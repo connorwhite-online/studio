@@ -10,9 +10,11 @@ export default function Bio() {
       <p>
         I&#39;m a software designer and engineer based in Los Angeles, California.
         <br />
-        Currently, I&#39;m at <a href="https://www.tyb.xyz/" target="_blank" rel="noopener noreferrer"><b>Try Your Best</b></a> designing the future of brand loyalty, and obsessing over all the little details that make software feel enjoyable.
+        Currently, I&#39;m at <a href="https://vizcom.com/" target="_blank" rel="noopener noreferrer"><b>Vizcom</b></a> creating tools for industrial designers and beyond.
         <br />
         I&#39;ve also worked with <a href="https://www.instagram.com/byseanbrown" target="_blank" rel="noopener noreferrer"><b>Sean Brown</b></a>, <a href="https://www.blackbird.xyz/" target="_blank" rel="noopener noreferrer"><b>Blackbird</b></a>, <a href="https://www.nike.com/" target="_blank" rel="noopener noreferrer"><b>Nike</b></a>, and more.
+        <br />
+        I&#39;m not available for any type of project or engagement.
       </p>
     </section>
   );
