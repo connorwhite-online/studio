@@ -1,11 +1,13 @@
 .main {
   position: relative;
-  padding: 40px 16px;
+  padding: 0;
   min-height: 100dvh;
+  height: 100dvh;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
+  align-items: stretch;
+  justify-content: stretch;
   z-index: 2;
 }
 
@@ -27,16 +29,32 @@
 
 .container {
   width: 100%;
-  max-width: 500px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  height: 100%;
+  max-width: none;
+  display: block;
   position: relative;
 }
 
 .sceneSection {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  margin-bottom: 40px;
+  height: 100%;
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bioBlock {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  width: 100%;
+  padding: 0 20px calc(24px + env(safe-area-inset-bottom, 0px));
+  box-sizing: border-box;
 }
 
 .section {
@@ -84,8 +102,11 @@
 }
 
 @media screen and (min-width: 768px) {
-  .main {
-    padding: 60px 16px;
+  .bioBlock {
+    left: 0;
+    right: auto;
+    width: min(560px, calc(100% - 96px));
+    padding: 0 0 calc(48px + env(safe-area-inset-bottom, 0px)) 48px;
   }
   
   .timeContainer {

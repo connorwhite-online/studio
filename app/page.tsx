@@ -2,10 +2,11 @@
 import { useEffect, useState } from 'react';
 import styles from "./page.module.css";
 import Scene from './components/Scene';
-import InteractionsSection from './components/InteractionsSection';
-import InfoSection from './components/InfoSection';
 import Bio from './components/Bio';
-import ThemeToggle from './components/ThemeToggle';
+// Homepage is intentionally minimal for now — keep these unused rather than deleting them.
+// import InteractionsSection from './components/InteractionsSection';
+// import InfoSection from './components/InfoSection';
+// import ThemeToggle from './components/ThemeToggle';
 
 export default function Home() {
   const [shouldAnimate, setShouldAnimate] = useState(false);
@@ -35,22 +36,23 @@ export default function Home() {
         </section>
         
         {/* Bio Section */}
-        <Bio />
-        
-        {/* Interactions Section */}
+        <div className={styles.bioBlock}>
+          <Bio />
+        </div>
+
+        {/* Unused for now — sections remain in the codebase.
         <section className={styles.section}>
           <InteractionsSection />
         </section>
         
-        {/* Info Section */}
         <section className={styles.section}>
           <InfoSection />
         </section>
         
-        {/* Theme Toggle Section */}
         <section className={styles.themeSection}>
           <ThemeToggle />
         </section>
+        */}
       </div>
     </main>
   );
