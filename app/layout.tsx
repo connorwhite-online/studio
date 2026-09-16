@@ -72,7 +72,8 @@ export default function RootLayout({
         <ThemeProvider
           attribute="data-theme"
           defaultTheme="system"
-          enableSystem={true}
+          enableSystem
+          enableColorScheme
           value={{
             light: "light",
             dark: "dark"

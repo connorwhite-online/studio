@@ -14,8 +14,7 @@
 }
 
 .bioSection h4 {
-  font-family: var(--regular);
-  font-weight: 400;
+  font-family: var(--medium);
 }
 
 .bioLine {

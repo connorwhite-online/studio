@@ -3,8 +3,21 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { useSpring } from '@react-spring/three';
+import { useTheme } from 'next-themes';
 import * as THREE from 'three';
 import styles from './Scene.module.css';
+
+const syncParticleColorFromTheme = (material: THREE.ShaderMaterial | null) => {
+  if (!material || typeof window === 'undefined') return;
+
+  const dreamBlue = getComputedStyle(document.documentElement)
+    .getPropertyValue('--dreamBlue')
+    .trim();
+
+  if (dreamBlue) {
+    material.uniforms.uColor.value.set(dreamBlue);
+  }
+};
 
 const POINT_COUNT = 20000;
 
@@ -124,6 +137,7 @@ const fragmentShader = `
 `;
 
 const AmorphousPointCloud = () => {
+  const { resolvedTheme } = useTheme();
   const pointsRef = useRef<THREE.Points>(null);
   const materialRef = useRef<THREE.ShaderMaterial>(null);
   const rotationRef = useRef({ x: 0, y: 0 });
@@ -167,10 +181,26 @@ const AmorphousPointCloud = () => {
       uIntroProgress: { value: 0 },
       uAttraction: { value: 0 },
       uTouch: { value: new THREE.Vector3(0, 0, 0.8) },
-      uColor: { value: new THREE.Color('#8aa0e8') },
+      uColor: { value: new THREE.Color('#5373E7') },
     }),
     []
   );
+
+  useEffect(() => {
+    syncParticleColorFromTheme(materialRef.current);
+  }, [resolvedTheme]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleSystemThemeChange = () => {
+      syncParticleColorFromTheme(materialRef.current);
+    };
+
+    mediaQuery.addEventListener('change', handleSystemThemeChange);
+    return () => mediaQuery.removeEventListener('change', handleSystemThemeChange);
+  }, []);
   
   const introSpring = useSpring({
     from: { progress: 0.065 },
