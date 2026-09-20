@@ -121,6 +121,81 @@ html, body {
   --alpha-800-dark: hsla(0, 0%, 100%, 0.47);
   --alpha-900-dark: hsla(0, 0%, 100%, 0.61);
   --alpha-1000-dark: hsla(0, 0%, 100%, 0.92);
+
+  /* Default (light) — overridden by system preference and data-theme */
+  --primary: var(--neutral-950-light);
+  --secondary: var(--neutral-700-light);
+  --border: var(--neutral-300-light);
+
+  --neutral-0: var(--neutral-0-light);
+  --neutral-50: var(--neutral-50-light);
+  --neutral-100: var(--neutral-100-light);
+  --neutral-200: var(--neutral-200-light);
+  --neutral-300: var(--neutral-300-light);
+  --neutral-400: var(--neutral-400-light);
+  --neutral-500: var(--neutral-500-light);
+  --neutral-600: var(--neutral-600-light);
+  --neutral-700: var(--neutral-700-light);
+  --neutral-800: var(--neutral-800-light);
+  --neutral-900: var(--neutral-900-light);
+  --neutral-950: var(--neutral-950-light);
+  --neutral-1000: var(--neutral-1000-light);
+
+  --color-main: var(--neutral-950-light);
+  --bg-main: var(--neutral-50-light);
+
+  --alpha-100: var(--alpha-100-light);
+  --alpha-200: var(--alpha-200-light);
+  --alpha-300: var(--alpha-300-light);
+  --alpha-400: var(--alpha-400-light);
+  --alpha-500: var(--alpha-500-light);
+  --alpha-600: var(--alpha-600-light);
+  --alpha-700: var(--alpha-700-light);
+  --alpha-800: var(--alpha-800-light);
+  --alpha-900: var(--alpha-900-light);
+  --alpha-1000: var(--alpha-1000-light);
+
+  --dreamBlue: var(--dreamBlueLight);
+
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary: var(--neutral-950-dark);
+    --secondary: var(--neutral-700-dark);
+    --border: var(--neutral-300-dark);
+
+    --neutral-0: var(--neutral-0-dark);
+    --neutral-50: var(--neutral-50-dark);
+    --neutral-100: var(--neutral-100-dark);
+    --neutral-200: var(--neutral-200-dark);
+    --neutral-300: var(--neutral-300-dark);
+    --neutral-400: var(--neutral-400-dark);
+    --neutral-500: var(--neutral-500-dark);
+    --neutral-600: var(--neutral-600-dark);
+    --neutral-700: var(--neutral-700-dark);
+    --neutral-800: var(--neutral-800-dark);
+    --neutral-900: var(--neutral-900-dark);
+    --neutral-950: var(--neutral-950-dark);
+    --neutral-1000: var(--neutral-1000-dark);
+
+    --color-main: var(--neutral-950-dark);
+    --bg-main: var(--neutral-50-dark);
+
+    --alpha-100: var(--alpha-100-dark);
+    --alpha-200: var(--alpha-200-dark);
+    --alpha-300: var(--alpha-300-dark);
+    --alpha-400: var(--alpha-400-dark);
+    --alpha-500: var(--alpha-500-dark);
+    --alpha-600: var(--alpha-600-dark);
+    --alpha-700: var(--alpha-700-dark);
+    --alpha-800: var(--alpha-800-dark);
+    --alpha-900: var(--alpha-900-dark);
+    --alpha-1000: var(--alpha-1000-dark);
+
+    --dreamBlue: var(--dreamBlueDark);
+  }
 }
 
 [data-theme="dark"] {

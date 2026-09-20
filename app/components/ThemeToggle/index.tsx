@@ -16,13 +16,7 @@ export default function ThemeToggle() {
 
     useEffect(() => {
         setMounted(true);
-        
-        // If theme is system, detect the system preference and set it explicitly
-        if (theme === 'system') {
-            const systemPreference = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-            setTheme(systemPreference);
-        }
-    }, [theme, setTheme]);
+    }, []);
 
     // Function to force iOS Safari overscroll background update
     const forceIOSBackgroundUpdate = () => {
